@@ -1,0 +1,338 @@
+---
+title: "Chinook Salmon Catch in Puget Sound"
+author: "Meghan Roberts"
+date: "2023-07-26"
+output: 
+  html_document:
+    code_folding: 'hide'
+    theme: lumen
+---
+## Summary of Catch {.tabset}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.width=12, fig.height=6)
+library(here)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+library(kableExtra)
+library(stringr)
+```
+
+```{r}
+# Look at random data
+dockside<-read_csv(here("data","2010-2020_dockside_boats_anglers_salmon_edited_LK_1.2023.csv"))
+#dockside is the one we care about
+wdfw<-read_csv(here("data","wdfw_2001-13_LKedited_1.2023.csv"))
+# Load in rec data
+catch<-read_csv(here("data","excess_catch.csv")) %>% 
+  filter(group=="total") %>% 
+  dplyr::select(-c(notes, group)) %>% #remove notes column for analysis
+  filter(year!=2022)
+
+catch <- catch[order(catch$year), ] #reorder years
+
+# Load in com
+commercial<-read_csv(here("data","commercial_harvest.csv")) %>% 
+  dplyr::select(-c(notes))
+commercial$area<-str_c(commercial$region, " ", commercial$type)
+commercial_sep <- commercial %>% dplyr::select(-c(region, type))
+
+## Table with average differences by area
+# Compute the differences between actual and predicted values
+catch$diff <- catch$actual-catch$projected
+commercial_sep$diff<- commercial_sep$actual-commercial_sep$projected
+catch_table <- catch %>% dplyr::select(-c(actual, projected))
+catch_table$area<-as.character(catch_table$area)
+commercial_sep<- commercial_sep %>% dplyr::select(-c(actual, projected))
+
+#join the rec and commercial
+table_data<-full_join(catch_table, commercial_sep)
+
+# Group by area and summarize the differences to get the average for each area across all years
+# table_data <- catch_table %>%
+#   group_by(area) %>%
+#   summarize(average_diff = mean(diff))
+
+# Pivot the data to have areas as columns and years as rows
+pivot_table_data <- table_data %>%
+  pivot_wider(names_from = area, values_from = diff)
+pivot_table_data <- pivot_table_data[, c("year", "5", "6", "7", "SJF troll", "SJF net", "SJ net")] #rearrange order of columns
+
+# Add a row for the average difference across the years
+colnames(pivot_table_data) <- c("Year", "Area 5", "Area 6", "Area 7", "SJF Troll", "SJF Net", "SJ Bycatch")
+selected_columns_10 <- pivot_table_data[, c("Area 5", "Area 6", "Area 7", "SJF Troll", "SJF Net", "SJ Bycatch" )]
+selected_columns_5 <- pivot_table_data[6:10, c("Area 5", "Area 6", "Area 7", "SJF Troll", "SJF Net", "SJ Bycatch" )]
+
+# Calculate the averages for each column except the first one (Category)
+average_row_10 <- c("2012-2021 Average", round(colMeans(selected_columns_10, na.rm = TRUE), 0))
+average_row_5 <- c("2017-2021 Average", round(colMeans(selected_columns_5, na.rm = TRUE), 0))
+
+# Append the "Average" row to the pivot table data
+final_table_data <- rbind(pivot_table_data, average_row_10, average_row_5)
+
+# Create a nice-looking table using kable() function
+kable(final_table_data, caption = "Table 1. Difference in Actual Chinook Catch and Projected Chinook Catch per Year by Area", format = "html", align = "c", row.names = FALSE)%>%
+  kable_styling(bootstrap_options = "striped")%>%
+  row_spec(13,bold=T,hline_after = T) %>% 
+  row_spec(14,bold=T,hline_after = T) %>% 
+  add_header_above(c(" ", "Recreational" = 3, "Commercial" = 3))
+```
+Table 1 shows the difference in the actual amount of Chinook salmon caught compared to the projected amount for recreational fisheries in Areas 5, 6 and 7 and commercial fisheries in the Strait of Juan de Fuca (SJF) and Chinook bycatch in the San Juan (SJ) Islands. Positive values indicate when more fish were actually caught than projected. The catch data for Areas 5, 6 and 7 is for the summer fisheries. The averages at the bottom show the average difference in the actual amount of Chinook salmon caught compared to the projected amount for the entire ten year period and for the last 5 years. This gives an idea of the direction that each fishery is heading. On average for both the last ten years and the past five years, areas 6 and 7 catch more than projected. But the amount that they go over by, on average, has decreased. The tabs below show the actual and projected catch per year by area as well as commercial bycatch data and bycatch mortality.
+
+### Recreational {.tabset}
+#### Area 5 
+```{r, fig.cap="Figure 1. Actual vs. Projected Catch of Chinook Salmon in Area 5 by Year", fig.align='center'}
+## Plot it
+# Reshape the data to be in a tidy format
+catch_tidy <- catch %>%
+  gather(key = "type", value = "catch", actual, projected)
+
+## Area 5
+catch_tidy_5<-catch_tidy %>% filter(area==5)
+catch_tidy_5$type <- factor(catch_tidy_5$type, levels = c("projected", "actual"))
+
+# Plot the bar chart
+ggplot(catch_tidy_5, aes(x = year, y = catch, fill = type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Year",
+       y = "Catch (number of Chinook)") +
+  scale_fill_manual('', values = c("actual" = "darkblue", "projected" = "lightblue")) +
+  scale_x_continuous(breaks = catch_tidy_5$year)+
+  theme_minimal()
+```
+During the study years of 2012-2021 actual catch in Area 5 was lower the FRAM projections most years except for 2012, 2013 and 2018 (Figure 1). In 2012, actual catch exceeded the projection by 1281 individuals. In 2013, actual catch exceeded the projection by 3668 individuals. In 2014, actual catch was lower than the projection by 1162 individuals. In 2015, actual catch was lower than the projection by 1663 individuals. In 2016, actual catch was lower than the projection by 2821 individuals. In 2017, actual catch was lower than the projection by 2111 individuals. In 2018, actual catch exceeded the projection by 312 individuals. In 2019, actual catch was lower than the projection by 99 individuals. In 2020, actual catch was lower than projections by 350 individuals. In 2021, actual catch was lower than the projection by 130 individuals. On average, catch in Area 5 is lower than the projected values.
+
+```{r, fig.align='center', fig.cap="Figure 2. Line plot showing the difference in actual minus projected catch over time."}
+ggplot(catch_tidy_5, aes(x = year, y = diff)) +
+    geom_line(size=0.75) +
+    geom_point() +
+    theme_minimal() +
+    scale_x_continuous(breaks = catch_tidy_5$year)+
+    labs(x="Year", y = "Actual Minus Projected Catch")
+```
+
+#### Area 6
+```{r, fig.cap="Figure 3. Actual vs. Projected Catch of Chinook Salmon in Area 6 by Year", fig.align='center'}
+## Area 6  
+catch_tidy_6<-catch_tidy %>% filter(area==6)
+catch_tidy_6$type <- factor(catch_tidy_6$type, levels = c("projected", "actual"))
+
+# Plot the bar chart
+ggplot(catch_tidy_6, aes(x = year, y = catch, fill = type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Year",
+       y = "Catch (number of Chinook)") +
+  scale_fill_manual('',values = c("actual" = "darkblue", "projected" = "lightblue")) +
+  scale_x_continuous(breaks = catch_tidy_6$year)+
+  theme_minimal()
+```
+During the study years of 2012-2021 actual catch in Area 6 exceeded the FRAM projections most year except for 2014, 2015, 2019 and 2020 (Figure 3). In 2012, actual catch exceeded the projection by 4385 individuals. In 2013, actual catch exceeded the projection by 2464 individuals. In 2014, actual catch was lower than the projection by 1059 individuals. In 2015, actual catch was lower than the projection by 459 individuals. In 2016, actual catch exceeded the projection by 1808 individuals. In 2017, actual catch exceeded the projection by 890 individuals. In 2018, actual catch exceeded the projection by 3630 individuals. In 2019, actual catch was lower than the projection by 590 individuals. In 2020, actual catch was lower than projections by 2506 individuals. In 2021, actual catch exceeded the projection by 329 individuals. On average, catch in Area 6 is higher than the projected values.
+
+```{r, fig.align='center', fig.cap="Figure 4. Line plot showing the difference in actual minus projected catch over time."}
+ggplot(catch_tidy_6, aes(x = year, y = diff)) +
+    geom_line(size=0.75) +
+    geom_point() +
+    theme_minimal() +
+    scale_x_continuous(breaks = catch_tidy_6$year)+
+    labs(x="Year", y = "Actual Minus Projected Catch")
+```
+
+
+#### Area 7 
+```{r, fig.cap="Figure 5. Actual vs. Projected Catch of Chinook Salmon in Area 7 by Year. The dashed line indicates that projected values after 2017 equal quotas set as catch limits for Chinook.", fig.align='center'}
+## Area 7  
+# Change the order of the "type" variable levels
+catch_tidy_7<-catch_tidy %>% filter(area==7)
+catch_tidy_7$type <- factor(catch_tidy_7$type, levels = c("projected", "actual"))
+
+# Plot the bar chart
+p<-ggplot(catch_tidy_7, aes(x = year, y = catch, fill = type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Year",
+       y = "Catch (number of Chinook)") +
+  scale_fill_manual('',values = c("actual" = "darkblue", "projected" = "lightblue")) +
+  scale_x_continuous(breaks = catch_tidy_7$year)+
+  theme_minimal()
+p + geom_vline(xintercept = 2017.5, color = "black", linetype = "dashed")
+```
+During the study years of 2012-2021 actual catch in Area 7 exceeded the FRAM projections every year except for 2020 (Figure 5). In 2012, actual catch exceeded the projection by 1086 individuals. In 2013, actual catch exceeded the projection by 3461 individuals. In 2014, actual catch exceeded the projection by 1777 individuals. In 2015, actual catch exceeded the projection by 3325 individuals. In 2016, actual catch exceeded the projection by 1473 individuals. In 2017, actual catch exceeded the projection by 2687 individuals. In 2018, actual catch exceeded the projection by 568 individuals. In 2019, actual catch exceeded the projection by 1559 individuals. In 2020, actual catch was lower than projections by 6 individuals. In 2021, actual catch exceeded the projection by 1122 individuals. On average, catch in Area 7 is higher than the projected values.
+
+```{r, fig.align='center', fig.cap="Figure 6. Line plot showing the difference in actual minus projected catch over time."}
+ggplot(catch_tidy_7, aes(x = year, y = diff)) +
+    geom_line(size=0.75) +
+    geom_point() +
+    theme_minimal() +
+    scale_x_continuous(breaks = catch_tidy_7$year)+
+    labs(x="Year", y = "Actual Minus Projected Catch")
+```
+
+
+### Commercial {.tabset}
+#### Strait of Juan de Fuca
+##### Troll Fisheries
+```{r, fig.cap="Figure 7. Actual vs. Projected Catch of Chinook Salmon in the Strait of Juan de Fuca Troll Fisheries by Year", fig.align='center'}
+## graph for SJF total
+SJF_troll<-commercial %>% filter(region=="SJF") %>% filter(type=="troll") %>% 
+  dplyr::select(-c(region)) %>% group_by(year) %>% 
+  summarise(projected = sum(projected),
+          actual = sum(actual))
+SJF_troll_tidy <- SJF_troll %>%
+  gather(key = "type", value = "catch", actual, projected)
+SJF_troll_tidy$type <- factor(SJF_troll_tidy$type, levels = c("projected", "actual"))
+
+# Plot the bar chart
+ggplot(SJF_troll_tidy, aes(x = year, y = catch, fill = type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Year",
+       y = "Catch (number of Chinook)") +
+  scale_fill_manual('',values = c("actual" = "darkgreen", "projected" = "lightgreen")) +
+  scale_x_continuous(breaks = SJF_troll_tidy$year)+
+  theme_minimal()
+```
+During the study years of 2012-2021 actual catch in SJF troll fisheries was lower the FRAM projections every year except for 2013 and 2021 (Figure 7). In 2012, actual catch was lower than the projection by 6399 individuals. In 2013, actual catch  was lower than the projection by 111 individuals. In 2014, actual catch  was lower than the projection by 920 individuals. In 2015, actual catch  was lower than the projection by 3207 individuals. In 2016, actual catch was lower than the projection by 4003 individuals. In 2017, actual catch was lower than the projection by 4591 individuals. In 2018, actual catch was lower than the projection by 2089 individuals. In 2019, actual catch was lower than the projection by 3587 individuals. In 2020, actual catch was lower than projections by 3415 individuals. In 2021, actual catch exceeded the projection by 581 individuals. On average, catch in SJF troll fisheries is lower than the projected values.
+
+
+```{r, fig.align='center', fig.cap="Figure 8. Line plot showing the difference in actual minus projected catch over time."}
+SJF_troll_line<-commercial_sep %>% 
+  filter(area=="SJF troll")
+ggplot(SJF_troll_line, aes(x = year, y = diff)) +
+    geom_line(size=0.75) +
+    geom_point() +
+    theme_minimal() +
+    scale_x_continuous(breaks = SJF_troll_line$year)+
+    labs(x="Year", y = "Actual Minus Projected Catch")
+```
+
+
+*******************************************
+
+##### Net Fisheries
+```{r, fig.cap="Figure 9. Actual vs. Projected Catch of Chinook Salmon in the Strait of Juan de Fuca Net Fisheries by Year", fig.align='center'}
+## graph for SJF total
+SJF_net<-commercial %>% filter(region=="SJF") %>% filter(type=="net") %>% 
+  dplyr::select(-c(region)) %>% group_by(year) %>% 
+  summarise(projected = sum(projected),
+          actual = sum(actual))
+SJF_net_tidy <- SJF_net %>%
+  gather(key = "type", value = "catch", actual, projected)
+SJF_net_tidy$type <- factor(SJF_net_tidy$type, levels = c("projected", "actual"))
+
+# Plot the bar chart
+ggplot(SJF_net_tidy, aes(x = year, y = catch, fill = type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Year",
+       y = "Catch (number of Chinook)") +
+  scale_fill_manual('',values = c("actual" = "darkgreen", "projected" = "lightgreen")) +
+  scale_x_continuous(breaks = SJF_net_tidy$year)+
+  theme_minimal()
+```
+During the study years of 2012-2021 actual catch in SJF net fisheries was lower the FRAM projections every year except for 2012 and 2018 (Figure 9). In 2012, actual catch exceeded the projection by 787 individuals. In 2013, actual catch  was lower than the projection by 680 individuals. In 2014, actual catch  was lower than the projection by 583 individuals. In 2015, actual catch  was lower than the projection by 84 individuals. In 2016, actual catch was lower than the projection by 24 individuals. In 2017, actual catch was lower than the projection by 267 individuals. In 2018, actual catch exceeded the projection by 1636 individuals. In 2019, actual catch was lower than the projection by 431 individuals. In 2020, actual catch was lower than projections by 304 individuals. In 2021, actual catch exceeded the projection by 100 individuals. On average, catch in SJF net fisheries is higher than the projected values. It is important to note that this average is pulled up by 2018 in which there was an unusually high catch compared to the projected values.
+
+```{r, fig.align='center', fig.cap="Figure 10. Line plot showing the difference in actual minus projected catch over time."}
+SJF_net_line<-commercial_sep %>% 
+  filter(area=="SJF net")
+ggplot(SJF_net_line, aes(x = year, y = diff)) +
+    geom_line(size=0.75) +
+    geom_point() +
+    theme_minimal() +
+    scale_x_continuous(breaks = SJF_net_line$year)+
+    labs(x="Year", y = "Actual Minus Projected Catch")
+```
+
+
+#### San Juan Island Bycatch
+```{r, fig.cap="Figure 11. Actual vs. Projected Catch of Chinook Salmon in the San Juan Islands Net Fisheries by Year", fig.align='center'}
+## graph for SJF
+SJ_total<-commercial %>% filter(region=="SJ") %>% dplyr::select(-c(region, type)) 
+SJ_total_tidy <- SJ_total %>%
+  gather(key = "type", value = "catch", actual, projected) %>% 
+  filter(year!=2012)
+SJ_total_tidy$type <- factor(SJ_total_tidy$type, levels = c("projected", "actual"))
+
+# Plot the bar chart
+plot<-
+  ggplot(SJ_total_tidy, aes(x = year, y = catch, fill = type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Year",
+       y = "Catch (number of Chinook)", 
+    #   title = "Actual vs. Projected Catch of Chinook Salmon in the San Juan Islands Net Fisheries by Year"
+         ) +
+  scale_fill_manual('',values = c("actual" = "darkgreen", "projected" = "lightgreen")) +
+  scale_x_continuous(breaks = SJ_total_tidy$year)+
+  geom_text(aes(label = catch, y = catch + 10), vjust = -0.5, position = position_dodge(width = 0.9), size = 3) +
+  theme_minimal()
+
+# Save the ggplot to a file (e.g., in PNG format)
+ggsave(here("data","commercial_ma7.jpeg"), plot, width = 10, height = 6, units = "in", dpi = 300)
+
+
+# ############UNUSED SJF TOTAL
+# ## graph for SJF total
+# SJF_total<-commercial %>% filter(region=="SJF") %>% select(-c(region)) %>% group_by(year) %>% 
+#   summarise(projected = sum(projected),
+#           actual = sum(actual))
+# SJF_total_tidy <- SJF_total %>%
+#   gather(key = "type", value = "catch", actual, projected)
+# SJF_total_tidy$type <- factor(SJF_total_tidy$type, levels = c("projected", "actual"))
+# 
+# # Plot the bar chart
+# ggplot(SJF_total_tidy, aes(x = year, y = catch, fill = type)) +
+#   geom_bar(stat = "identity", position = "dodge") +
+#   labs(x = "Year",
+#        y = "Catch (number of Chinook)") +
+#   scale_fill_manual(values = c("actual" = "darkgreen", "projected" = "lightgreen")) +
+#   scale_x_continuous(breaks = SJF_total_tidy$year)+
+#   theme_minimal()
+```
+During the study years of 2012-2021 actual bycatch in SJ net fisheries was lower than the FRAM projections every year except 2014 (Figure 6). It is important to note that the values include non-retention mortality in the non-treaty purse seine fishery. In 2012, actual bycatch was lower than the projection by 5692 individuals. Bycatch this year was mostly from the fisheries targeting Fraser sockeye and pink. In 2013, actual bycatch was lower than the projection by 4128 individuals. Bycatch this year was mostly from the fisheries targeting Fraser sockeye and pink. In 2014, actual bycatch exceeded the projection by 815 individuals. This year the bycatch mortality was primarily from fisheries targeting Fraser sockeye. In 2015, actual bycatch was lower than the projection by 1519 individuals. Bycatch in 2015 resulted from fisheries targeting Fraser sockeye. In 2016, actual bycatch was lower than the projection by 6364 individuals. The Fraser sockeye fishery was not open in 2016 due to low returning abundances so no Chinook were landed from this fishery. In 2017, actual bycatch was lower than the projection by 6653 individuals. This year the majority of catch in the SJ Islands occurred during Fraser Panel fisheries from late-August to late-September. In 2018, actual bycatch was lower than the projection by 3515 individuals. Bycatch in 2018 occurred mostly during the Fraser Sockeye directed fishery in the summer, primarily in August 2018. In 2019, actual bycatch was lower than the projection by 4134 individuals. Bycatch in this area occurred mostly during the Fraser pink directed fishery in the summer, primarily in late August 2019. In 2020, actual bycatch was lower than projections by 8197 individuals. This bycatch occurred during the Fraser chum directed fishery in October 2020. In 2021, actual catch was lower than the projection by 5796 individuals. Bycatch in this area occurred during the Fraser pink salmon directed fishery in late-August to mid-September, 2021. On average, catch in SJ net fisheries is lower than the projected values.
+
+```{r, fig.align='center', fig.cap="Figure 12. Line plot showing the difference in actual minus projected catch over time."}
+SJ_net_line<-commercial_sep %>% 
+  filter(area=="SJ net")
+ggplot(SJ_net_line, aes(x = year, y = diff)) +
+    geom_line(size=0.75) +
+    geom_point() +
+    theme_minimal() +
+    scale_x_continuous(breaks = SJ_net_line$year)+
+    labs(x="Year", y = "Actual Minus Projected Catch")
+```
+
+#### Bycatch Mortality in SJF and SJ Islands
+
+```{r}
+#read in data
+bycatch<-read_csv(here("data","commercial_bycatch.csv"))
+# Assuming your data is in a DataFrame named "bycatch"
+# Make sure to replace 'year', 'fishery', and 'bycatch' with your actual column names
+
+totals_by_year_fishery <- bycatch %>%
+  group_by(year, fishery) %>%
+  summarise(total_bycatch = sum(bycatch))
+totals_by_year_fishery_wide <- pivot_wider(totals_by_year_fishery, names_from = fishery, values_from = total_bycatch)
+totals_by_year_fishery_wide_with_totals <- totals_by_year_fishery_wide %>%
+  group_by(year) %>%
+  mutate(Total = sum(across(everything()),na.rm=TRUE))
+colnames(totals_by_year_fishery_wide_with_totals) <- c("Year", "Chum", "Sockeye", "Sockeye/Pink", "Pink", "Total")
+# Create the table using kable
+kable(totals_by_year_fishery_wide_with_totals, caption = "Table 2. Commercial Bycatch Mortality in the SJF and San Juan Islands Region by Year and Fishery", format = "html", align = "c", row.names = FALSE)%>%
+  kable_styling(bootstrap_options = "striped")%>%
+  column_spec(6,bold=T)
+```
+
+The bycatch mortality numbers documented in Table 2 include Chinook landed and release mortality estimates for non-treaty fisheries targeting Chum, Sockeye and Pink salmon in Areas 7 and 7A. In 2012 and 2013 the number of salmon landed was combined for the Sockeye and Pink fisheries. In 2016, non-treaty fisheries targeting Fraser sockeye in Areas 7 and 7A did not occur due to low
+returning abundances and no available international TAC (total allowable catch). Release mortality estimates are calculated using available data from on-water by-catch monitoring. This does not include test fishing.
+```{r, fig.cap="Figure 7. Bycatch per Year by Fishery Target Species", fig.align='center'}
+custom_colors <- c("#FF9999", "#993333", "#660000", "#330000")
+ggplot(bycatch, aes(x = year, y = bycatch, fill = fishery)) +
+  geom_bar(stat = 'identity') +
+  labs(x = 'Year', y = 'Bycatch (number of Chinook)') +
+  #scale_fill_discrete(name = 'Fishery')+
+  theme_minimal()+
+  #scale_x_discrete(labels = custom_dates)+
+  scale_x_continuous(breaks = bycatch$year)+
+  scale_fill_manual(values = custom_colors, name = 'Fishery Target Species', 
+                    labels=c("Chum", "Pink", "Sockeye", "Sockeye/Pink"))+
+  guides(color = guide_legend(override.aes = list(label = levels(bycatch$fishery[!is.na(bycatch$fishery)]))))
+```
+Figure 7 shows how the total bycatch mortality numbers have varied from 2017 to 2021 and which fisheries the bycatch mortality was associated with. The fishery with the highest proportion of bycatch mortality has differed over time. In 2012 and 2013 the number of salmon landed was combined for the Sockeye and Pink fisheries.

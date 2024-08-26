@@ -1,0 +1,530 @@
+---
+title: "SRKW Sightings"
+author: "Meghan Roberts"
+date: "2023-10-06"
+output: 
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+library(here)
+library(janitor)
+library(tidyverse)
+library(leaflet)
+library(dplyr)
+library(lubridate)
+library(remotes)
+library(leaflet.extras)
+library(readr)
+library(sf)
+library(rmapshaper)
+```
+
+## July 28, 2022
+
+This map displays where the SRKW were spotted in marine area 7 on a day when recreational Chinook fishing was open, but no incidents were recorded. The blue pins represent sightings of SRKW. The red area is a 1000 yard buffer around the approximate track of the SRKW. The purple area is the voluntary no-go zone on the west side of San Juan Island.
+
+Since the west coast of San Juan island is so close to the maritime border of the US and Canada, the 1000 yard rule will essentially close parts of this area to fishing when the whales are present. While the distance between the west coast and the maritime border is more than 2000 yards, the SRKW generally are spread out as they travel along this region, which increases the overall width of the buffered area.
+
+```{r, include=FALSE, echo=TRUE, warning=FALSE, message=FALSE}
+sightings<-read_csv(here("data","srkw_sightings.csv")) %>% 
+  clean_names()
+sightings_filter<-sightings %>% 
+  filter(year==2022) %>% 
+  filter(month==7) %>% 
+  filter(act_lat!=0.00000) %>% 
+  filter(day==28) %>% 
+  filter(fish_area==7)
+#no need to filter by pod, all are confirmed JKL except one that is likely J
+
+sightings_filter$sight_date<-as.Date(sightings_filter$sight_date, format = "%m/%d/%Y")
+
+sightings_filter <- sightings_filter %>%
+  mutate(datetime = ymd_hms(paste(sight_date, time1)))
+
+# Sort the filtered data by datetime
+sightings_filter <- sightings_filter %>%
+  arrange(datetime)
+
+
+whale_map <- leaflet(sightings_filter) %>%
+  addTiles() %>%
+  addMarkers(
+    lng = ~act_long,
+    lat = ~act_lat,
+    popup = ~format(datetime, "%Y-%m-%d %H:%M:%S")
+  )
+
+# Create a sequence of indices to connect the points in order
+#indices <- 1:(nrow(sightings_filter) - 1)
+
+whale_map <- whale_map %>%
+  addPolylines(
+    lng = ~act_long,
+    lat = ~act_lat
+  )
+
+#whale_map
+
+# Convert the sightings_filter data frame to an sf object with POINT geometry
+sightings_sf <- st_as_sf(sightings_filter, coords = c("act_long", "act_lat"), crs = 4326)
+
+# Group the points by some identifier, e.g., a unique ID or pod name
+# This assumes each group represents a separate track
+sightings_grouped <- group_by(sightings_sf)  # Replace "group_column" with your actual grouping column
+
+# Create lines for each group of points
+lines_sf <- summarise(sightings_grouped, geometry = st_union(geometry))
+
+# Change the geometry type to LINESTRING
+lines_sf <- st_cast(lines_sf, "LINESTRING")
+
+# Save the lines_sf object as a shapefile or another geospatial format
+output_shapefile <- here("data","sightings_line","sightings_line_07_28_2022_correct_1.shp")
+#st_write(lines_sf, output_shapefile)
+```
+
+```{r, include=FALSE, echo=TRUE, warning=FALSE, message=FALSE}
+sightings_line <- st_read(here("data","sightings_line","sightings_line_07_28_2022_correct_1.shp"))
+no_go<-st_read(here("data","Voluntary_Whale_No_Go_Zone","WhaleNoGoZoneQuarterMile_Sim.shp"))
+#st_crs(no_go)
+```
+
+
+```{r, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+
+
+reprojected_no_go <- st_transform(no_go, crs = "+proj=longlat +datum=WGS84")
+
+buffer_distance <- 1000  # 1000 meters
+
+# Create a buffered line
+buffered_line <- st_buffer(sightings_line, dist = buffer_distance)
+# Create a Leaflet map
+map <- leaflet() %>%
+  addTiles()
+
+simplified_buffer <- ms_simplify(buffered_line, keep = 0.05)  # Adjust the 'keep' parameter as needed
+
+# # Create a Leaflet map
+# map <- leaflet() %>%
+#   addTiles()
+
+#add occurences to the map
+map <- leaflet(sightings_filter) %>%
+  addTiles() %>%
+  addMarkers(
+    lng = ~act_long,
+    lat = ~act_lat,
+    popup = ~format(datetime, "%Y-%m-%d %H:%M:%S")
+  ) #%>%
+  # addPolylines(
+  #   data = sightings_line,
+  #   color = "blue",  # Line color
+  #   weight = 2        # Line weight/thickness
+  # )
+
+# # Add the line to the map
+# map <- map %>%
+#   addPolylines(
+#     data = line_sf,
+#     color = "blue",
+#     weight = 2
+#   )
+
+# Add the simplified buffer to the map
+map <- map %>%
+  addPolygons(
+    data = simplified_buffer,
+    color = "red",
+    weight = 2,
+    fill = TRUE,
+    fillColor = "red",
+    fillOpacity = 0.3
+  ) 
+map<-map%>% 
+  addPolygons(
+    data=reprojected_no_go,
+    color = "purple",
+    weight = 2,
+    fill = TRUE,
+    fillColor = "purple",
+    fillOpacity = 0.3
+  
+  )
+
+# Display the map
+map
+```
+
+
+
+
+
+
+
+
+
+
+
+```{r, warning=FALSE, message=FALSE, include=FALSE}
+# ###NOT using the rest of this
+# sightings<-read_csv(here("data","srkw_sightings.csv")) %>% 
+#   clean_names()
+# sightings_filter<-sightings %>% 
+#   filter(year==2022) %>% 
+#   filter(month==7) %>% 
+#   filter(act_lat!=0.00000) %>% 
+#   filter(day==23) %>% 
+#   filter(fish_area==7)
+# #no need to filter by pod, all are confirmed JKL except one that is likely J
+# 
+# sightings_filter$sight_date<-as.Date(sightings_filter$sight_date, format = "%m/%d/%Y")
+# 
+# sightings_filter <- sightings_filter %>%
+#   mutate(datetime = ymd_hms(paste(sight_date, time1)))
+# 
+# 
+# whale_map <- leaflet(sightings_filter) %>%
+#   addTiles() %>%
+#   addMarkers(
+#     lng = ~act_long,
+#     lat = ~act_lat,
+#     popup = ~format(datetime, "%Y-%m-%d %H:%M:%S")
+#   )
+# 
+# # Sort the filtered data by datetime
+# sightings_filter <- sightings_filter %>%
+#   arrange(datetime)
+# 
+# # Create a sequence of indices to connect the points in order
+# indices <- 1:(nrow(sightings_filter) - 1)
+# 
+# ## OLD WAY THAT WORKS
+# # Add polylines to connect the points in order of time
+# whale_map <- whale_map %>%
+#   addPolylines(
+#     lng = ~act_long[indices],
+#     lat = ~act_lat[indices]
+#   )
+# 
+# whale_map
+# 
+# # Convert the sightings_filter data frame to an sf object with POINT geometry
+# sightings_sf <- st_as_sf(sightings_filter, coords = c("act_long", "act_lat"), crs = 4326)
+# 
+# # Group the points by some identifier, e.g., a unique ID or pod name
+# # This assumes each group represents a separate track
+# sightings_grouped <- group_by(sightings_sf)  # Replace "group_column" with your actual grouping column
+# 
+# # Create lines for each group of points
+# lines_sf <- summarise(sightings_grouped, geometry = st_union(geometry))
+# 
+# # Change the geometry type to LINESTRING
+# lines_sf <- st_cast(lines_sf, "LINESTRING")
+# #lines_sf <- st_cast(sightings_sf, "LINESTRING") #tried this, but didn't work??
+# 
+# # Save the lines_sf object as a shapefile or another geospatial format
+# output_shapefile <- here("data","sightings_line_real_1.shp")
+# #st_write(lines_sf, output_shapefile)
+
+```
+
+
+```{r, warning=FALSE, message=FALSE, include=FALSE}
+# line_sf <- st_read(here("data","sightings_line_real.shp"))
+# buffer_distance <- 1000  # 1000 meters
+# 
+# # Create a buffered line
+# buffered_line <- st_buffer(line_sf, dist = buffer_distance)
+# # Create a Leaflet map
+# map <- leaflet() %>%
+#   addTiles()
+# 
+# simplified_buffer <- ms_simplify(buffered_line, keep = 0.08)  # Adjust the 'keep' parameter as needed
+# 
+# # # Create a Leaflet map
+# # map <- leaflet() %>%
+# #   addTiles()
+# 
+# #add occurences to the map
+# map <- leaflet(sightings_filter) %>%
+#   addTiles() %>%
+#   addMarkers(
+#     lng = ~act_long,
+#     lat = ~act_lat,
+#     popup = ~format(datetime, "%Y-%m-%d %H:%M:%S")
+#   )
+# 
+# # # Add the line to the map
+# # map <- map %>%
+# #   addPolylines(
+# #     data = line_sf,
+# #     color = "blue",
+# #     weight = 2
+# #   )
+# 
+# # Add the simplified buffer to the map
+# map <- map %>%
+#   addPolygons(
+#     data = simplified_buffer,
+#     color = "red",
+#     weight = 2,
+#     fill = TRUE,
+#     fillColor = "red",
+#     fillOpacity = 0.3
+#   )
+# 
+# # Display the map
+# map
+
+```
+
+
+
+```{r, warning=FALSE, message=FALSE, include=FALSE}
+# ## July 29, 2022
+# sightings<-read_csv(here("data","srkw_sightings.csv")) %>% 
+#   clean_names()
+# sightings_filter<-sightings %>% 
+#   filter(year==2022) %>% 
+#   filter(month==7) %>% 
+#   filter(act_lat!=0.00000) %>% 
+#   filter(day==29) %>% 
+#   filter(fish_area==7)
+# #no need to filter by pod, all are confirmed JKL except one that is likely J
+# 
+# sightings_filter$sight_date<-as.Date(sightings_filter$sight_date, format = "%m/%d/%Y")
+# 
+# sightings_filter <- sightings_filter %>%
+#   mutate(datetime = ymd_hms(paste(sight_date, time1)))
+# 
+# 
+# whale_map <- leaflet(sightings_filter) %>%
+#   addTiles() %>%
+#   addMarkers(
+#     lng = ~act_long,
+#     lat = ~act_lat,
+#     popup = ~format(datetime, "%Y-%m-%d %H:%M:%S")
+#   )
+# 
+# # Sort the filtered data by datetime
+# sightings_filter <- sightings_filter %>%
+#   arrange(datetime)
+# 
+# # Create a sequence of indices to connect the points in order
+# indices <- 1:(nrow(sightings_filter) - 1)
+# 
+# # Add polylines to connect the points in order of time
+# whale_map <- whale_map %>%
+#   addPolylines(
+#     lng = ~act_long[indices],
+#     lat = ~act_lat[indices]
+#   )
+# 
+# whale_map
+```
+
+```{r, include=FALSE}
+# ####HOW TO EXPORT AS POINTS
+# # Convert the sightings_filter data frame to an sf object
+# sightings_sf <- st_as_sf(sightings_filter, coords = c("act_long", "act_lat"), crs = 4326)
+# 
+# # Define the path where you want to save the shapefile
+# output_shapefile <- here("data","sightings_line.shp")
+# 
+# # Save the sf object as a shapefile
+# st_write(sightings_sf, output_shapefile)
+
+```
+
+
+
+
+## Filter data for hotspot map 2022
+We need a dataframe containing SRKW sightings locations when the fishery is open and when the fishery is closed by year (start with 2022). All sightings data for when the fishery is open comes from four days: July 13th (Wednesday), July 23rd (Saturday), July 28th (Thursday) and July 29th (Friday). Whereas, the sightings data for when the fishery is closed comes three days: August 4th (Thursday), August 5th (Friday) and August 6th (Saturday).
+
+```{r}
+#specifically rec fishing in MA 7
+sightings<-read_csv(here("data","srkw_sightings.csv")) %>% 
+  clean_names()
+fishery_status<-read_csv(here("data","fishery_status.csv"))
+fishery_open_2022<-fishery_status %>% 
+  filter(year==2022) %>% 
+  filter(fishery_status=="open")
+fishery_closed_2022<-fishery_status %>% 
+  filter(year==2022) %>% 
+  filter(fishery_status=="closed")
+#making a new dataframe of closed days (same n as open) that can be looked at representatively
+date<-c("2022-06-30", "2022-07-01", "2022-07-02", "2022-07-06", "2022-07-07", "2022-07-08", "2022-08-04", "2022-08-05", "2022-08-06")
+compare_days_2022<-data.frame(date = date)
+compare_days_2022$date<-as.Date(compare_days_2022$date)
+compare_days_2022$year<-2022
+compare_days_2022$fishery_status<-"open"
+sightings_filter<-sightings %>% 
+  filter(year==2022) %>% 
+  filter(act_lat!=0.00000) %>% 
+  filter(fish_area==7) %>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+
+sightings_filter$sight_date <- as.Date(sightings_filter$sight_date, format = "%m/%d/%Y")
+SRKW_fishery_open_2022<-fishery_open_2022 %>% 
+  left_join(sightings_filter, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+# SRKW_fishery_closed_2022<-fishery_closed_2022 %>% 
+#   left_join(sightings_filter, by = c("date" = "sight_date"))%>% 
+#   filter(!(is.na(pod) & is.na(likely_pod)))
+SRKW_fishery_closed_2022<-compare_days_2022 %>% 
+  left_join(sightings_filter, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+
+# Create a Leaflet map for the open data
+map_2022 <- leaflet(SRKW_fishery_open_2022) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~act_long,
+    lat = ~act_lat,
+    group = "Open",  # Add a group for open data
+  clusterOptions = markerClusterOptions()  # Enable marker clustering
+  )
+
+map_2022 <- map_2022 %>% addCircleMarkers(
+  data = SRKW_fishery_closed_2022,
+  lng = ~act_long,
+  lat = ~act_lat,
+  group = "Closed",
+  clusterOptions = markerClusterOptions()  # Enable marker clustering
+)
+
+# Add a layer control to toggle between open and closed data
+map_2022 <- map_2022 %>% addLayersControl(
+  baseGroups = c("Open", "Closed"),
+  options = layersControlOptions(collapsed = FALSE)
+)
+
+# Display the map
+map_2022
+```
+Sightings data only exists for July 1st (thursday) and 2nd (Friday) when fishing was open. The next day that had sightings with actual coordinates (as opposed to center of quadrant coordinates) was July 27th (tuesday) which had one sighting and August 30th (monday) which had three sightings. Due to the temporal lag of the next sightings it does not make sense to compare whale distribution during and after recreational fishing. There are also no sightings right before the fishery opens.
+```{r}
+#specifically rec fishing in MA 7
+fishery_open_2021<-fishery_status %>% 
+  filter(year==2021) %>% 
+  filter(fishery_status=="open")
+fishery_closed_2021<-fishery_status %>% 
+  filter(year==2021) %>% 
+  filter(fishery_status=="closed")
+#making a new dataframe of closed days (same n as open) that can be looked at representatively
+date<-c("2021-07-08", "2021-07-09", "2021-07-10", "2021-07-11", "2021-07-12", "2021-07-13", "2021-07-14")
+compare_days_2021<-data.frame(date = date)
+compare_days_2021$date<-as.Date(compare_days_2021$date)
+compare_days_2021$year<-2021
+compare_days_2021$fishery_status<-"open"
+sightings_filter_2021<-sightings %>% 
+  filter(year==2021) %>% 
+  filter(act_lat!=0.00000) %>% 
+  filter(fish_area==7) #%>% 
+  #filter(!(is.na(pod) & is.na(likely_pod)))
+
+sightings_filter_2021$sight_date <- as.Date(sightings_filter_2021$sight_date, format = "%m/%d/%Y")
+SRKW_fishery_open_2021<-fishery_open_2021 %>% 
+  left_join(sightings_filter_2021, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+# SRKW_fishery_closed_2021<-fishery_closed_2021 %>% 
+#   left_join(sightings_filter_2021, by = c("date" = "sight_date"))%>% 
+#   filter(!(is.na(pod) & is.na(likely_pod)))
+SRKW_fishery_closed_2021<-compare_days_2021 %>% 
+  left_join(sightings_filter_2021, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+
+# Create a Leaflet map for the open data
+map_2021 <- leaflet(SRKW_fishery_open_2021) %>%
+  addTiles() %>%
+  addMarkers(
+    lng = ~act_long,
+    lat = ~act_lat,
+    group = "Fishery Open"  # Add a group for open data
+  )
+
+# Add markers for the closed data in a different color
+map_2021 <- map_2021 %>% addMarkers(
+    data = SRKW_fishery_closed_2021,
+    lng = ~act_long,
+    lat = ~act_lat,
+    group = "Fishery Closed"  # Add a group for closed data
+  )
+
+# Add a layer control to toggle between open and closed data
+map_2021 <- map_2021 %>% addLayersControl(
+  baseGroups = c("Open", "Closed"),
+  options = layersControlOptions(collapsed = FALSE)
+)
+#map_2021
+```
+
+You also cannot compare SRKW distribution when recreational fishing is open and closed in 2020 since there are many (>200) observations of SRKW when the fishery was open (all July and last week of August), but one observation of the whales when it was closed in the first three weeks of August. But, you could compare to the month of September.
+```{r}
+#specifically rec fishing in MA 7
+fishery_open_2020<-fishery_status %>% 
+  filter(year==2020) %>% 
+  filter(fishery_status=="open")
+fishery_closed_2020<-fishery_status %>% 
+  filter(year==2020) %>% 
+  filter(fishery_status=="closed")
+sightings_filter_2020<-sightings %>% 
+  filter(year==2020) %>% 
+  filter(act_lat!=0.00000) %>% 
+  filter(fish_area==7) %>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+#creating a dataframe for days in September
+start_date <- ymd("2020-09-01")
+end_date <- ymd("2020-09-30")
+date_list <- seq(start_date, end_date, by = "days")
+compare_days_2020<-data.frame(date = date_list)
+compare_days_2020$date<-as.Date(compare_days_2020$date)
+compare_days_2020$year<-2020
+compare_days_2020$fishery_status<-"open"
+compare_days_2020 <- rbind(fishery_closed_2020, compare_days_2020)
+
+sightings_filter_2020$sight_date <- as.Date(sightings_filter_2020$sight_date, format = "%m/%d/%Y")
+SRKW_fishery_open_2020<-fishery_open_2020 %>% 
+  left_join(sightings_filter_2020, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+# SRKW_fishery_closed_2020<-fishery_closed_2020 %>% 
+#   left_join(sightings_filter_2020, by = c("date" = "sight_date"))%>% 
+#   filter(!(is.na(pod) & is.na(likely_pod)))
+SRKW_fishery_closed_2020<-compare_days_2020 %>% 
+  left_join(sightings_filter_2020, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+
+
+# Create a Leaflet map for the open data
+map_2020 <- leaflet(SRKW_fishery_open_2020) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~act_long,
+    lat = ~act_lat,
+    group = "Open",  # Add a group for open data
+  clusterOptions = markerClusterOptions()  # Enable marker clustering
+  )
+
+map_2020 <- map_2020 %>% addCircleMarkers(
+  data = SRKW_fishery_closed_2020,
+  lng = ~act_long,
+  lat = ~act_lat,
+  group = "Closed",
+  clusterOptions = markerClusterOptions()  # Enable marker clustering
+)
+
+# Add a layer control to toggle between open and closed data
+map_2020 <- map_2020 %>% addLayersControl(
+  baseGroups = c("Open", "Closed"),
+  options = layersControlOptions(collapsed = FALSE)
+)
+
+# Display the map
+map_2020
+```
+

@@ -1,0 +1,357 @@
+---
+title: "Reproducible"
+author: "Meghan Roberts"
+date: "2024-08-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+library(kableExtra)
+library(stringr)
+library(janitor)
+library(tidyr)
+library(lubridate)
+```
+
+Catch Overage
+
+
+```{r}
+#### this data has days for all fisheries open in the area and boats fishing all salmon
+
+# Load in rec data
+catch<-read_csv(here("data","excess_catch.csv")) %>% 
+  filter(group=="total") %>% 
+  dplyr::select(-c(notes, group)) 
+
+# Work it
+catch <- catch[order(catch$year), ] #reorder years
+catch$diff <- catch$actual-catch$projected
+catch <- catch %>%
+  mutate(percent_over = round((diff / projected) * 100, 1)) %>% 
+  filter(area==7)
+
+catch_tidy <- catch %>%
+  gather(key = "type", value = "catch", actual, projected)
+
+## Area 7  
+# Change the order of the "type" variable levels
+catch_tidy_7<-catch_tidy %>% filter(area==7)
+catch_tidy_7$type <- factor(catch_tidy_7$type, levels = c("projected", "actual"))
+
+
+# Add a label condition for every other bar
+mean_percent_over <- catch_tidy_7 %>%
+  mutate(label_condition = ifelse(row_number() <= 12, TRUE, FALSE))
+mean_percent_over$percent_formatted <- sprintf("%.1f%%", mean_percent_over$percent_over)
+mean_percent_over$v_nudge<- -0.5
+mean_percent_over$v_nudge[which(mean_percent_over$year == 2016)] <- -4.5
+mean_percent_over$v_nudge[which(mean_percent_over$year == 2022)] <- -1.0
+mean_percent_over$v_nudge[which(mean_percent_over$year == 2023)] <- -1.0
+
+# Create the bar chart
+p <- ggplot(catch_tidy_7, aes(x = year, y = catch, fill = type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Year",
+       y = "Catch (number of Chinook)") +
+  scale_fill_manual('', values = c("actual" = "darkblue", "projected" = "lightblue")) +
+  scale_x_continuous(breaks = catch_tidy_7$year) +
+  theme_minimal()
+ # ylim(0,7500)
+
+# Add labels for bars based on label_condition
+p<-p + geom_text(data = mean_percent_over, aes(label = ifelse(label_condition, percent_formatted, "")), vjust = mean_percent_over$v_nudge, hjust= 1, position = position_dodge(width = 1))
+p
+
+ggsave(here("saved_figures", "summer_rec_catch_MA7_2012_2023.jpg"), plot=p, width = 10)
+```
+
+
+
+Recreational Overlap
+
+
+```{r}
+orca<-read_csv(here("data","orca_fishery_overlap.csv")) %>% 
+  clean_names() 
+#creating a df with days the fishery is open
+fishery_status<-orca %>% dplyr::select(-orcas_sighted)
+fishery_status$date <- as.Date(paste("2023", fishery_status$date), format="%Y %d-%b")
+fishery_status$date<- format(fishery_status$date, format = "%m/%d")
+
+#creating a dataframe to compare the above 2020-2022 to in order to get full dates through September represented in figure
+# Define function to generate data frame for each year
+generate_year_data <- function(year, open_dates) {
+  start_date <- as.Date(paste(year, "07", "01", sep = "-"))
+  end_date <- as.Date(paste(year, "09", "30", sep = "-"))
+
+  # Generate date vector
+  date_vector <- seq.Date(start_date, end_date, by = "days")
+  date_strings <- format(date_vector, "%m/%d")
+
+  # Determine fishery_status
+  # fishery_status <- ifelse(date_strings %in% open_dates, "open", "closed")
+
+  # Create data frame
+  data <- data.frame(
+    year = rep(year, length(date_strings)),
+    date = date_strings #,
+    # fishery_status = fishery_status
+  )
+  return(data)
+}
+
+# Define open dates (none in this case)
+open_dates <- character()
+
+# Generate data for 2020, 2021, and 2022
+extra_data_2020 <- generate_year_data(2020, open_dates)
+extra_data_2021 <- generate_year_data(2021, open_dates)
+extra_data_2022 <- generate_year_data(2022, open_dates)
+extra_data_2023 <- generate_year_data(2023, open_dates)
+
+# Combine the data frames
+full_data <- rbind(extra_data_2020, extra_data_2021, extra_data_2022, extra_data_2023)
+
+#left join to put back in the correct open dates
+fishery_status<-full_join(full_data, fishery_status)
+#replace NA values with closed
+fishery_status <- fishery_status %>%
+  mutate(fishery_status = coalesce(fishery_status, "closed"))
+
+
+#2011 to 2017
+years <- 2011:2017
+date_strings_list <- list()
+
+for (year in years) {
+  start_date <- as.Date(paste(year, "-07-01", sep = ""))
+  end_date <- as.Date(paste(year, "-09-30", sep = ""))
+  
+  date_vector <- seq.Date(start_date, end_date, by = "days")
+  date_strings <- format(date_vector, "%m/%d")
+  
+  date_strings_list[[as.character(year)]] <- date_strings
+}
+
+extra_data_1 <- data.frame(
+  year = rep(years, each = length(date_strings)),
+  date = unlist(date_strings_list))
+
+##for 2018 and 2019
+# Define function to generate data frame for each year
+generate_year_data <- function(year, start_month, start_day, end_month, end_day, open_dates) {
+  start_date <- as.Date(paste(year, start_month, start_day, sep = "-"))
+  end_date <- as.Date(paste(year, end_month, end_day, sep = "-"))
+
+  # Generate date vector
+  date_vector <- seq.Date(start_date, end_date, by = "days")
+  date_strings <- format(date_vector, "%m/%d")
+
+  # Determine fishery_status
+  fishery_status <- ifelse(date_strings %in% open_dates, "open", "closed")
+
+  # Create data frame
+  data <- data.frame(
+    year = rep(year, length(date_strings)),
+    date = date_strings,
+    fishery_status = fishery_status
+  )
+  return(data)
+}
+
+# Generate data for 2018
+open_dates_2018 <- c("07/01", "07/02", "07/03", "07/04", "07/05", "07/06", "07/07", "07/08", "07/09", "07/10", "07/11", "07/12", "07/13", "07/14", "07/15", "07/16", "07/17", "07/18", "07/19", "07/20", "07/21", "07/22", "07/23", "07/24", "07/25", "07/26", "07/27", "07/28", "07/29", "07/30", "07/31", "08/01", "08/02", "08/03", "08/04", "08/05", "08/06", "08/07", "08/08", "08/09", "08/10", "08/11", "08/12", "08/13", "08/14", "08/15", "08/16", "08/17", "08/18", "08/19", "08/20", "08/21", "08/22", "08/23", "08/24", "08/25", "08/26", "08/27", "08/28", "08/29", "08/30", "08/31")
+extra_data_2 <- generate_year_data(2018, "07", "01", "09", "30", open_dates_2018)
+
+# Generate data for 2019
+open_dates_2019 <- c("07/01", "07/02", "07/03", "07/04", "07/05", "07/06", "07/07", "07/08", "07/09", "07/10", "07/11", "07/12", "07/13", "07/14", "07/15", "07/16", "07/17", "07/18", "07/19", "07/20", "07/21", "07/22", "07/23", "07/24", "07/25", "07/26", "07/27", "07/28", "07/29", "07/30", "07/31")
+extra_data_3 <- generate_year_data(2019, "07", "01", "09", "30", open_dates_2019)
+
+fishery_status <- bind_rows(fishery_status, extra_data_1, extra_data_2, extra_data_3)
+fishery_status <- fishery_status [order(fishery_status $year), ] #reorder years
+fishery_status$fishery_status[is.na(fishery_status$fishery_status)] <- "open"
+
+fishery_status_1<-fishery_status %>% rename("md_date_for"="date") %>% 
+  filter(year>2011)
+
+fishery_status_1$date <- gsub("/", "-", fishery_status_1$md_date_for)
+
+date_parts <- strsplit(fishery_status_1$date, "-")
+
+# Combine month/day and year to create a date column
+fishery_status_1$date <- as.Date(paste(fishery_status_1$year, fishery_status_1$md_date_for), format = "%Y %m/%d")
+# # Create a new_date column in "year-month-day" format
+# orca$date <- sprintf("%04d-%02d-%02d", orca$year, 
+#                          as.POSIXlt(orca$md_date_for)$mon + 1, 
+#                          as.POSIXlt(orca$md_date_for)$mday)
+
+srkw_sightings1<-read_csv(here("data","SRKW_sightings_2023.csv")) %>% 
+  clean_names() 
+
+srkw_sightings1$sight_date <- mdy(srkw_sightings1$sight_date)
+srkw_sightings1<-srkw_sightings1 %>% 
+  filter(year(sight_date) >= 2014 & year(sight_date) <= 2023) %>% 
+  filter(month(sight_date) >= 7 & month(sight_date) <= 9) %>% 
+  filter(fish_area==7) %>% 
+  filter(pod!=c("NA", "Ts?", "NRs", "NRs?"))
+srkw_sightings1$date <- sprintf('%d/%d', month(srkw_sightings1$sight_date), day(srkw_sightings1$sight_date))
+unique_dates_df <- srkw_sightings1 %>%
+  distinct(sight_date)%>%
+  mutate(sighting = "yes") 
+  
+unique_dates_df <- unique_dates_df %>%
+  rename("date" = "sight_date")
+
+fishery_status_1$date <- as.Date(fishery_status_1$date)
+
+fishery_status_1<-left_join(fishery_status_1, unique_dates_df, by="date")
+fishery_status_1$year<-as.numeric(fishery_status_1$year)
+# fishery_status_1<-fishery_status_1%>% filter(year>2016)
+fishery_status_1$sighting <- ifelse(is.na(fishery_status_1$sighting), "no", fishery_status_1$sighting) 
+#sighting column is the conservative estimate
+fishery_status_1<-fishery_status_1 %>% filter(year>2013)
+
+# Create the customized stacked line graph
+rec<-ggplot(fishery_status_1, aes(x = as.Date(md_date_for, format="%m/%d"), fill = factor(fishery_status))) +
+  geom_tile(aes(y = year, height = 0.4), color = "white", position = position_nudge(y = -0.2)) +  # Adjust height and add white border
+  geom_tile(aes(y = year + 0.2, fill = factor(sighting)), height = 0.4, color = "white") +  # Adjust height and add white border
+  scale_fill_manual(values = c("closed"="lightgreen", "no"="lightblue", "open"="darkgreen", "yes"="darkblue"), labels = c("closed"="Rec Chinook Fishery Closed", "no"="Orcas Absent", "open"="Mark Selective Chinook Retention", "yes"="Orcas Present")) +
+  labs(x = "Date", y = "Year", fill = "Status") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  scale_y_continuous(breaks = unique(fishery_status_1$year), labels = unique(fishery_status_1$year)) +
+  theme(panel.grid.major = element_blank(),  # Remove major grid lines
+        panel.grid.minor = element_blank(),
+        axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank() )  +# Remove minor grid lines
+  scale_x_date(date_breaks = "5 day", date_labels = "%m/%d")  # Adjust x-axis date breaks and labels
+
+rec
+ggsave(here("saved_figures", "rec_fishery_SRKW_overlap_a7_2014_2023.jpg"), plot = rec, width = 8, height = 9, units = "in")
+```
+
+
+
+Commercial Overlap
+```{r}
+## New figure showing overlap with commercial fisheries
+all_dates <- seq(from = as.Date("2014-08-01"), 
+                 to = as.Date("2023-09-30"), 
+                 by = "days")
+
+# Create a DataFrame from the dates
+dates <- data.frame(date = as.character(all_dates)) %>% 
+  filter(month(date) >= 8 & month(date) <= 9) 
+dates$date<-as.Date(dates$date)
+
+
+comm_fish<-read_csv(here("data","a7_commercial_fishery_dates.csv")) %>% 
+  clean_names() 
+comm_fish$date<-as.Date(comm_fish$date)
+comm_fish$fishery_status <- "open"
+## make sure to remove reef net fishing days
+  # reef net fisheries are fixed gear (no boats)
+ comm_fish$fishery_status <- ifelse(comm_fish$fishery_type == "reef net", "closed", comm_fish$fishery_status)
+
+
+
+comm_fish_dates<-left_join(dates, comm_fish)
+comm_fish_dates$md_date <- format(comm_fish_dates$date, "%m/%d")
+comm_fish_dates$fishery_status <- replace(comm_fish_dates$fishery_status, is.na(comm_fish_dates$fishery_status), "closed")
+
+srkw_sightings2<-read_csv(here("data","SRKW_sightings_2023.csv")) %>% 
+  clean_names() 
+
+srkw_sightings2$sight_date <- mdy(srkw_sightings2$sight_date)
+srkw_sightings2<-srkw_sightings2 %>% 
+  filter(year(sight_date) >= 2014 & year(sight_date) <= 2023) %>% 
+  filter(month(sight_date) >= 8 & month(sight_date) <= 9) %>% 
+  filter(fish_area==7) %>% 
+  filter(pod!=c("NA", "Ts?", "NRs", "NRs?"))
+srkw_sightings2$date <- sprintf('%d/%d', month(srkw_sightings2$sight_date), day(srkw_sightings2$sight_date))
+unique_dates_df1 <- srkw_sightings2 %>%
+  distinct(sight_date)%>%
+  mutate(sighting = "yes") 
+  
+unique_dates_df1 <- unique_dates_df1 %>%
+  rename("date" = "sight_date")
+
+comm_overlap<-left_join(comm_fish_dates, unique_dates_df1, by="date")
+comm_overlap$sighting <- ifelse(is.na(comm_overlap$sighting), "no", comm_overlap$sighting)
+comm_overlap$date<-as.Date(comm_overlap$date)
+comm_overlap$year <- substr(comm_overlap$date, 1, 4)
+comm_overlap$observed_year<-as.numeric(comm_overlap$year)
+#sighting column is the conservative estimate
+
+# # Making this condensed df bc dates in which one type of fishing was closed but not all automatically made the graph show that all fishing was closed on that day which isn't true
+# comm_overlap_condensed <- comm_overlap %>%
+#   filter(fishery_status == "open") %>%
+#   group_by(date) %>%
+#   summarise(
+#     sighting = first(sighting),
+#     year = first(year),
+#     md_date = first(md_date),
+#     observed_year = first(observed_year)
+#   ) %>%
+  # ungroup()
+
+comm_overlap_condensed <- comm_overlap %>%
+  group_by(md_date, observed_year) %>%
+  summarize(
+    fishery_status = any(fishery_status == "open"),
+    sighting = ifelse(any(sighting == "yes"), "yes", "no")
+  ) %>%
+  ungroup()
+
+write.csv(comm_overlap_condensed, here("data", "comm_dates_Fraser_WDFW.csv"))
+
+# Create the customized stacked line graph
+p<-ggplot(comm_overlap_condensed, aes(x = as.Date(md_date, format="%m/%d"), fill = factor(fishery_status))) +
+  geom_tile(aes(y = observed_year, height = 0.4), color = "white", position = position_nudge(y = -0.2)) +  # Adjust height and add white border
+  geom_tile(aes(y = observed_year + 0.2, fill = factor(sighting)), height = 0.4, color = "white") +  # Adjust height and add white border
+  scale_fill_manual(values = c("FALSE"="lightgreen", "no"="lightblue", "TRUE"="darkgreen", "yes"="darkblue"), labels = c("FALSE"="Commercial Fishery Closed", "no"="Orcas Absent", "TRUE"="Commercial Fishery Open", "yes"="Orcas Present"))  +
+  labs(x = "Date", y = "Year", fill = "Status") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  # geom_text(aes(x = as.Date(md_date, format = "%m/%d"),
+  #               y = observed_year-0.2,
+  #               label = ifelse(sighting == "yes" & fishery_status == "TRUE", "*", "")),vjust = -3, hjust = 0.5, size = 4, color = "purple") +
+  guides(fill = guide_legend(reverse = TRUE))  +
+  scale_y_continuous(breaks = unique(comm_overlap$observed_year), labels = unique(comm_overlap$observed_year))  +
+  theme(panel.grid.major = element_blank(),  # Remove major grid lines
+        panel.grid.minor = element_blank(),
+        axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank() )  +# Remove minor grid lines
+  scale_x_date(date_breaks = "5 day", date_labels = "%m/%d")  # Adjust x-axis date breaks and labels
+
+overlap_summary <- comm_overlap_condensed %>%
+  filter(sighting == "yes" & fishery_status == "TRUE") %>%
+  group_by(observed_year) %>%
+  summarize(overlap_days = n())
+
+total_com_days <- comm_overlap_condensed %>%
+  filter(fishery_status == "TRUE") %>%
+  group_by(observed_year) %>%
+  # summarize(open_days = n_distinct(date))
+  summarize(open_days = n())
+
+overlap_summary<-full_join(overlap_summary, total_com_days, by="observed_year")
+library(openxlsx)
+write.xlsx(overlap_summary, file = here("data","a7_commercial_overlap.xlsx"))
+
+p
+
+ggsave(here("saved_figures","comm_fishery_SRKW_overlap_a7_2014_2023.jpg"), plot = p, width = 8, height = 9, units = "in")
+
+
+problem_rows<-comm_overlap[comm_overlap$sighting == "yes" & comm_overlap$fishery_status == "open" & comm_overlap$fishery_type != "reef net", ]
+```
+

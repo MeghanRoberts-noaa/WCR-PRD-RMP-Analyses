@@ -1,0 +1,178 @@
+---
+title: "Validation Run Data"
+author: "Meghan Roberts"
+date: "2024-06-10"
+output: html_document
+---
+
+This Rmarkdown contains analyses related to the validation run data provided by Jon Carey. The final chunk produces table_data which contains information used in the 2024 PSC 1-yr biop.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+library(ggplot2)
+library(janitor)
+library(tidyverse)
+library(dplyr)
+```
+
+#Validation Output Analyses
+####Loading in the data
+```{r}
+percent_reduction<-read_csv(here("data", "SRKW_output_Validation_1992-2020", "SRKW_output_Validation_1992-2020", "SRKW_reduction_percent_all_Valid2022.csv"))
+
+starting_abundances<-read_csv(here("data", "SRKW_output_Validation_1992-2020", "SRKW_output_Validation_1992-2020", "SRKW_preFish_zero_all_Valid2022.csv"))
+
+nominal_reduction<-read_csv(here("data", "SRKW_output_Validation_1992-2020", "SRKW_output_Validation_1992-2020", "SRKW_reduction_nominal_all_Valid2022.csv"))
+```
+
+###Tech Memo (all regions)
+####Finding the average percent reduction by fishery 
+```{r}
+### getting the df in a workable format
+#convert years to numeric
+percent_reduction$Year<-as.numeric(percent_reduction$Year)
+#remove percent sign
+substitute_values <- function(column) {
+  as.numeric(gsub("%", "", column))
+}
+# Apply the function to multiple columns
+percent_reduction <- percent_reduction  %>%
+  mutate_at(vars(Salish, OR, NOF, Cali, SWWCVI), list(~substitute_values(.)))
+
+###group by and summarize
+percent_reduction_all <- percent_reduction %>%
+  group_by(TimeStep, Scenario) %>%
+  summarise(
+    avg_percent_reduction_Salish = round(mean(Salish, na.rm = TRUE),2),
+    avg_percent_reduction_OR = round(mean(OR, na.rm = TRUE),2),
+    avg_percent_reduction_NOF = round(mean(NOF, na.rm = TRUE),2),
+    avg_percent_reduction_Cali = round(mean(Cali, na.rm = TRUE),2),
+    avg_percent_reduction_SWWCVI = round(mean(SWWCVI, na.rm = TRUE),2),
+    .groups = 'drop'
+  )
+write_csv(percent_reduction_all, here("data", "tech_memo","summary_data","Validation_all_regions_percent_reduction_1992-2020_tm.csv"))
+
+percent_reduction_10yr<-percent_reduction %>% filter(Year>2010)
+
+percent_reduction_all_10yr <- percent_reduction_10yr %>%
+  group_by(TimeStep, Scenario) %>%
+  summarise(
+    avg_percent_reduction_Salish = round(mean(Salish, na.rm = TRUE),2),
+    avg_percent_reduction_OR = round(mean(OR, na.rm = TRUE),2),
+    avg_percent_reduction_NOF = round(mean(NOF, na.rm = TRUE),2),
+    avg_percent_reduction_Cali = round(mean(Cali, na.rm = TRUE),2),
+    avg_percent_reduction_SWWCVI = round(mean(SWWCVI, na.rm = TRUE),2),
+    .groups = 'drop'
+  )
+write_csv(percent_reduction_all_10yr, here("data", "tech_memo","summary_data","Validation_all_regions_percent_reduction_2011-2020_tm.csv"))
+
+## also create df from 1999-2020
+percent_reduction_20yr<-percent_reduction %>% filter(Year>1998)
+
+percent_reduction_all_10yr <- percent_reduction_10yr %>%
+  group_by(TimeStep, Scenario) %>%
+  summarise(
+    avg_percent_reduction_Salish = round(mean(Salish, na.rm = TRUE),2),
+    avg_percent_reduction_OR = round(mean(OR, na.rm = TRUE),2),
+    avg_percent_reduction_NOF = round(mean(NOF, na.rm = TRUE),2),
+    avg_percent_reduction_Cali = round(mean(Cali, na.rm = TRUE),2),
+    avg_percent_reduction_SWWCVI = round(mean(SWWCVI, na.rm = TRUE),2),
+    .groups = 'drop'
+  )
+write_csv(percent_reduction_all_10yr, here("data", "tech_memo","summary_data","Validation_all_regions_percent_reduction_2011-2020_tm.csv"))
+
+
+## all years
+
+percent_reduction_all_allyr <- percent_reduction %>%
+  group_by(TimeStep, Scenario) %>%
+  summarise(
+    avg_percent_reduction_Salish = round(mean(Salish, na.rm = TRUE),2),
+    avg_percent_reduction_OR = round(mean(OR, na.rm = TRUE),2),
+    avg_percent_reduction_NOF = round(mean(NOF, na.rm = TRUE),2),
+    avg_percent_reduction_Cali = round(mean(Cali, na.rm = TRUE),2),
+    avg_percent_reduction_SWWCVI = round(mean(SWWCVI, na.rm = TRUE),2),
+    .groups = 'drop'
+  )
+```
+
+###1 yr Biop
+####Finding the average percent reduction in Salish over all time and past 10 yrs by timestep
+```{r}
+### ALL YEARS
+
+#filter
+percent_reduction_salish_all<-percent_reduction %>% dplyr::select("Year", "Scenario", "TimeStep", "Salish")
+#summarize results
+percent_reduction_salish_all<-percent_reduction_salish_all %>% group_by(TimeStep) %>% 
+  summarise(avg_percent_reduction = mean(Salish),.groups = 'drop')
+
+### PAST 10 YRS
+
+#filter to past 10yrs
+percent_reduction_salish_10<-percent_reduction %>% dplyr::select("Year", "Scenario", "TimeStep", "Salish")%>% filter(Year>2010)
+#summarize results
+percent_reduction_salish_10<-percent_reduction_salish_10 %>% group_by(TimeStep) %>% 
+  summarise(avg_per_reduction = mean(Salish),.groups = 'drop')
+
+## PAST 20 YRS
+percent_reduction_salish_20<-percent_reduction %>% dplyr::select("Year", "Scenario", "TimeStep", "Salish")%>% filter(Year>2000)
+#summarize results
+percent_reduction_salish_20<-percent_reduction_salish_20 %>% group_by(TimeStep, Scenario) %>% 
+  summarise(avg_per_reduction = mean(Salish),.groups = 'drop')
+
+```
+
+####Finding the average nominal reduction in Salish over all time and past 10 yrs by timestep
+```{r}
+### ALL YEARS
+
+#filter
+nominal_reduction_salish_all<-nominal_reduction %>% dplyr::select("Year", "Scenario", "TimeStep", "Salish")
+#summarize results
+nominal_reduction_salish_all<-nominal_reduction_salish_all %>% group_by(TimeStep) %>% 
+  summarise(avg_percent_reduction = mean(Salish),.groups = 'drop')
+
+### PAST 10 YRS
+
+#filter to past 10yrs
+nominal_reduction_salish_10<-nominal_reduction %>% dplyr::select("Year", "Scenario", "TimeStep", "Salish")%>% filter(Year>2010)
+#summarize results
+nominal_reduction_salish_10<-nominal_reduction_salish_10 %>% group_by(TimeStep) %>% 
+  summarise(avg_per_reduction = mean(Salish),.groups = 'drop')
+```
+
+####Finding the average starting abundance over all time and past 10 yrs
+Only look at timestep 1, which is October - April
+```{r}
+starting_abundances_Salish<-starting_abundances %>% filter(TimeStep=="Oct_Apr") %>% 
+  filter(Scenario=="ZeroSEAK") %>% 
+  dplyr::select("Year", "Scenario", "Salish")
+
+mean(starting_abundances_Salish$Salish)
+starting_abundances_Salish_10yr<-starting_abundances_Salish %>% filter(Year>2010)
+mean(starting_abundances_Salish_10yr$Salish)
+
+ggplot(data=starting_abundances_Salish, aes(x=Year, y=Salish))+
+  geom_point()+
+  geom_line()+
+  theme_minimal()+
+  ylab("Number of Chinook in the Salish Sea")
+```
+
+####Table in Effects
+```{r}
+table_data<-starting_abundances_Salish %>% dplyr::select(-Scenario) %>% 
+  rename("starting_abundance"="Salish")
+nominal_reduction_table<-nominal_reduction %>% filter(Scenario=="ZeroPS") %>% 
+  filter(TimeStep=="Oct_Apr") %>% dplyr::select(Year, Salish)%>% 
+  rename("nominal_reduction"="Salish")
+percent_reduction_table<-percent_reduction %>% filter(Scenario=="ZeroPS") %>% 
+  filter(TimeStep=="Oct_Apr") %>% dplyr::select(Year, Salish)%>% 
+  rename("percent_reduction"="Salish")
+
+table_data<- table_data %>% right_join(nominal_reduction_table)
+table_data<- table_data %>% right_join(percent_reduction_table)
+```

@@ -1,0 +1,554 @@
+---
+title: "Impacts of Fisheries in Area 7"
+author: "Meghan Roberts"
+date: "2023-08-07"
+output: 
+  html_document:
+    code_folding: 'hide'
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.width=12, fig.height=6)
+library(here)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+library(kableExtra)
+library(stringr)
+library(janitor)
+library(tidyr)
+library(lubridate)
+```
+
+```{r, fig.align='center', fig.cap="Figure 1. Actual vs. Projected Catch of Chinook Salmon in Area 7 by Year. Data for 2022 (*) is an estimated initial value from D. Dapp. The values over the bar show the percent overage. Percent overage is calculated according to the formula below."}
+# Look at random data
+dockside<-read_csv(here("data","2010-2020_dockside_boats_anglers_salmon_edited_LK_1.2023.csv")) %>% 
+  clean_names() %>% 
+  filter(year!=2011) %>% 
+  filter(year!=2010) %>% 
+  filter(catch_area_code==7) 
+
+#### this data has days for all fisheries open in the area and boats fishing all salmon
+
+# Load in rec data
+catch<-read_csv(here("data","excess_catch.csv")) %>% 
+  filter(group=="total") %>% 
+  dplyr::select(-c(notes, group)) 
+
+# Work it
+catch <- catch[order(catch$year), ] #reorder years
+catch$diff <- catch$actual-catch$projected
+catch <- catch %>%
+  mutate(percent_over = round((diff / projected) * 100, 1)) %>% 
+  filter(area==7)
+
+catch_tidy <- catch %>%
+  gather(key = "type", value = "catch", actual, projected)
+
+## Area 7  
+# Change the order of the "type" variable levels
+catch_tidy_7<-catch_tidy %>% filter(area==7)
+catch_tidy_7$type <- factor(catch_tidy_7$type, levels = c("projected", "actual"))
+
+
+# Add a label condition for every other bar
+mean_percent_over <- catch_tidy_7 %>%
+  mutate(label_condition = ifelse(row_number() <= 12, TRUE, FALSE))
+mean_percent_over$percent_formatted <- sprintf("%.1f%%", mean_percent_over$percent_over)
+mean_percent_over$v_nudge<- -0.5
+mean_percent_over$v_nudge[which(mean_percent_over$year == 2016)] <- -4.5
+mean_percent_over$v_nudge[which(mean_percent_over$year == 2022)] <- -1.0
+mean_percent_over$v_nudge[which(mean_percent_over$year == 2023)] <- -1.0
+
+# Create the bar chart
+p <- ggplot(catch_tidy_7, aes(x = year, y = catch, fill = type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Year",
+       y = "Catch (number of Chinook)") +
+  scale_fill_manual('', values = c("actual" = "darkblue", "projected" = "lightblue")) +
+  scale_x_continuous(breaks = catch_tidy_7$year) +
+  theme_minimal()
+ # ylim(0,7500)
+
+# Add labels for bars based on label_condition
+p<-p + #geom_vline(xintercept = 2017.5, color = "black", linetype = "dashed") +
+  #geom_text(aes(x=2014.5, label="Projected=Projected", y=7100), colour="black", angle=0) +
+  #geom_text(aes(x=2022, label="*", y=2150), colour="black", angle=0) +
+  geom_text(data = mean_percent_over, aes(label = ifelse(label_condition, percent_formatted, "")), vjust = mean_percent_over$v_nudge, hjust= 1, position = position_dodge(width = 1))
+p
+ggsave(here("saved_figures", "summer_rec_catch_MA7_2012_2023.jpg"), plot=p, width = 10)
+
+# ggplot(catch, aes(x = year, y = percent_over, fill="darkblue")) +
+#   #geom_bar(stat = "identity", position = "dodge") +
+#   geom_line(size=1)+
+#   labs(x = "Year",
+#        y = "Percent over Projected Catch") +
+#   scale_x_continuous(breaks = catch$year) +
+#   scale_fill_identity("darkblue") + 
+#   theme_minimal()
+```
+
+The actual catch in Area 7 often surpasses the projected values for this region. From 2012 to 2021, this happened every year except for 2020. Since SRKW are known to spend time in Area 7, it is important to look at how variables have changed over time in Area 7 such as number of days open to Chinook retention, number of boats per day, Fraser Chinook abundance and SRKW sightings in inland waters.
+
+\[
+\text{Percent Overage} = \frac{\text{Actual Catch} - \text{Projected Catch}}{\text{Projected Catch}} \times 100
+\]
+
+
+###  {.tabset}
+
+#### **SRKW Spatial Overlap**
+Better figure for rec overlap in soundwatch_incidents.rmd (contains more years)
+```{r, fig.width=12, fig.height=6, fig.align='center', fig.cap="Figure 2. Chinook fishery retention in area 7 compared to SRKW presence in the region."}
+# Create the combined line plot
+orca<-read_csv(here("data","orca_fishery_overlap.csv")) %>% 
+  clean_names() %>% 
+  rename("md_date" = "date")
+
+date_parts <- strsplit(orca$md_date, "-")
+
+# Create a new column with month/day format
+orca$md_date_for <- sapply(date_parts, function(x) {
+  month <- match(x[2], month.abb)
+  day <- as.integer(x[1])
+  return(sprintf("%02d/%02d", month, day))
+})
+
+# orca$md_date_for <- as.Date(orca$md_date_for, format = "%m/%d")
+# orca$md_date_for <- format(orca$md_date_for, format = "%m/%d")
+
+
+# orca$month_day <- as.character(orca$month_day)  # Ensure it's character type
+# orca$year <- as.character(orca$year)  # Ensure it's character type
+
+# Combine month/day and year to create a date column
+orca$date <- as.Date(paste(orca$year, orca$md_date_for), format = "%Y %m/%d")
+# # Create a new_date column in "year-month-day" format
+# orca$date <- sprintf("%04d-%02d-%02d", orca$year, 
+#                          as.POSIXlt(orca$md_date_for)$mon + 1, 
+#                          as.POSIXlt(orca$md_date_for)$mday)
+
+srkw_sightings1<-read_csv(here("data","SRKW_sightings_2012-2022.csv")) %>% 
+  clean_names() 
+# srkw_sightings1<-srkw_sightings1 %>% 
+#   filter(year==2022)
+
+srkw_sightings1$sight_date <- mdy(srkw_sightings1$sight_date)
+srkw_sightings1<-srkw_sightings1 %>% 
+  filter(year(sight_date) >= 2012 & year(sight_date) <= 2022) %>% 
+  filter(month(sight_date) >= 7 & month(sight_date) <= 8) %>% 
+  filter(fish_area==7) %>% 
+  filter(pod!=c("NA", "Ts?", "NRs", "NRs?"))
+srkw_sightings1$date <- sprintf('%d/%d', month(srkw_sightings1$sight_date), day(srkw_sightings1$sight_date))
+unique_dates_df <- srkw_sightings1 %>%
+  distinct(sight_date)%>%
+  mutate(sighting = "yes") 
+  
+unique_dates_df <- unique_dates_df %>%
+  rename("date" = "sight_date")
+
+orca <- orca[order(orca$year), ] #reorder years
+
+orca$date <- as.Date(orca$date)
+
+orca<-left_join(orca, unique_dates_df, by="date")
+orca$sighting <- ifelse(is.na(orca$sighting), "no", orca$sighting)
+write.csv(orca, here("data", "orca.csv"))
+#sighting column is the conservative estimate
+
+#legend_order <- c("Closed", "Open", "Orcas Present", "Orcas Absent")
+# Create the customized stacked line graph
+# ggplot(orca, aes(x = as.Date(date, format = "%m/%d"), fill = factor(fishery_status))) +
+rec<-ggplot(orca, aes(x = as.Date(md_date_for, format="%m/%d"), fill = factor(fishery_status))) +
+  geom_tile(aes(y = year, height = 0.4), color = "white", position = position_nudge(y = -0.2)) +  ## Adjust height and add white border
+  geom_tile(aes(y = year + 0.2, fill = factor(sighting)), height = 0.4, color = "white") +  # Adjust height and add white border
+  scale_fill_manual(values = c("lightgreen", "lightblue", "darkgreen", "darkblue"), labels = c("Rec Chinook Fishery Closed", "Orcas Absent", "Mark Selective Chinook Retention", "Orcas Present")) +
+  labs(x = "Date", y = "Year", fill = "Status") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  geom_text(aes(x = as.Date(md_date_for, format = "%m/%d"), y = year+0.1,
+                 label = ifelse(sighting == "yes" & fishery_status == "open", "*", "") ),
+             vjust = -3, hjust = 0.5, size = 4, color = "purple") +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  scale_y_continuous(breaks = unique(orca$year), labels = unique(orca$year)) +
+  theme(panel.grid.major = element_blank(),  # Remove major grid lines
+        panel.grid.minor = element_blank(),
+        axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank() ) + # Remove minor grid lines
+  scale_x_date(date_breaks = "5 day", date_labels = "%m/%d")  # Adjust x-axis date breaks and labels
+
+rec
+
+# ggsave("rec_fish_orca_a7.jpg", plot = rec, width = 8, height = 5, units = "in")
+
+```
+This figure shows when the SRKW could have overlapped with fisheries from 2020 to 2022. The top bar (blue) shows when orcas were present or absent in area 7 and the bottom bar (green) shows when Chinook retention in area 7 is open or closed. Purple stars show days where SRKW sightings occurred in inland waters and the Chinook fishery was open for retention. In area 7, the fisheries overlapped with SRKW presence 29 days of 41 days the fishery was open in 2020, 2 of 7 days in 2021 and 6 of 9 days in 2022.
+
+```{r}
+## New figure showing overlap with commercial fisheries
+all_dates <- seq(from = as.Date("2014-08-01"), 
+                 to = as.Date("2023-09-30"), 
+                 by = "days")
+
+# Create a DataFrame from the dates
+dates <- data.frame(date = as.character(all_dates)) %>% 
+  filter(month(date) >= 8 & month(date) <= 9) 
+dates$date<-as.Date(dates$date)
+
+
+comm_fish<-read_csv(here("data","a7_commercial_fishery_dates.csv")) %>% 
+  clean_names() 
+comm_fish$date<-as.Date(comm_fish$date)
+comm_fish$fishery_status <- "open"
+## make sure to remove reef net fishing days
+  # reef net fisheries are fixed gear (no boats)
+ comm_fish$fishery_status <- ifelse(comm_fish$fishery_type == "reef net", "closed", comm_fish$fishery_status)
+
+
+
+comm_fish_dates<-left_join(dates, comm_fish)
+comm_fish_dates$md_date <- format(comm_fish_dates$date, "%m/%d")
+comm_fish_dates$fishery_status <- replace(comm_fish_dates$fishery_status, is.na(comm_fish_dates$fishery_status), "closed")
+
+srkw_sightings2<-read_csv(here("data","SRKW_sightings_2023.csv")) %>% 
+  clean_names() 
+
+srkw_sightings2$sight_date <- mdy(srkw_sightings2$sight_date)
+srkw_sightings2<-srkw_sightings2 %>% 
+  filter(year(sight_date) >= 2014 & year(sight_date) <= 2023) %>% 
+  filter(month(sight_date) >= 8 & month(sight_date) <= 9) %>% 
+  filter(fish_area==7) %>% 
+  filter(pod!=c("NA", "Ts?", "NRs", "NRs?"))
+srkw_sightings2$date <- sprintf('%d/%d', month(srkw_sightings2$sight_date), day(srkw_sightings2$sight_date))
+unique_dates_df1 <- srkw_sightings2 %>%
+  distinct(sight_date)%>%
+  mutate(sighting = "yes") 
+  
+unique_dates_df1 <- unique_dates_df1 %>%
+  rename("date" = "sight_date")
+
+comm_overlap<-left_join(comm_fish_dates, unique_dates_df1, by="date")
+comm_overlap$sighting <- ifelse(is.na(comm_overlap$sighting), "no", comm_overlap$sighting)
+comm_overlap$date<-as.Date(comm_overlap$date)
+comm_overlap$year <- substr(comm_overlap$date, 1, 4)
+comm_overlap$observed_year<-as.numeric(comm_overlap$year)
+#sighting column is the conservative estimate
+
+# # Making this condensed df bc dates in which one type of fishing was closed but not all automatically made the graph show that all fishing was closed on that day which isn't true
+# comm_overlap_condensed <- comm_overlap %>%
+#   filter(fishery_status == "open") %>%
+#   group_by(date) %>%
+#   summarise(
+#     sighting = first(sighting),
+#     year = first(year),
+#     md_date = first(md_date),
+#     observed_year = first(observed_year)
+#   ) %>%
+  # ungroup()
+
+comm_overlap_condensed <- comm_overlap %>%
+  group_by(md_date, observed_year) %>%
+  summarize(
+    fishery_status = any(fishery_status == "open"),
+    sighting = ifelse(any(sighting == "yes"), "yes", "no")
+  ) %>%
+  ungroup()
+
+write.csv(comm_overlap_condensed, here("data", "comm_dates_Fraser_WDFW.csv"))
+
+# Create the customized stacked line graph
+p<-ggplot(comm_overlap_condensed, aes(x = as.Date(md_date, format="%m/%d"), fill = factor(fishery_status))) +
+  geom_tile(aes(y = observed_year, height = 0.4), color = "white", position = position_nudge(y = -0.2)) +  # Adjust height and add white border
+  geom_tile(aes(y = observed_year + 0.2, fill = factor(sighting)), height = 0.4, color = "white") +  # Adjust height and add white border
+  scale_fill_manual(values = c("FALSE"="lightgreen", "no"="lightblue", "TRUE"="darkgreen", "yes"="darkblue"), labels = c("FALSE"="Commercial Fishery Closed", "no"="Orcas Absent", "TRUE"="Commercial Fishery Open", "yes"="Orcas Present"))  +
+  labs(x = "Date", y = "Year", fill = "Status") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  # geom_text(aes(x = as.Date(md_date, format = "%m/%d"),
+  #               y = observed_year-0.2,
+  #               label = ifelse(sighting == "yes" & fishery_status == "TRUE", "*", "")),vjust = -3, hjust = 0.5, size = 4, color = "purple") +
+  guides(fill = guide_legend(reverse = TRUE))  +
+  scale_y_continuous(breaks = unique(comm_overlap$observed_year), labels = unique(comm_overlap$observed_year))  +
+  theme(panel.grid.major = element_blank(),  # Remove major grid lines
+        panel.grid.minor = element_blank(),
+        axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank() )  +# Remove minor grid lines
+  scale_x_date(date_breaks = "5 day", date_labels = "%m/%d")  # Adjust x-axis date breaks and labels
+
+overlap_summary <- comm_overlap_condensed %>%
+  filter(sighting == "yes" & fishery_status == "TRUE") %>%
+  group_by(observed_year) %>%
+  summarize(overlap_days = n())
+
+total_com_days <- comm_overlap_condensed %>%
+  filter(fishery_status == "TRUE") %>%
+  group_by(observed_year) %>%
+  # summarize(open_days = n_distinct(date))
+  summarize(open_days = n())
+
+overlap_summary<-full_join(overlap_summary, total_com_days, by="observed_year")
+library(openxlsx)
+write.xlsx(overlap_summary, file = here("data","a7_commercial_overlap.xlsx"))
+
+p
+
+ggsave(here("saved_figures","comm_fishery_SRKW_overlap_a7_2014_2023.jpg"), plot = p, width = 8, height = 9, units = "in")
+
+
+problem_rows<-comm_overlap[comm_overlap$sighting == "yes" & comm_overlap$fishery_status == "open" & comm_overlap$fishery_type != "reef net", ]
+```
+
+
+
+```{r, fig.align='center', fig.cap="Figure 3. Maximum percentage of days that SRKW could overlap with Chinook fisheries by year and percent overage. Data for percent of days overlapped is not separated by pod after 2019."}
+orca_all_prejoin<-read_csv(here("data","pod_overlap_all.csv")) %>% 
+  clean_names() %>% 
+  mutate(po_j=j_max/chinook_retention_days*100)%>% 
+  mutate(po_k=k_max/chinook_retention_days*100)%>% 
+  mutate(po_l=l_max/chinook_retention_days*100)%>% 
+  mutate(po_all=all_pods/chinook_retention_days*100)
+
+percent_over_simple<-mean_percent_over %>% 
+  dplyr::select(c(percent_over, year)) %>% arrange(year)%>% distinct(year, .keep_all = TRUE)
+
+orca_all<-full_join(orca_all_prejoin, percent_over_simple, by="year")
+
+scale_f=2.5
+p<-ggplot(orca_all, aes(x = year)) +
+  geom_line(aes(y = po_j, color = "J"), size=1.5, alpha = 0.8) +
+  geom_line(aes(y = po_k, color = "K"), size=1.5, alpha = 0.8) +
+  geom_line(aes(y = po_l, color = "L"), size=1.5, alpha = 0.8) +
+  geom_line(aes(y = po_all, color = "All SRKW"), size=1.5, alpha = 0.8) +
+  geom_line(aes(y = percent_over/scale_f, group = 1, color = "Percent Overage"), size = 1.5, alpha = 0.8) +
+  scale_color_manual(values = c("J"="#99CCCC","K"= "#669999","L"= "#336666","All SRKW"= "#003333", "Percent Overage"="darkred")) +
+  labs(x = "Year", y = "Percent of Days Overlap",
+       color = "Pod") +
+  theme_minimal() +
+  scale_x_continuous(breaks = orca_all$year)+
+  theme(legend.position = "right")
+
+# Add secondary y-axis for percent_over
+p+scale_y_continuous(sec.axis = sec_axis(~ . * scale_f, name = "Percent Overage"))
+```
+
+Given the maximum amount of days that SRKW were seen in inland waters from 2009 to 2022, the percentage of days that SRKW could have overlapped with Chinook fisheries in Area 7 was calculated. From 2009 to 2019, this data is reported separately for each pod. After this, the SRKW sightings are grouped together. There is no clear trend in the percentage of days that SRKW overlap with fisheries despite the number of days for Chinook retention decreasing since 2009. In 2017 when percent overage was high, the percent of days overlap for SRKW and the fishery is lower for all pods than in previous years. Percent of days overlap is calculated according to the equation below:
+
+\[
+\text{Percent of Days Overlap} = \frac{\text{# of days SRKW are sighted in Area 7 when fisheries are open}}{\text{# of chinook retention days}} \times 100
+\]
+
+#### **SRKW Births and Deaths**
+
+```{r, fig.align='center', fig.cap="Figure 4. The number of births and deaths per year of SRKW compared to percent overage."}
+fraser<-read_csv(here("data","Fraser_Abundance.csv")) %>% 
+  clean_names()
+orca_pop_change<-fraser %>% dplyr::select(c(year, births, deaths)) %>%
+  filter(year>2011) %>% 
+  rename("birth"="births") %>% 
+  rename("death"="deaths") %>% 
+  mutate(net=birth-death) #%>% 
+  #gather(key = "population_change", value = "number", birth, death)
+
+orca_pop_change<-full_join(orca_pop_change, catch_tidy_7, by="year")
+
+scale_d=30
+# Create the plot
+p<-ggplot(orca_pop_change, aes(x = year)) +
+  geom_line(aes(y = birth, color = "Births"), size = 1.5, alpha = 0.8) +
+  geom_line(aes(y = death, color = "Deaths"), size = 1.5, alpha = 0.8) +
+  geom_line(aes(y = percent_over/scale_d, group = 1.5, color = "Percent Overage"), size = 1.5, alpha = 0.8) +
+  labs(x = "Year",
+       y = "Number of Births/Deaths",
+       color = "") +
+  scale_x_continuous(breaks = orca_pop_change$year) +
+  scale_color_manual(values = c("Births" = "darkblue", "Deaths"="darkgreen", "Percent Overage" = "darkred")) +
+  theme_minimal()
+
+# Add secondary y-axis for percent_over
+p+scale_y_continuous(sec.axis = sec_axis(~ . * scale_d, name = "Percent Overage"))
+
+# scale_d=30
+# # Create the plot
+# p <- ggplot(orca_pop_change, aes(x = year, y = number, fill = population_change)) +
+#   geom_bar(stat = "identity", position = "dodge") +
+#   geom_line(aes(y = net, group = 1), color = "darkblue", size = 1) +
+#   labs(x = "Year",
+#        y = "Number of Individuals") +
+#   scale_fill_manual('', values = c("birth" = "lightblue", "death" = "lightgreen")) +
+#   scale_x_continuous(breaks = orca_pop_change$year) +
+#   theme_minimal()
+# 
+# # Add secondary y-axis for percent_over
+# p + geom_line(aes(y = percent_over/scale_d, group = 1), color = "red", size = 1) +
+#   scale_y_continuous(sec.axis = sec_axis(~ . * scale_d, name = "Percent Overage"))
+
+```
+From 2012 to 2022, the SRKW births peaked in 2015 and dipped during 2017. Whereas deaths were highest in 2012 and 2016. Percent overage for Chinook fisheries was highest in 2017, then next highest in 2013 and 2015. None of these peaks necessarily line up with each other in a way that suggests correlation. 
+
+
+#### **Days Open to Chinook Retention**
+```{r, fig.align='center', fig.cap="Figure 5. This line chart shows the percent over the projected number of Chinook caught in Area 7 from 2012 to 2021. Percent over is calculated by dividing the difference in actual catch minus projected catch by the projected catch and mutiplying it by 100. It also shows the number of days the Chinook fishery allowed retention each year."}
+
+anglers<-read_csv(here("data","anglers_perday.csv"), skip = 1) %>% 
+  clean_names()
+anglers_july<-read_csv(here("data","angler_per_day_july.csv")) %>% 
+  clean_names()
+# # Days fishery is open
+# total.sampling.days <- dockside %>% 
+#   mutate(date = paste(month, day, year, sep = "/")) %>% 
+#   group_by(year, month) %>% 
+#   distinct(date) %>% 
+#   summarise(sampled_days = n()) %>% 
+#   mutate(date = paste(year, month, sep = "/"))
+# 
+# # Days fishery is open by year
+# days <- total.sampling.days %>%
+#   group_by(year) %>%
+#   summarize(total_sampled_days = sum(sampled_days))
+
+# # Create a new row of data for 2021 so plot will match above plot
+# row_2021 <- data.frame(
+#   year = 2021,
+#   total_sampled_days = NA)
+# 
+# # Add the new row to the existing dataframe for 2021
+# days <- rbind(days, row_2021)
+
+#ggplot(days, aes(x = year, y = total_sampled_days)) +
+    # geom_line(size=0.75) +
+    # #geom_point() +
+    # theme_minimal() +
+    # scale_x_continuous(breaks = days$year)+
+    # labs(x="Year", y = "Number of Days Where Boats Were Recorded")
+
+days_fished<-full_join(catch, anglers, by="year")
+
+days_fished_july<-full_join(catch, anglers_july, by="year")
+
+scale_a=0.4
+# Create the plot
+p<-ggplot(data = days_fished, aes(x = year)) +
+  geom_line(aes(y = percent_over, color = "Percent Overage"), size = 1.5) +
+  geom_line(aes(y = days_open_to_chinook_retention/scale_a, color = "Number of Chinook Retention Days"), size = 1.5) + 
+  scale_color_manual('',values = c("Percent Overage" = "darkred", "Number of Chinook Retention Days" = "darkblue")) +
+  scale_x_continuous(breaks = days_fished$year) +
+  labs(x = "Year", y = "Percent Overage", color = "Variable") +
+  theme_minimal()
+
+# Add secondary y-axis
+p + scale_y_continuous(
+    name = "Percent Overage",
+    sec.axis = sec_axis(trans = ~ .*scale_a, name = "Number of Chinook Retention Days"))
+```
+This plot shows that there is no clear pattern between the number of days open for Chinook retention in Area 7 and the percentage that the actual catch over shot the projected values by.
+
+#### **Anglers Per Day**
+
+```{r, fig.align='center', fig.cap="Figure 6. The number of anglers per day on days in July when Area 7 allows Chinook retention over time and number of days that the fishery is open to retention of Chinook in July by year. Values for angler trips in July for 2009-2020 are from J. Carey querying the most current CRC database."}
+
+scale_c=0.04
+p<-ggplot(data = days_fished_july, aes(x = year)) +
+  geom_line(aes(y = angler_trips_per_day, color = "Angler Trips per Day in July"), size = 1.5) +
+  geom_line(aes(y = days_open_july/scale_c, color = "Number of Chinook\nRetention Days in July"), size = 1.5) +
+  scale_color_manual('',values = c("Angler Trips per Day in July" = "darkgreen", "Number of Chinook\nRetention Days in July" = "darkblue")) +
+  labs(x = "Year", y = "Anglers per Day in July", color = "Variable") +
+  scale_x_continuous(breaks = days_fished$year)+
+  theme_minimal(base_size = 15)+
+  theme(legend.position = "bottom")
+
+anglers_per_day<-p + scale_y_continuous(
+    name = "Angler Trips per Day in July",
+    sec.axis = sec_axis(trans = ~ .*scale_c, name = "Number of Chinook\nRetention Days in July"))
+
+anglers_per_day
+
+ggsave(here("saved_figures", "anglers_per_day_retention_MA7.jpg"), anglers_per_day, width = 9, height = 5, units = "in")
+
+```
+The number of anglers per day has increased over time as the number of days that the Chinook fishery is open for retention has decreased.
+
+```{r, fig.align='center', fig.cap="Figure 7. The number of anglers per day in July on days when Area 7 allows Chinook retention over time and percent overage by year. Values for angler trips in July for 2009-2020 are from J. Carey querying the most current CRC database."}
+scale_e=.25
+p<-ggplot(data = days_fished_july, aes(x = year)) +
+  geom_line(aes(y = angler_trips_per_day, color = "Anglers per Day in July"), size = 1.5) +
+  geom_line(aes(y = percent_over/scale_e, color = "Percent Overage"), size = 1.5) +
+  scale_color_manual('',values = c("Anglers per Day in July" = "darkgreen", "Percent Overage" = "darkred")) +
+  labs(x = "Year", y = "Anglers per Day", color = "Variable") +
+  scale_x_continuous(breaks = days_fished$year)+
+  theme_minimal()
+
+p + scale_y_continuous(
+    name = "Anglers per Day in July",
+    sec.axis = sec_axis(trans = ~ .*scale_e, name = "Percent Overage"))
+```
+There is no clear relationship between anglers per day and percent overage.
+
+```{r, fig.align='center', fig.cap="Figure 8. Maximum percentage of days that SRKW could overlap with Chinook fisheries by year and average anglers per day of Chinook retention. Data for percent of days overlapped is not separated by pod after 2019."}
+percent_over_simple<-mean_percent_over %>%
+  dplyr::select(c(percent_over, year)) %>% arrange(year)%>% distinct(year, .keep_all = TRUE)
+
+orca_all_angler<-full_join(orca_all_prejoin, days_fished, by="year")
+
+scale_f=10
+p<-ggplot(orca_all_angler, aes(x = year)) +
+  geom_line(aes(y = po_j, color = "J"), size=1.5, alpha = 0.8) +
+  geom_line(aes(y = po_k, color = "K"), size=1.5, alpha = 0.8) +
+  geom_line(aes(y = po_l, color = "L"), size=1.5, alpha = 0.8) +
+  geom_line(aes(y = po_all, color = "All SRKW"), size=1.5, alpha = 0.8) +
+  geom_line(aes(y = anglers_per_day_open/scale_f, group = 1, color = "Anglers per Day"), size = 1.5, alpha = 0.8) +
+  scale_color_manual(values = c("J"="#99CCCC","K"= "#669999","L"= "#336666","All SRKW"= "#003333", "Anglers per Day"="darkgreen")) +
+  labs(x = "Year", y = "Percent of Days Overlap",
+       color = "Pod") +
+  theme_minimal() +
+  scale_x_continuous(breaks = orca_all$year)+
+  theme(legend.position = "right")
+
+# Add secondary y-axis for percent_over
+p+scale_y_continuous(sec.axis = sec_axis(~ . * scale_f, name = "Anglers per Day"))
+```
+This plot shows how percent of days that SRKW sightings overlap with Chinook retention days. In recent years, it appears that anglers per day has increased and SRKW are overlapping with the fisheries more than 25% of the time.
+
+#### **Fraser Chinook**
+```{r, fig.align='center', fig.cap="Figure 9. This plot shows the percentage that the actual catch over shot the projected values by as well as fraser abundance over time."}
+fraser_catch<-inner_join(catch, fraser, by="year")
+
+scale_b=5000
+# Create the plot
+p<-ggplot(data = fraser_catch, aes(x = year)) +
+  geom_line(aes(y = percent_over, color = "Percent Overage"), size = 1.5) +
+  geom_line(aes(y = fraser_river/scale_b, color = "Fraser Chinook Run Size"), size = 1.5) +
+  scale_color_manual('',values = c("Percent Overage" = "darkred", "Fraser Chinook Run Size" = "darkgreen")) +
+  labs(x = "Year", y = "Percent Overage", color = "Variable") +
+  scale_x_continuous(breaks = fraser_catch$year) +
+  theme_minimal()
+
+# Add secondary y-axis
+p + scale_y_continuous(
+    name = "Percent Overage",
+    sec.axis = sec_axis(trans = ~ .*scale_b, name = "Fraser Chinook Run Size"))
+
+```
+Over the years when we have both Fraser Chinook abundance and the percentage that the actual catch over shot the projected values by, the Fraser Chinook abundance appears to be higher when actual catch is closer to projected catch. The high percent overage in 2017 is concerning since this could mean higher exploitation of the stock in a year when they are already doing poorly. Fraser Chinook abundance numbers are model estimates.
+
+##Making a more informative dataframe for commercial fisheries openings
+```{r}
+##I did not change fishery_status to be closed when reef net is the type bc technically fishing is open on those days despite it not being represented in the plots (not enough impact to be considered)
+
+# comm_fish<-read_csv(here("data","a7_commercial_fishery_dates.csv")) %>%
+#   clean_names()
+# comm_fish_reformatted <- comm_fish %>%
+#   group_by(date) %>%
+#   mutate(treaty_fishery_type = ifelse(treaty == "yes", fishery_type, NA),
+#          nontreaty_fishery_type = ifelse(treaty == "no", fishery_type, NA)) %>% select(-c(fishery_type, treaty)) %>% rename("restrictions"="notes") %>%
+#   mutate(MA7=ifelse(entire_a7=="yes", "open", "closed")) %>%
+#   mutate(MA7A=ifelse(restrictions=="7a", "open", NA)) %>%
+#   mutate(restrictions = ifelse(restrictions == "7a", NA, restrictions))%>%
+#   arrange(date)
+# 
+# library(openxlsx)
+# write.xlsx(comm_fish_reformatted, file = "a7_commercial_dates_reformatted.xlsx")
+
+```
+

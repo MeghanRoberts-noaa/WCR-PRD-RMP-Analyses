@@ -1,0 +1,829 @@
+---
+title: "Prey Reduction Tech Memo"
+author: "Meghan Roberts"
+date: "2024-06-10"
+output: html_document
+---
+
+This markdown contains analyses produced for the tech memo that Meg Wallen is working on looking at cumulative prey reduction for SRKW across all fisheries by timestep. The figures are saved to saved_figures>tech_memo.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(sf)
+library(here)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(janitor)
+library(patchwork)
+# library(ggtree)
+library(stringr)
+library(purrr)
+library(png)
+library(scatterpie)
+library(grid)
+library(treemapify)
+library(cowplot)
+```
+
+
+```{r}
+#read in data and align naming system
+regions_sp<-read_sf(here("data","shapefiles", "Shelton_region_shapefile","Shelton_region_shapefile", "Shelton_regions_final.shp"))
+regions_sp$layer[1]<-"Salish"
+regions_sp$layer[2]<-"CA"
+regions_sp$layer[3]<-"OR"
+regions_sp$layer[5]<-"SWWCVI"
+regions_sp<-regions_sp %>% rename("region"="layer")
+data<-read_csv(here("data","USALLValid_TechMemo.csv"))
+# write_csv(data, "tech_memo_data_nonshp.csv")
+
+#join the data
+data_spatial<-left_join(regions_sp, data)
+# st_write(data_spatial, "tech_memo_data.shp")
+
+```
+
+#making a map
+```{r}
+#load in US state shapefile
+US<-read_sf(here("data","shapefiles", "US","US", "States_shapefile.shp")) %>% 
+  clean_names() %>% 
+  filter(state_name!="ALASKA") %>% 
+  filter(state_name!="HAWAII")
+
+#load in Canada
+CAN<-read_sf(here("data","shapefiles", "Canada","Canada", "gpr_000b11a_e.shp"))
+
+#define colors
+region_colors <- c("SWWCVI" = "#26456E", "Salish" = "#7AC7E2", "NOF" = "#64AAD2", 
+                   "OR" = "#1C5A99", "CA" = "#B4D4DA")
+
+map<-ggplot() +
+  geom_sf(data=US, aes())+
+  geom_sf(data=CAN, aes())+
+  geom_sf(data = data_spatial, aes(fill=region)) +
+  scale_fill_manual(values = region_colors) +  # Manual color assignment
+  theme_minimal()+
+  coord_sf(xlim = c(-129, -119), ylim = c(34, 51), expand = FALSE)+
+  theme(legend.position = "none") + # Remove legend
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1))
+
+
+map_legend<-ggplot() +
+  geom_sf(data=US, aes())+
+  geom_sf(data=CAN, aes())+
+  geom_sf(data = data_spatial, aes(fill=region)) +
+  scale_fill_manual(values = region_colors) +  # Manual color assignment
+  theme_minimal()+
+  coord_sf(xlim = c(-129, -119), ylim = c(34, 51), expand = FALSE)+
+  theme(legend.position = "right") + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1))
+```
+
+#make a corresponding bar plot
+```{r}
+bar<- ggplot(data_spatial, aes(x = timestep, y = avg_per_reduction, fill = region)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Timestep",
+       y = "Average Percent Reduction",
+       fill = "Region") +
+  scale_fill_manual(values = region_colors) +
+  theme_minimal()
+```
+
+#plot and map combo
+```{r}
+combined_plot <- map +bar
+combined_plot
+
+ggsave(here("saved_figures", "tech_memo", "regional_perc_reduction_tech_memo_1.jpg"), plot = combined_plot, width = 10, height = 5, dpi = 300)
+```
+
+
+#just 3 maps labeled with values
+```{r}
+#adding latitude and longitude for the labels
+data_spatial$latitude=0
+data_spatial$longitude=0
+data_spatial$x_nudge=0
+data_spatial$y_nudge=0
+data_spatial <- data_spatial %>%
+  mutate(latitude = ifelse(region == "CA", 125, latitude),
+         longitude = ifelse(region == "CA", 35, longitude),
+         x_nudge = ifelse(region == "CA", -1, x_nudge),
+         y_nudge = ifelse(region == "CA", -4.5, y_nudge)) %>% 
+  mutate(latitude = ifelse(region == "OR", 42.5, latitude),
+         longitude = ifelse(region == "OR", 127, longitude),
+         x_nudge = ifelse(region == "OR", -2.5, x_nudge),
+         y_nudge = ifelse(region == "OR", -1, y_nudge)) %>% 
+  mutate(latitude = ifelse(region == "NOF", 47, latitude),
+         longitude = ifelse(region == "NOF", 127, longitude),
+         x_nudge = ifelse(region == "NOF", -2.5, x_nudge),
+         y_nudge = ifelse(region == "NOF", 0, y_nudge)) %>% 
+  mutate(latitude = ifelse(region == "SWWCVI", 49, latitude),
+         longitude = ifelse(region == "SWWCVI", 128, longitude),
+         x_nudge = ifelse(region == "SWWCVI", -3, x_nudge),
+         y_nudge = ifelse(region == "SWWCVI", 0.5, y_nudge)) %>% 
+  mutate(latitude = ifelse(region == "Salish", 29, latitude),
+         longitude = ifelse(region == "Salish", 122, longitude),
+         x_nudge = ifelse(region == "Salish", 3, x_nudge),
+         y_nudge = ifelse(region == "Salish", 0.4, y_nudge))
+data_spatial$avg_per_reduction_label=NA
+
+#breaking up data by timestep
+oct_apr<-data_spatial %>% filter(timestep=="Oct-Apr")
+may_jun<-data_spatial %>% filter(timestep=="May-Jun")
+jul_sep<-data_spatial %>% filter(timestep=="Jul-Sep")
+
+#getting the scale the same
+# Generate gradient colors
+gradient_colors <- scales::gradient_n_pal("Blues")(20)
+
+# Define common scale limits based on the overall range of avg_per_reduction values
+common_scale_limits <- range(c(oct_apr$avg_per_reduction, jul_sep$avg_per_reduction, may_jun$avg_per_reduction))
+```
+
+```{r}
+oct_apr_map <- ggplot() +
+  geom_sf(data = US, aes()) +
+  geom_sf(data = CAN, aes()) +
+  geom_sf(data = oct_apr, aes(fill = region)) +
+  scale_fill_manual(values = region_colors) +
+  theme_minimal() +
+  coord_sf(xlim = c(-130, -119), ylim = c(34, 51), expand = FALSE) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 1)) +
+  geom_sf_text(data = oct_apr, aes(label = avg_per_reduction_label),
+               color = "black", size=3, fun.geometry = sf::st_centroid, 
+               nudge_x=oct_apr$x_nudge, nudge_y = oct_apr$y_nudge)
+
+oct_apr_map
+```
+
+```{r}
+oct_apr_map <- ggplot() +
+  geom_sf(data = US, aes()) +
+  geom_sf(data = CAN, aes()) +
+  geom_sf(data = oct_apr, aes(fill = avg_per_reduction)) +
+  # scale_fill_gradient(low = "lightblue", high = "darkblue") +
+  scale_fill_gradient(low = "lightblue", high = "darkblue", limits = common_scale_limits) +
+  theme_minimal() +
+  coord_sf(xlim = c(-133, -117), ylim = c(34, 51), expand = FALSE) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 1)) +
+  geom_sf_text(data = oct_apr, aes(label = paste(region, " = \n", avg_per_reduction, "%")),
+               color = "black", size=2.5, fun.geometry = sf::st_centroid, 
+               nudge_x=oct_apr$x_nudge, nudge_y = oct_apr$y_nudge)+
+  labs(x="", y="",fill="Average Percent Reduction", title="October - April")
+
+# Print the map
+# print(oct_apr_map)
+```
+
+```{r}
+may_jun_map <- ggplot() +
+  geom_sf(data = US, aes()) +
+  geom_sf(data = CAN, aes()) +
+  geom_sf(data = may_jun, aes(fill = avg_per_reduction)) +
+  scale_fill_gradient(low = "lightblue", high = "darkblue", limits = common_scale_limits) +
+  theme_minimal() +
+  coord_sf(xlim = c(-133, -117), ylim = c(34, 51), expand = FALSE) +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 1)) +
+  geom_sf_text(data = may_jun, aes(label = paste(region, " = \n", avg_per_reduction, "%")),
+               color = "black", size=2.5, fun.geometry = sf::st_centroid, 
+               nudge_x=oct_apr$x_nudge, nudge_y = oct_apr$y_nudge)+
+  labs(x="", y="",fill="Average Percent Reduction", title="May - June")
+
+# Print the map
+# print(may_jun_map)
+```
+
+```{r}
+jul_sep_map <- ggplot() +
+  geom_sf(data = US, aes()) +
+  geom_sf(data = CAN, aes()) +
+  geom_sf(data = jul_sep, aes(fill = avg_per_reduction)) +
+  scale_fill_gradient(low = "lightblue", high = "darkblue", limits = common_scale_limits) +
+  theme_minimal() +
+  coord_sf(xlim = c(-133, -117), ylim = c(34, 51), expand = FALSE) +
+  theme(legend.position = "right") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 1)) +
+  geom_sf_text(data = jul_sep, aes(label = paste(region, " = \n", avg_per_reduction, "%")),
+               color = "black", size=2.5, fun.geometry = sf::st_centroid, 
+               nudge_x=oct_apr$x_nudge, nudge_y = oct_apr$y_nudge)+
+  labs(x="", y="",fill="Average Percent\nReduction", title="July - Sep")
+
+# Print the map
+# print(jul_sep_map)
+```
+
+
+#combine the maps
+```{r}
+perc_reduction_map<-oct_apr_map +may_jun_map +jul_sep_map
+perc_reduction_map
+# ggsave("regional_per_reduction_tech_memo.jpg", plot = perc_reduction_map, width = 10, height = 5, dpi = 300)
+```
+
+##Making a treemap instead of a pie chart
+```{r}
+#read in files from validation_run_data.Rmd
+
+percent_reduction_all<-read_csv(here("data", "tech_memo","summary_data","Validation_all_regions_percent_reduction_1992-2020_tm.csv"))
+percent_reduction_all_10yr<-read_csv(here("data", "tech_memo","summary_data","Validation_all_regions_percent_reduction_2011-2020_tm.csv"))
+
+# Assuming percent_reduction_all has columns: time_step, avg_percent_reduction_Region, avg_percent_reduction_...
+
+# Long format
+percent_reduction_long <- percent_reduction_all %>%
+  pivot_longer(cols = starts_with("avg_percent_reduction_"),
+               names_to = "region",
+               values_to = "percent_reduction") %>%
+  clean_names()
+
+percent_reduction_long$region <- str_replace_all(percent_reduction_long$region, "avg_percent_reduction_", "")
+
+percent_reduction_long$scenario<-str_replace_all(percent_reduction_long$scenario, 
+                                                 "Zero", "")
+
+scenario_colors <- c("PS" = "#819171", "BC" = "#9CAF88", "PFMC" = "#DFE6DA", 
+                     "SEAK" = "#CBD5B0")
+
+percent_reduction_long<-percent_reduction_long %>% filter(scenario!="US")
+
+#filter data
+#CA
+Cali_TS1<-percent_reduction_long %>% filter(time_step=="Oct_Apr") %>% 
+  filter(region=="Cali")
+Cali_TS2<-percent_reduction_long %>% filter(time_step=="May_Jun") %>% 
+  filter(region=="Cali")
+Cali_TS3<-percent_reduction_long %>% filter(time_step=="Jul_Sep") %>% 
+  filter(region=="Cali")
+#Salish
+Salish_TS1<-percent_reduction_long %>% filter(time_step=="Oct_Apr") %>% 
+  filter(region=="Salish")
+Salish_TS2<-percent_reduction_long %>% filter(time_step=="May_Jun") %>% 
+  filter(region=="Salish")
+Salish_TS3<-percent_reduction_long %>% filter(time_step=="Jul_Sep") %>% 
+  filter(region=="Salish")
+#OR
+OR_TS1<-percent_reduction_long %>% filter(time_step=="Oct_Apr") %>% 
+  filter(region=="OR")
+OR_TS2<-percent_reduction_long %>% filter(time_step=="May_Jun") %>% 
+  filter(region=="OR")
+OR_TS3<-percent_reduction_long %>% filter(time_step=="Jul_Sep") %>% 
+  filter(region=="OR")
+#NOF
+NOF_TS1<-percent_reduction_long %>% filter(time_step=="Oct_Apr") %>% 
+  filter(region=="NOF")
+NOF_TS2<-percent_reduction_long %>% filter(time_step=="May_Jun") %>% 
+  filter(region=="NOF")
+NOF_TS3<-percent_reduction_long %>% filter(time_step=="Jul_Sep") %>% 
+  filter(region=="NOF")
+#SWWCVI
+SWWCVI_TS1<-percent_reduction_long %>% filter(time_step=="Oct_Apr") %>% 
+  filter(region=="SWWCVI")
+SWWCVI_TS2<-percent_reduction_long %>% filter(time_step=="May_Jun") %>% 
+  filter(region=="SWWCVI")
+SWWCVI_TS3<-percent_reduction_long %>% filter(time_step=="Jul_Sep") %>% 
+  filter(region=="SWWCVI")
+```
+
+#TS1 Treemaps for all years
+```{r}
+#with legend
+#Cali
+Cali_TS1_legend <- ggplot(Cali_TS1, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "right") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("CA")
+
+Cali_TS1_tree <- ggplot(Cali_TS1, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("CA")
+
+Cali_TS1_tree
+
+OR_TS1_tree <- ggplot(OR_TS1, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("OR")
+
+OR_TS1_tree
+
+NOF_TS1_tree <- ggplot(NOF_TS1, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("NOF")
+
+NOF_TS1_tree
+
+Salish_TS1_tree <- ggplot(Salish_TS1, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("Salish")
+
+Salish_TS1_tree
+
+SWWCVI_TS1_tree <- ggplot(SWWCVI_TS1, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("SWWCVI")
+
+SWWCVI_TS1_tree
+
+#combine plots
+grid_layout <- c(2, 3)
+
+#get legend
+legend <- cowplot::get_legend(Cali_TS1_legend)
+# Combine the plots using the + operator
+TS1_combined <- Salish_TS1_tree+SWWCVI_TS1_tree+NOF_TS1_tree+OR_TS1_tree+Cali_TS1_tree+legend+
+                  plot_layout(ncol = grid_layout[2], byrow = TRUE)
+TS1_combined <- TS1_combined +
+  plot_annotation(title = "Average Percent Reduction in October to April by Region from 1992-2020")
+                  
+TS1_combined
+
+ggsave(here("saved_figures", "tech_memo", "TS1_scenario_percent_reduction_1992_2020_tech_memo.jpg"), plot = TS1_combined, width = 8, height = 6, dpi = 300)
+
+```
+
+
+#TS2 Treemaps for all years 
+```{r}
+#with legend
+#Cali
+Cali_TS2_legend <- ggplot(Cali_TS2, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "right") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("CA")
+
+Cali_TS2_tree <- ggplot(Cali_TS2, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("CA")
+
+Cali_TS2_tree
+
+OR_TS2_tree <- ggplot(OR_TS2, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("OR")
+
+OR_TS2_tree
+
+NOF_TS2_tree <- ggplot(NOF_TS2, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("NOF")
+
+NOF_TS2_tree
+
+Salish_TS2_tree <- ggplot(Salish_TS2, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("Salish")
+
+Salish_TS2_tree
+
+SWWCVI_TS2_tree <- ggplot(SWWCVI_TS2, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("SWWCVI")
+
+SWWCVI_TS2_tree
+
+#combine plots
+grid_layout <- c(2, 3)
+
+#get legend
+legend <- cowplot::get_legend(Cali_TS2_legend)
+# Combine the plots using the + operator
+TS2_combined <- Salish_TS2_tree+SWWCVI_TS2_tree+NOF_TS2_tree+OR_TS2_tree+Cali_TS2_tree+legend+
+plot_layout(ncol = grid_layout[2], byrow = TRUE)
+TS2_combined <- TS2_combined +
+  plot_annotation(title = "Average Percent Reduction in May to June by Region from 1992-2020")
+                  
+TS2_combined
+
+ggsave(here("saved_figures", "tech_memo", "TS2_scenario_percent_reduction_1992_2020_tech_memo.jpg"), plot = TS2_combined, width = 8, height = 6, dpi = 300)
+
+```
+
+
+#TS3 Treemaps for all years 
+```{r}
+#with legend
+#Cali
+Cali_TS3_legend <- ggplot(Cali_TS3, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "right") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("CA")
+
+Cali_TS3_tree <- ggplot(Cali_TS3, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("CA")
+
+Cali_TS3_tree
+
+OR_TS3_tree <- ggplot(OR_TS3, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("OR")
+
+OR_TS3_tree
+
+NOF_TS3_tree <- ggplot(NOF_TS3, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("NOF")
+
+NOF_TS3_tree
+
+Salish_TS3_tree <- ggplot(Salish_TS3, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("Salish")
+
+Salish_TS3_tree
+
+SWWCVI_TS3_tree <- ggplot(SWWCVI_TS3, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("SWWCVI")
+
+SWWCVI_TS3_tree
+
+#combine plots
+grid_layout <- c(2, 3)
+
+#get legend
+legend <- cowplot::get_legend(Cali_TS3_legend)
+# Combine the plots using the + operator
+TS3_combined <- Salish_TS3_tree+SWWCVI_TS3_tree+NOF_TS3_tree+OR_TS3_tree+Cali_TS3_tree+legend+
+                  plot_layout(ncol = grid_layout[2], byrow = TRUE)
+TS3_combined <- TS3_combined +
+  plot_annotation(title = "Average Percent Reduction in July to September by Region from 1992-2020")
+TS3_combined
+
+ggsave(here("saved_figures", "tech_memo", "TS3_scenario_percent_reduction_1992_2020_tech_memo.jpg"), plot = TS3_combined, width = 8, height = 6, dpi = 300)
+
+```
+
+##Repeating for the past 10 yrs and not all time
+
+do not just save any of the files without running the whole script because things are named the same thing
+```{r}
+# Long format
+percent_reduction_long <- percent_reduction_all_10yr %>%
+  pivot_longer(cols = starts_with("avg_percent_reduction_"),
+               names_to = "region",
+               values_to = "percent_reduction") %>%
+  clean_names()
+
+percent_reduction_long$region <- str_replace_all(percent_reduction_long$region, "avg_percent_reduction_", "")
+
+percent_reduction_long$scenario<-str_replace_all(percent_reduction_long$scenario, 
+                                                 "Zero", "")
+
+scenario_colors <- c("PS" = "#AA00D7", "BC" = "#DC86FA", "PFMC" = "#FBF2FF", 
+                     "SEAK" = "#E2ABFF")
+
+percent_reduction_long<-percent_reduction_long %>% filter(scenario!="US")
+
+#filter data
+#CA
+Cali_TS1<-percent_reduction_long %>% filter(time_step=="Oct_Apr") %>% 
+  filter(region=="Cali")
+Cali_TS2<-percent_reduction_long %>% filter(time_step=="May_Jun") %>% 
+  filter(region=="Cali")
+Cali_TS3<-percent_reduction_long %>% filter(time_step=="Jul_Sep") %>% 
+  filter(region=="Cali")
+#Salish
+Salish_TS1<-percent_reduction_long %>% filter(time_step=="Oct_Apr") %>% 
+  filter(region=="Salish")
+Salish_TS2<-percent_reduction_long %>% filter(time_step=="May_Jun") %>% 
+  filter(region=="Salish")
+Salish_TS3<-percent_reduction_long %>% filter(time_step=="Jul_Sep") %>% 
+  filter(region=="Salish")
+#OR
+OR_TS1<-percent_reduction_long %>% filter(time_step=="Oct_Apr") %>% 
+  filter(region=="OR")
+OR_TS2<-percent_reduction_long %>% filter(time_step=="May_Jun") %>% 
+  filter(region=="OR")
+OR_TS3<-percent_reduction_long %>% filter(time_step=="Jul_Sep") %>% 
+  filter(region=="OR")
+#NOF
+NOF_TS1<-percent_reduction_long %>% filter(time_step=="Oct_Apr") %>% 
+  filter(region=="NOF")
+NOF_TS2<-percent_reduction_long %>% filter(time_step=="May_Jun") %>% 
+  filter(region=="NOF")
+NOF_TS3<-percent_reduction_long %>% filter(time_step=="Jul_Sep") %>% 
+  filter(region=="NOF")
+#SWWCVI
+SWWCVI_TS1<-percent_reduction_long %>% filter(time_step=="Oct_Apr") %>% 
+  filter(region=="SWWCVI")
+SWWCVI_TS2<-percent_reduction_long %>% filter(time_step=="May_Jun") %>% 
+  filter(region=="SWWCVI")
+SWWCVI_TS3<-percent_reduction_long %>% filter(time_step=="Jul_Sep") %>% 
+  filter(region=="SWWCVI")
+```
+
+
+#TS1 Treemaps for 10yrs years
+```{r}
+#with legend
+#Cali
+Cali_TS1_legend <- ggplot(Cali_TS1, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "right") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("CA")
+
+Cali_TS1_tree <- ggplot(Cali_TS1, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("CA")
+
+Cali_TS1_tree
+
+OR_TS1_tree <- ggplot(OR_TS1, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("OR")
+
+OR_TS1_tree
+
+NOF_TS1_tree <- ggplot(NOF_TS1, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("NOF")
+
+NOF_TS1_tree
+
+Salish_TS1_tree <- ggplot(Salish_TS1, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("Salish")
+
+Salish_TS1_tree
+
+SWWCVI_TS1_tree <- ggplot(SWWCVI_TS1, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("SWWCVI")
+
+SWWCVI_TS1_tree
+
+#combine plots
+grid_layout <- c(2, 3)
+
+#get legend
+legend <- cowplot::get_legend(Cali_TS1_legend)
+# Combine the plots using the + operator
+TS1_combined <- Salish_TS1_tree+SWWCVI_TS1_tree+NOF_TS1_tree+OR_TS1_tree+Cali_TS1_tree+legend+
+                  plot_layout(ncol = grid_layout[2], byrow = TRUE)
+TS1_combined <- TS1_combined +
+  plot_annotation(title = "Average Percent Reduction in October to April by Region from 2011-2020")
+                  
+TS1_combined
+
+ggsave(here("saved_figures", "tech_memo", "TS1_scenario_percent_reduction_2011-2020_tech_memo.jpg"), plot = TS1_combined, width = 8, height = 6, dpi = 300)
+
+```
+
+
+#TS2 Treemaps for 10 years 
+```{r}
+#with legend
+#Cali
+Cali_TS2_legend <- ggplot(Cali_TS2, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "right") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("CA")
+
+Cali_TS2_tree <- ggplot(Cali_TS2, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("CA")
+
+Cali_TS2_tree
+
+OR_TS2_tree <- ggplot(OR_TS2, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("OR")
+
+OR_TS2_tree
+
+NOF_TS2_tree <- ggplot(NOF_TS2, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("NOF")
+
+NOF_TS2_tree
+
+Salish_TS2_tree <- ggplot(Salish_TS2, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("Salish")
+
+Salish_TS2_tree
+
+SWWCVI_TS2_tree <- ggplot(SWWCVI_TS2, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("SWWCVI")
+
+SWWCVI_TS2_tree
+
+#combine plots
+grid_layout <- c(2, 3)
+
+#get legend
+legend <- cowplot::get_legend(Cali_TS2_legend)
+# Combine the plots using the + operator
+TS2_combined <- Salish_TS2_tree+SWWCVI_TS2_tree+NOF_TS2_tree+OR_TS2_tree+Cali_TS2_tree+legend+
+plot_layout(ncol = grid_layout[2], byrow = TRUE)
+TS2_combined <- TS2_combined +
+  plot_annotation(title = "Average Percent Reduction in May to June by Region from 2011-2020")
+                  
+TS2_combined
+
+ggsave(here("saved_figures", "tech_memo", "TS2_scenario_percent_reduction_2011-2020_tech_memo.jpg"), plot = TS2_combined, width = 8, height = 6, dpi = 300)
+
+```
+
+
+#TS3 Treemaps for 10 years 
+```{r}
+#with legend
+#Cali
+Cali_TS3_legend <- ggplot(Cali_TS3, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "right") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("CA")
+
+Cali_TS3_tree <- ggplot(Cali_TS3, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("CA")
+
+Cali_TS3_tree
+
+OR_TS3_tree <- ggplot(OR_TS3, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("OR")
+
+OR_TS3_tree
+
+NOF_TS3_tree <- ggplot(NOF_TS3, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("NOF")
+
+NOF_TS3_tree
+
+Salish_TS3_tree <- ggplot(Salish_TS3, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("Salish")
+
+Salish_TS3_tree
+
+SWWCVI_TS3_tree <- ggplot(SWWCVI_TS3, aes(area = percent_reduction, fill = scenario, label = paste0(percent_reduction, "%"))) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black", size = 13) +
+  scale_fill_manual(values = scenario_colors) +
+  theme(legend.position = "none") +  # You can adjust the legend position as needed
+  guides(fill = guide_legend(title = "Scenario"))+  # Set the legend title if needed
+  ggtitle("SWWCVI")
+
+SWWCVI_TS3_tree
+
+#combine plots
+grid_layout <- c(2, 3)
+
+#get legend
+legend <- cowplot::get_legend(Cali_TS3_legend)
+# Combine the plots using the + operator
+TS3_combined <- Salish_TS3_tree+SWWCVI_TS3_tree+NOF_TS3_tree+OR_TS3_tree+Cali_TS3_tree+legend+
+                  plot_layout(ncol = grid_layout[2], byrow = TRUE)
+TS3_combined <- TS3_combined +
+  plot_annotation(title = "Average Percent Reduction in July to September by Region from 2011-2020")
+TS3_combined
+
+ggsave(here("saved_figures", "tech_memo", "TS3_scenario_percent_reduction_2011-2020_tech_memo.jpg"), plot = TS3_combined, width = 8, height = 6, dpi = 300)
+
+```

@@ -1,0 +1,240 @@
+start,end,today,geopoint_test:Latitude,geopoint_test:Longitude,geopoint_test:Altitude,geopoint_test:Accuracy,datetime_test,select_soundwatchvessel,Boat_Driver,vessel,action,kayak_num,incidents,ODK conversion,select_previous,select_photo,select_whaleinfo,whaleinformation,select_behavior,changeinbehavior,select_wwf,vesselswwf,select_kayakwwf,Comments,initials,meta:instanceID
+Fri Jul 05 17:30:46 UTC 2019,Fri Jul 05 17:31:53 UTC 2019,Fri Jul 05 00:00:00 UTC 2019,48.46392667,-123.1048783,-9.5,4,Fri Jul 05 17:30:00 UTC 2019,Raydiance,Taypor,PS,T,,400yd_inthepath no_go_zone,400yd inthepath,contact_no,photo_y,whaleinfo_y,J k l12,behavior_n,,wwf_n,1,kayakwwf_n,,Kw,uuid:13cc9357-60e9-49c6-8947-5403471ee333
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Fri Jul 05 17:43:54 UTC 2019,Fri Jul 05 17:45:24 UTC 2019,Fri Jul 05 00:00:00 UTC 2019,48.46414333,-123.0798983,-8.399999619,3.9,Fri Jul 05 17:43:00 UTC 2019,Raydiance,Taylir,PM,T,,high_speed_within_1km withinhalfmile_Limekiln,high speed within 1km,contact_no,photo_n,whaleinfo_y,J k l12,behavior_n,,wwf_n,2,,,Kw,uuid:ff11ee41-14b7-4255-a6f7-3dfa9c0921a3
+,,,,,,,,,,,,,,withinhalfmile Limekiln,,,,,,,,,,,,
+Fri Jul 05 18:04:22 UTC 2019,Fri Jul 05 18:06:15 UTC 2019,Fri Jul 05 00:00:00 UTC 2019,48.45335667,-123.03986,-8,3.9,Fri Jul 05 18:04:00 UTC 2019,Raydiance,Taylor,PM,T,,inshore_of_whales high_speed_within_1km 200_yards_under_power 100_yards_under_power 300_yards_under_power no_go_zone,inshore of whales,contact_no,photo_y,whaleinfo_y,"J56, some Js and ls",behavior_unk,,wwf_n,1,,,Ec,uuid:06db40c3-5592-48e5-9a6e-c7780e10c1c4
+,,,,,,,,,,,,,,high speed within 1km,,,,,,,,,,,,
+,,,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,100 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Fri Jul 05 18:06:18 UTC 2019,Fri Jul 05 18:08:21 UTC 2019,Fri Jul 05 00:00:00 UTC 2019,48.45343667,-123.0403783,-8,3.9,Fri Jul 05 18:06:00 UTC 2019,Raydiance,Taylor,PM,F,,inshore_of_whales no_go_zone fishing_within100yds fishing_within200yds,inshore of whales,contact_no,photo_y,whaleinfo_y,"J56, some Js some ls",behavior_unk,,wwf_n,1,,x10 for 10 fishing boats all around whales,Ec,uuid:0c87f5ab-1d21-45e0-9186-e73801d4e413
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,,,fishing within100yds,,,,,,,,,,,,
+,,,,,,,,,,,,,,fishing within200yds,,,,,,,,,,,,
+Fri Jul 05 19:08:37 UTC 2019,Fri Jul 05 19:09:28 UTC 2019,Fri Jul 05 00:00:00 UTC 2019,48.46249333,-123.08353,-7.400000095,3.9,Fri Jul 05 19:08:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,J k,behavior_n,,wwf_n,2,,Wn 5700 nt,Kw,uuid:bf5abe6c-ff19-4799-8375-930cc29e4c20
+Fri Jul 05 19:37:50 UTC 2019,Fri Jul 05 19:38:44 UTC 2019,Fri Jul 05 00:00:00 UTC 2019,48.44983,-123.0833283,-7.5,3.9,Fri Jul 05 19:37:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,J27,behavior_n,,wwf_n,1,,,Kw,uuid:19cdb276-f5ec-49de-a123-cd5ec3e25643
+Fri Jul 05 23:21:35 UTC 2019,Fri Jul 05 23:22:46 UTC 2019,Fri Jul 05 00:00:00 UTC 2019,48.46754833,-123.0866383,31.5,3.9,Fri Jul 05 23:21:00 UTC 2019,Luna,Taylor,PM,F,,no_go_zone,no go zone,contact_no,photo_n,whaleinfo_y,K,behavior_n,,wwf_n,1,kayakwwf_n,,Kw,uuid:fa70c0de-2d69-4954-b1b9-0e05551705f7
+Fri Jul 05 23:36:43 UTC 2019,Fri Jul 05 23:37:45 UTC 2019,Fri Jul 05 00:00:00 UTC 2019,48.46628167,-123.0769683,-4.800000191,3.9,Fri Jul 05 23:36:00 UTC 2019,Luna,Taylir,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,K,behavior_n,,wwf_n,1,,,Kw,uuid:b5b87b5e-f7db-43b1-825d-847802a61f58
+Fri Jul 05 00:01:20 UTC 2019,Fri Jul 05 00:03:45 UTC 2019,Fri Jul 05 00:00:00 UTC 2019,48.44771,-123.045165,-4.900000095,3.9,Fri Jul 05 00:01:00 UTC 2019,Luna,Taylor,PM,WO,,300_yards_under_power,300 yards under power,contact_no,photo_y,whaleinfo_y,K17s,behavior_unk,,wwf_n,1,,,Ec,uuid:e8710155-381e-407b-bcd5-613f3bfd76cf
+Sat Jul 06 19:12:09 UTC 2019,Sat Jul 06 19:13:31 UTC 2019,Sat Jul 06 00:00:00 UTC 2019,48.730045,-123.1508617,-7.099999905,3.9,Sat Jul 06 19:12:00 UTC 2019,Luna,Allie,MM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,K40 and jpod?,behavior_n,,wwf_n,1,,Straitwatch,Em,uuid:b506ef58-1539-4d78-b04e-cc3ef3b59ee5
+Thu Aug 15 18:57:59 UTC 2019,Thu Aug 15 19:00:05 UTC 2019,Thu Aug 15 00:00:00 UTC 2019,48.46946167,-123.0810367,0.00E+00,3.9,Thu Aug 15 18:58:00 UTC 2019,Raydiance,Jess,EU,WO,,no_go_zone,no go zone,contact_no,photo_n,whaleinfo_y,Jpod,behavior_unk,,wwf_n,2,,J1  western pince,Em,uuid:aba84cca-68ab-45c7-91e3-0a266af77d57
+Thu Aug 15 19:09:02 UTC 2019,Thu Aug 15 19:10:48 UTC 2019,Thu Aug 15 00:00:00 UTC 2019,48.47183,-123.07726,0.00E+00,3.9,Thu Aug 15 19:09:00 UTC 2019,Luna,Jess,EU,WO,,300_yards_under_power,300 yards under power,contact_no,photo_y,whaleinfo_y,Jpod,behavior_n,,,,,Puget sound express \ western prince,Em,uuid:43f3d31e-c8f2-47d5-8a67-8434ecc0c337
+Thu Aug 15 19:25:25 UTC 2019,Thu Aug 15 19:28:51 UTC 2019,Thu Aug 15 00:00:00 UTC 2019,48.47476333,-123.085415,0.00E+00,3.9,Thu Aug 15 19:25:00 UTC 2019,Luna,Jess,EU,WO,,300_yards_under_power,300 yards under power,contact_no,photo_y,whaleinfo_y,Jpod,behavior_n,,wwf_n,,kayakwwf_n,,Em,uuid:348c9853-06ee-4685-9037-70b21ef1a88f
+Thu Aug 15 19:57:43 UTC 2019,Thu Aug 15 20:00:04 UTC 2019,Thu Aug 15 00:00:00 UTC 2019,48.47604667,-123.0949217,0.00E+00,3.9,Thu Aug 15 19:57:00 UTC 2019,Luna,Jess,PM,WO,,300_yards_under_power no_go_zone,300 yards under power,contact_no,photo_n,whaleinfo_y,Jpod,behavior_y,Deep dive,wwf_n,3,,"Name:Waterfront , Friday harbor",Em,uuid:8895fd95-a4e0-4fc4-991f-aaa9965c4457
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Thu Aug 15 20:07:29 UTC 2019,Thu Aug 15 20:08:54 UTC 2019,Thu Aug 15 00:00:00 UTC 2019,48.46539,-123.0924483,0.00E+00,3.9,Thu Aug 15 20:07:00 UTC 2019,Luna,Jess,PM,T,,high_speed_within_1km 300_yards_under_power 400yd_inthepath no_go_zone,high speed within 1km,contact_no,photo_y,whaleinfo_y,Jpod,behavior_n,,wwf_n,3,,,Em,uuid:6ddd02d5-d002-470f-968c-a949242cce70
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Thu Aug 15 21:24:09 UTC 2019,Thu Aug 15 21:25:43 UTC 2019,Thu Aug 15 00:00:00 UTC 2019,48.50952333,-123.1622283,-8.199999809,3.9,Thu Aug 15 21:24:00 UTC 2019,Luna,Jess,PK,T,2,inshore_of_whales,inshore of whales,contact_no,photo_n,whaleinfo_y,Jpod and K's,behavior_n,,wwf_n,1,kayakwwf_y,,Em,uuid:73f5c8b9-0330-4e00-8066-a32df6b977e8
+Fri Aug 16 18:44:15 UTC 2019,Fri Aug 16 18:45:23 UTC 2019,Fri Aug 16 00:00:00 UTC 2019,48.463785,-123.0702917,-7.099999905,3.9,Fri Aug 16 18:44:00 UTC 2019,Raydiance,Jeds,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,J16,,,wwf_n,2,,,Kw,uuid:3e6bc79a-eb36-49b0-8b17-fe94588e4aec
+Fri Aug 16 18:54:28 UTC 2019,Fri Aug 16 18:55:50 UTC 2019,Fri Aug 16 00:00:00 UTC 2019,48.47103333,-123.0761233,-7.099999905,3.9,Fri Aug 16 18:54:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km 400yd_inthepath,high speed within 1km,contact_no,photo_n,whaleinfo_y,"J31 and calf, j16s",behavior_n,,wwf_n,1,kayakwwf_n,,Kw,uuid:4bb150a8-81c1-4794-99bd-f12187294c87
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Fri Aug 16 19:14:44 UTC 2019,Fri Aug 16 19:21:20 UTC 2019,Fri Aug 16 00:00:00 UTC 2019,48.47422833,-123.0895817,-7.099999905,3.9,Fri Aug 16 19:14:00 UTC 2019,Raydiance,Jess,PM,WO,,100_yards_under_power 300_yards_under_power 400yd_inthepath,100 yards under power,contact_no,photo_y,whaleinfo_y,J pid,behavior_n,,wwf_n,2,,,Kw,uuid:b25e2448-7c68-4732-b466-6ad9484ae20b
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Fri Aug 16 20:05:16 UTC 2019,Fri Aug 16 20:06:27 UTC 2019,Fri Aug 16 00:00:00 UTC 2019,48.49381167,-123.1461983,-7.099999905,3.9,Fri Aug 16 20:05:00 UTC 2019,Raydiance,Jess,PM,T,,withinhalfmile_Limekiln,withinhalfmile Limekiln,contact_no,photo_n,whaleinfo_y,J pod,behavior_n,,wwf_n,1,kayakwwf_y,2 voats,Kw,uuid:f9469182-62bd-4b65-9264-0f21e7d3839d
+Fri Aug 16 21:42:38 UTC 2019,Fri Aug 16 21:43:23 UTC 2019,Fri Aug 16 00:00:00 UTC 2019,48.492685,-123.1421317,-8.399999619,3.9,Fri Aug 16 21:42:00 UTC 2019,Raydiance,Jess,PM,T,,300_yards_under_power,300 yards under power,contact_no,photo_n,whaleinfo_y,J pod,behavior_n,,wwf_n,1,,,Kw,uuid:eb74322e-0835-4c91-80b1-8a47940169d6
+Fri Aug 16 21:45:23 UTC 2019,Fri Aug 16 21:46:59 UTC 2019,Fri Aug 16 00:00:00 UTC 2019,48.494165,-123.1413033,-8.399999619,3.9,Fri Aug 16 21:45:00 UTC 2019,Raydiance,Jess,PM,T,,300_yards_under_power,300 yards under power,contact_no,photo_n,whaleinfo_y,J pod,behavior_n,,wwf_n,1,kayakwwf_n,"HOSTILE when contacted, sea dancer seattle",Kw,uuid:ab252c61-3a78-4d03-bcce-62fa186aaa59
+Fri Aug 16 21:54:23 UTC 2019,Fri Aug 16 21:55:12 UTC 2019,Fri Aug 16 00:00:00 UTC 2019,48.50380167,-123.1592183,-9.199999809,3.9,Fri Aug 16 21:54:00 UTC 2019,Raydiance,Jeds,PM,WO,,200_yards_under_power 300_yards_under_power,200 yards under power,contact_no,photo_y,whaleinfo_y,J pod,behavior_n,,wwf_n,1,,,Kw,uuid:c744f131-1014-45b3-b572-6d7ab5ec8f00
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Fri Aug 16 22:22:39 UTC 2019,Fri Aug 16 22:23:29 UTC 2019,Fri Aug 16 00:00:00 UTC 2019,48.5248,-123.18562,-9.199999809,3.9,Fri Aug 16 22:22:00 UTC 2019,Raydiance,Jess,PM,T,,300_yards_under_power,300 yards under power,contact_yes,photo_y,whaleinfo_y,J pod,behavior_n,,wwf_n,1,,Sun dancer seattle,Kw,uuid:12cc9f29-07a8-4416-a60a-6ae4ca28ac7e
+Sat Aug 17 18:49:54 UTC 2019,Sat Aug 17 18:50:53 UTC 2019,Sat Aug 17 00:00:00 UTC 2019,48.46785,-123.0837017,-1,3.9,Sat Aug 17 18:49:00 UTC 2019,Raydiance,Tay,PM,WO,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_no,photo_n,whaleinfo_y,J pod,,,wwf_n,4,,,Kw,uuid:157487db-29b2-4722-bb99-668a2e4813b6
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sat Aug 17 18:50:56 UTC 2019,Sat Aug 17 18:51:41 UTC 2019,Sat Aug 17 00:00:00 UTC 2019,48.46863167,-123.083315,-1,3.9,Sat Aug 17 18:51:00 UTC 2019,Raydiance,Taylir,PS,WO,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_no,photo_n,whaleinfo_y,J pod,behavior_unk,,wwf_n,4,,,Kw,uuid:2ec6493f-e659-4eac-9157-8d7f74f75e93
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sat Aug 17 19:39:39 UTC 2019,Sat Aug 17 19:40:47 UTC 2019,Sat Aug 17 00:00:00 UTC 2019,48.46146667,-123.07281,-1,3.9,Sat Aug 17 19:39:00 UTC 2019,Raydiance,Tay,PM,WO,,300_yards_under_power,300 yards under power,contact_no,photo_y,whaleinfo_y,J pod,,,wwf_n,3,,,Kw,uuid:18e92e25-321d-4d6e-ac46-8ac4c1589bda
+Sat Aug 17 20:02:13 UTC 2019,Sat Aug 17 20:02:53 UTC 2019,Sat Aug 17 00:00:00 UTC 2019,48.44561,-123.052395,-1.100000024,3.9,Sat Aug 17 20:02:00 UTC 2019,Raydiance,Taylot,PM,T,,high_speed_within_1km no_go_zone,high speed within 1km,contact_yes,photo_n,whaleinfo_y,J pod,,,wwf_n,2,,,Kw,uuid:80ea0388-5e4a-4363-baaa-0a9d70aaeef3
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Sat Aug 17 20:05:18 UTC 2019,Sat Aug 17 20:06:09 UTC 2019,Sat Aug 17 00:00:00 UTC 2019,48.444665,-123.05042,-1.100000024,3.9,Sat Aug 17 20:05:00 UTC 2019,Raydiance,Taylor,PM,WO,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_no,photo_n,whaleinfo_y,J ppd,,,wwf_n,3,,,Kw,uuid:6c7b0f91-65fe-4165-839e-182eae74d974
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sat Aug 17 20:39:43 UTC 2019,Sat Aug 17 20:40:49 UTC 2019,Sat Aug 17 00:00:00 UTC 2019,48.43641667,-123.0107233,-2,3.9,Sat Aug 17 20:39:00 UTC 2019,Raydiance,Taylor,EU,WO,,no_go_zone,no go zone,contact_no,photo_n,whaleinfo_y,J pod,,,wwf_y,3,,Vick star,Kw,uuid:01a90991-fdef-484b-866a-721cc8987e0a
+Sat Aug 17 21:02:12 UTC 2019,Sat Aug 17 21:06:32 UTC 2019,Sat Aug 17 00:00:00 UTC 2019,48.43914833,-123.0135133,-4.400000095,3.9,Sat Aug 17 21:02:00 UTC 2019,Raydiance,Taylor,PM,F,,high_speed_within_1km 300_yards_under_power fishing_within200yds,high speed within 1km,contact_no,photo_y,whaleinfo_y,J Pod,behavior_unk,,wwf_n,5,,Just for halibut,Kw,uuid:74e7f7e9-26f2-45b2-b7e1-9db86df45d0e
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,fishing within200yds,,,,,,,,,,,,
+Sun Aug 18 18:16:46 UTC 2019,Sun Aug 18 18:21:34 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.58770833,-123.20712,-6.699999809,3.9,Sun Aug 18 18:16:00 UTC 2019,Raydiance,Tay,EK,WO,4,inshore_of_whales 300_yards_under_power 400yd_inthepath,inshore of whales,contact_no,photo_y,whaleinfo_y,Jpod,behavior_y,Changed direction,wwf_n,2,kayakwwf_n,Wdfw contacted,Em,uuid:2aa0e4b9-7327-4fc4-aed5-1962dba2a451
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Aug 18 18:49:10 UTC 2019,Sun Aug 18 18:51:49 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.60105167,-123.2070817,-2.799999952,3.9,Sun Aug 18 18:49:00 UTC 2019,Raydiance,Tsy,PM,T,,high_speed_within_1km 300_yards_under_power 400yd_inthepath,high speed within 1km,contact_no,photo_y,whaleinfo_y,Jood,,,,1,,Fiddler Bellevue,Kw,uuid:547c43fa-17de-4670-a8c4-be80ac573a2c
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Aug 18 18:51:52 UTC 2019,Sun Aug 18 18:53:06 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.60059833,-123.2062083,-2.799999952,3.9,Sun Aug 18 18:52:00 UTC 2019,Raydiance,Tayoit,PM,WO,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_no,photo_y,whaleinfo_y,J pod,behavior_n,,wwf_n,1,,,Kw,uuid:3dab394d-76d3-425f-8d53-6f0fdf1eb6c0
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Aug 18 19:35:34 UTC 2019,Sun Aug 18 19:36:20 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.629955,-123.211975,-2.799999952,3.9,Sun Aug 18 19:35:00 UTC 2019,Raydiance,Taylit,PM,T,,high_speed_within_1km 400yd_inthepath,high speed within 1km,contact_no,photo_y,whaleinfo_y,J pod,,,wwf_n,3,,,Kw,uuid:29e323cc-2866-4f67-93d0-eda59115663a
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Aug 18 19:45:11 UTC 2019,Sun Aug 18 19:46:03 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.63784333,-123.2108217,-2.799999952,3.9,Sun Aug 18 19:45:00 UTC 2019,Raydiance,Tay,PM,T,,high_speed_within_1km 400yd_inthepath,high speed within 1km,contact_no,photo_y,whaleinfo_y,J pod,,,wwf_n,2,,,Kw,uuid:df2c9a68-4b96-4b13-a4b5-d77b48597f27
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Aug 18 19:53:58 UTC 2019,Sun Aug 18 19:54:48 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.64458833,-123.2079517,-2.799999952,3.9,Sun Aug 18 19:54:00 UTC 2019,Raydiance,Tay,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,J pod,,,wwf_n,2,,,Kw,uuid:1a75d6c9-b2f1-468f-8997-8478cf1bbcca
+Sun Aug 18 21:12:19 UTC 2019,Sun Aug 18 21:13:06 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.71751333,-123.2555217,-6.699999809,3.9,Sun Aug 18 21:12:00 UTC 2019,Raydiance,Taylot,PS,T,,300_yards_under_power,300 yards under power,contact_no,photo_n,whaleinfo_y,J pod,,,wwf_n,2,,W/in 400 canada,Kw,uuid:db012bbb-aa79-4b2a-8063-774d10b5a06e
+Sun Aug 18 21:20:16 UTC 2019,Sun Aug 18 21:21:02 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.72466833,-123.2626583,-6.199999809,3.9,Sun Aug 18 21:20:00 UTC 2019,Raydiance,Taylor,PS,T,,300_yards_under_power,300 yards under power,contact_no,photo_y,whaleinfo_y,J pod,,,wwf_n,2,,In CA,Kw,uuid:2e7097f3-f8d2-490b-8ec2-5e2116741dc7
+Sun Aug 18 21:22:22 UTC 2019,Sun Aug 18 21:23:14 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.72649667,-123.26478,-6.199999809,3.9,Sun Aug 18 21:22:00 UTC 2019,Raydiance,Tay,PS,WO,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_yes,photo_y,whaleinfo_y,J ppd,behavior_y,Tail slap,wwf_n,2,kayakwwf_n,IN CA,Kw,uuid:ee8eb92f-9b14-4f08-ad39-91a504def708
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Aug 18 21:31:35 UTC 2019,Sun Aug 18 21:32:54 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.73624167,-123.2743817,-7.400000095,3.9,Sun Aug 18 21:31:00 UTC 2019,Raydiance,Taylor,PS,T,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_no,photo_y,whaleinfo_y,J pod,behavior_y,Pec slap,wwf_n,2,kayakwwf_n,In CA,Kw,uuid:cbc5fae9-660c-4f65-946e-bbf9bb4edd94
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Aug 18 21:35:01 UTC 2019,Sun Aug 18 21:36:46 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.73928,-123.2794817,-7.300000191,3.9,Sun Aug 18 21:35:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km 300_yards_under_power,high speed within 1km,contact_no,photo_y,whaleinfo_y,J pod,behavior_n,,wwf_n,2,,Canada no go zone,Kw,uuid:f2599bb6-5260-4235-9ac5-d2999cfe1dfb
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Sun Aug 18 21:36:53 UTC 2019,Sun Aug 18 21:37:46 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.74094333,-123.28111,-7.699999809,3.9,Sun Aug 18 21:36:00 UTC 2019,Raydiance,Tayloe,PM,T,,high_speed_within_1km 300_yards_under_power,high speed within 1km,contact_no,photo_y,whaleinfo_y,J pod,behavior_n,,wwf_n,2,kayakwwf_n,Canada no gonzone,Kw,uuid:1aba4e6d-4b59-4980-bb56-46252015a989
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Sun Aug 18 21:56:01 UTC 2019,Sun Aug 18 21:56:50 UTC 2019,Sun Aug 18 00:00:00 UTC 2019,48.75661,-123.30009,-8.399999619,3.9,Sun Aug 18 21:56:00 UTC 2019,Raydiance,Tayloe,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_y,whaleinfo_y,J pod,,,wwf_n,2,,In CA nogo zones,Kw,uuid:fe981aa8-3d55-4364-9f6c-2e602e4bf91a
+Mon Aug 19 22:23:56 UTC 2019,Mon Aug 19 22:25:17 UTC 2019,Mon Aug 19 00:00:00 UTC 2019,48.71029833,-123.1235833,-8.300000191,3.9,Mon Aug 19 22:24:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,,whaleinfo_y,Srkw,behavior_n,,,3,,,Em,uuid:a5547ef3-dc1d-4fba-a54e-d375bec51a3d
+Mon Aug 19 22:29:17 UTC 2019,Mon Aug 19 22:31:31 UTC 2019,Mon Aug 19 00:00:00 UTC 2019,48.71035333,-123.131705,-8.300000191,3.9,Mon Aug 19 22:29:00 UTC 2019,Raydiance,Taylor,PM,T,,300_yards_under_power,300 yards under power,contact_yes,photo_n,whaleinfo_y,Jpod,behavior_n,,wwf_n,3,,,Em,uuid:716a668b-7d7b-4be0-b65a-0e316e338c7e
+Mon Aug 19 23:08:18 UTC 2019,Mon Aug 19 23:09:05 UTC 2019,Mon Aug 19 00:00:00 UTC 2019,48.708515,-123.215775,-8.300000191,3.9,Mon Aug 19 23:08:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,J,behavior_unk,,wwf_n,4,kayakwwf_n,,Em,uuid:4fa87310-97b1-4177-baa2-d22c3ec20df9
+Mon Aug 19 23:34:58 UTC 2019,Mon Aug 19 23:36:48 UTC 2019,Mon Aug 19 00:00:00 UTC 2019,48.68304667,-123.245675,-8.300000191,3.9,Mon Aug 19 23:35:00 UTC 2019,Raydiance,Tay,PM,T,,high_speed_within_1km 300_yards_under_power,high speed within 1km,contact_no,photo_y,whaleinfo_y,J,behavior_unk,,wwf_n,2,,X2,Em,uuid:bed54ed2-64c3-4836-98e6-699daff8c303
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Tue Aug 20 18:20:08 UTC 2019,Tue Aug 20 18:20:52 UTC 2019,Tue Aug 20 00:00:00 UTC 2019,48.73015667,-122.96819,-3.799999952,3.9,Tue Aug 20 18:20:00 UTC 2019,Raydiance,Taylor,PM,WO,,400yd_inthepath,400yd inthepath,contact_no,photo_y,whaleinfo_y,J pod,behavior_n,,wwf_n,4,,,Kw,uuid:cf353738-8301-41cc-8956-817cc7ec642c
+Tue Aug 20 18:22:39 UTC 2019,Tue Aug 20 18:23:30 UTC 2019,Tue Aug 20 00:00:00 UTC 2019,48.72922667,-122.9679267,-5.300000191,3.9,Tue Aug 20 18:22:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km 400yd_inthepath,high speed within 1km,contact_no,photo_n,whaleinfo_y,J pod,behavior_y,Dove,wwf_n,4,,,Kw,uuid:88cb964b-4ae9-43ad-b325-31ad1171a8df
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Tue Aug 20 21:08:31 UTC 2019,Tue Aug 20 21:09:19 UTC 2019,Tue Aug 20 00:00:00 UTC 2019,48.86554,-123.0346467,-5.300000191,3.9,Tue Aug 20 21:08:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,J pod,behavior_n,,wwf_n,2,,,Kw,uuid:9f4059f0-3fd5-47e3-9777-8966ac07af3c
+Tue Aug 20 21:47:44 UTC 2019,Tue Aug 20 21:48:40 UTC 2019,Tue Aug 20 00:00:00 UTC 2019,48.90021667,-123.06589,-7,3.9,Tue Aug 20 21:47:00 UTC 2019,Raydiance,Tay,PS,T,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_no,photo_y,whaleinfo_y,J pod,behavior_n,,wwf_n,2,,,Kw,uuid:50ca031f-7682-4455-8c0c-baeb4d1d0fa2
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Tue Aug 20 22:38:41 UTC 2019,Tue Aug 20 22:39:23 UTC 2019,Tue Aug 20 00:00:00 UTC 2019,48.774395,-123.040395,-6.900000095,3.9,Tue Aug 20 22:38:00 UTC 2019,Raydiance,Tay,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_y,whaleinfo_y,T46,behavior_n,,wwf_n,1,,,Kw,uuid:e475b5e5-5126-4fc5-84e2-5943ca54f8e7
+Wed Aug 21 18:19:58 UTC 2019,Wed Aug 21 18:20:56 UTC 2019,Wed Aug 21 00:00:00 UTC 2019,48.63195333,-123.17489,-8.100000382,3.9,Wed Aug 21 18:20:00 UTC 2019,Raydiance,T,PM,T,,high_speed_within_1km 100_yards_under_power,high speed within 1km,contact_no,photo_n,whaleinfo_y,T49a,behavior_unk,,wwf_n,3,,,Em,uuid:cbc92db7-70cc-4bb1-bdf9-f307728e5dce
+,,,,,,,,,,,,,,100 yards under power,,,,,,,,,,,,
+Sun Aug 25 17:23:13 UTC 2019,Sun Aug 25 17:24:08 UTC 2019,Sun Aug 25 00:00:00 UTC 2019,48.55236167,-123.1893417,-7.699999809,3.9,Sun Aug 25 17:23:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km 300_yards_under_power no_go_zone,high speed within 1km,contact_no,photo_n,whaleinfo_y,J pod,behavior_n,,wwf_n,4,,,Kw,uuid:9e4ded57-6133-4bab-815f-288c440eb37b
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Sun Aug 25 17:29:34 UTC 2019,Sun Aug 25 17:30:32 UTC 2019,Sun Aug 25 00:00:00 UTC 2019,48.55795,-123.1861,-7.699999809,3.9,Sun Aug 25 17:29:00 UTC 2019,Raydiance,Taylor,PS,T,,high_speed_within_1km 300_yards_under_power,high speed within 1km,contact_no,photo_n,whaleinfo_y,J pod,behavior_n,,wwf_n,4,,,Kw,uuid:3eff71ca-4c78-483b-8ef9-58e7f0a0b27e
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Sun Aug 25 17:34:53 UTC 2019,Sun Aug 25 17:35:28 UTC 2019,Sun Aug 25 00:00:00 UTC 2019,48.56005333,-123.182835,-9.199999809,3.9,Sun Aug 25 17:34:00 UTC 2019,Raydiance,Taylir,PM,T,,high_speed_within_1km 300_yards_under_power,high speed within 1km,contact_no,photo_n,whaleinfo_y,J pod,behavior_n,,wwf_n,4,,,Kw,uuid:008a676b-8010-47f8-9b3b-a624e247acf4
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Sun Aug 25 17:52:52 UTC 2019,Sun Aug 25 17:53:53 UTC 2019,Sun Aug 25 00:00:00 UTC 2019,48.57980167,-123.1896233,-9.199999809,3.9,Sun Aug 25 17:52:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,Jpod,,,wwf_n,2,,,Kw,uuid:f34fd708-5414-45b3-aca2-6945e062d7c0
+Sun Aug 25 18:02:54 UTC 2019,Sun Aug 25 18:03:51 UTC 2019,Sun Aug 25 00:00:00 UTC 2019,48.58001667,-123.1946717,-9.199999809,3.9,Sun Aug 25 18:02:00 UTC 2019,Raydiance,Taylor,PM,WO,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_no,photo_y,whaleinfo_y,Jpod,,,wwf_n,4,,,Kw,uuid:d2da3a9d-2099-4404-8bde-c165bc64cc67
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Aug 25 18:05:22 UTC 2019,Sun Aug 25 18:06:21 UTC 2019,Sun Aug 25 00:00:00 UTC 2019,48.58180167,-123.1962517,-9.199999809,3.9,Sun Aug 25 18:05:00 UTC 2019,Raydiance,Taylir,PM,T,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_no,photo_n,whaleinfo_y,Jpod,,,wwf_n,4,,,Kw,uuid:7385419a-2134-4283-a9f0-b88f9db78bd5
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Aug 25 18:12:58 UTC 2019,Sun Aug 25 18:14:54 UTC 2019,Sun Aug 25 00:00:00 UTC 2019,48.58419333,-123.201695,-9,3.9,Sun Aug 25 18:13:00 UTC 2019,Raydiance,Tay,EK,WO,6,300_yards_under_power 400yd_inthepath paddle_whale,300 yards under power,contact_no,photo_y,whaleinfo_y,Jpod 51,behavior_y,Dive,wwf_n,3,kayakwwf_n,,Em,uuid:56fbcfe5-0062-4f64-a45e-67c3928ecbfb
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,,,paddle whale,,,,,,,,,,,,
+Sun Aug 25 18:15:01 UTC 2019,Sun Aug 25 18:17:07 UTC 2019,Sun Aug 25 00:00:00 UTC 2019,48.58431333,-123.2016183,-9,3.9,Sun Aug 25 18:15:00 UTC 2019,Raydiance,Taylor,PM,WO,,300_yards_under_power,300 yards under power,contact_no,photo_y,whaleinfo_y,,behavior_y,Direction,wwf_n,3,,,Em,uuid:de63aabc-5880-4692-b0ab-b6105f382da3
+Sun Aug 25 19:03:48 UTC 2019,Sun Aug 25 22:55:38 UTC 2019,Sun Aug 25 00:00:00 UTC 2019,48.6261,-123.1993183,-9,3.9,Sun Aug 25 19:03:00 UTC 2019,Raydiance,Taylor,PM,T,San,high_speed_within_1km 300_yards_under_power 400yd_inthepath,high speed within 1km,contact_no,photo_n,whaleinfo_y,Jpod,,,,2,,,Em,uuid:302b647a-2a93-4183-b324-e4d085fa4f3b
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Aug 25 21:07:39 UTC 2019,Sun Aug 25 21:09:12 UTC 2019,Sun Aug 25 00:00:00 UTC 2019,48.62411667,-123.2034717,-9.399999619,3.9,Sun Aug 25 21:07:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km 300_yards_under_power 400yd_inthepath travel_behind100_400yds,high speed within 1km,contact_no,photo_y,whaleinfo_y,Jpod,behavior_n,,wwf_n,3,,Taylor got photos Really bad!!;,Em,uuid:55b0b79e-b800-44ca-b1fb-64eecea15cfd
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sun Aug 25 22:04:43 UTC 2019,Sun Aug 25 22:05:59 UTC 2019,Sun Aug 25 00:00:00 UTC 2019,48.571045,-123.2095933,-7.400000095,3.9,Sun Aug 25 22:04:00 UTC 2019,Raydiance,Tu,PM,T,,high_speed_within_1km 300_yards_under_power,high speed within 1km,contact_no,photo_y,whaleinfo_y,J pod,behavior_n,,wwf_n,3,,,Lw,uuid:0d16a689-9088-4fa5-845d-389dde0bc897
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Thu Aug 29 18:49:56 UTC 2019,Thu Aug 29 18:50:40 UTC 2019,Thu Aug 29 00:00:00 UTC 2019,48.70271833,-123.2110167,0.00E+00,3.9,Thu Aug 29 18:49:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km paddle_whale,high speed within 1km,contact_no,photo_n,whaleinfo_y,J pod,behavior_y,Dove,wwf_n,2,,,Kw,uuid:4340fef2-72cb-414f-9c4e-de486ee3e81c
+,,,,,,,,,,,,,,paddle whale,,,,,,,,,,,,
+Thu Aug 29 19:07:15 UTC 2019,Thu Aug 29 19:07:54 UTC 2019,Thu Aug 29 00:00:00 UTC 2019,48.68703833,-123.24318,0.00E+00,3.9,Thu Aug 29 19:07:00 UTC 2019,Raydiance,Jess,PM,WO,,300_yards_under_power,300 yards under power,contact_no,photo_y,whaleinfo_y,Jpod,behavior_n,,wwf_n,3,,,Kw,uuid:bc658649-843e-4026-b94b-8b710d1ef824
+Thu Aug 29 19:20:16 UTC 2019,Thu Aug 29 19:20:57 UTC 2019,Thu Aug 29 00:00:00 UTC 2019,48.66435,-123.2405967,0.00E+00,3.9,Thu Aug 29 19:20:00 UTC 2019,Raydiance,Jeds,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_y,whaleinfo_y,Jpod,behavior_n,,wwf_n,3,,,Kw,uuid:60d863be-dd1a-4b8a-b6d0-dd52f01dff27
+Thu Aug 29 19:22:07 UTC 2019,Sat Aug 31 20:19:18 UTC 2019,Thu Aug 29 00:00:00 UTC 2019,48.66002667,-123.237795,0.00E+00,3.9,Thu Aug 29 19:22:00 UTC 2019,Raydiance,Jess,PM,WO,,high_speed_within_1km 300_yards_under_power 400yd_inthepath,high speed within 1km,contact_no,photo_y,whaleinfo_y,Jpod,,,wwf_n,3,,"Estiva Yakima, bow riding whales",Kw,uuid:feb1b977-86ad-4ff9-affc-d80f13f80c6d
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Thu Aug 29 19:48:43 UTC 2019,Thu Aug 29 19:49:21 UTC 2019,Thu Aug 29 00:00:00 UTC 2019,48.62468167,-123.21437,-0.400000006,3.9,Thu Aug 29 19:48:00 UTC 2019,Raydiance,Jess,EU,WO,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_no,photo_y,whaleinfo_y,Jpod,,,wwf_y,4,,,Kw,uuid:d45135b2-a12e-4d9f-8223-400d9ed8fbfc
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Thu Aug 29 21:13:41 UTC 2019,Thu Aug 29 21:29:43 UTC 2019,Thu Aug 29 00:00:00 UTC 2019,48.51942167,-123.1663267,-7.199999809,3.9,Thu Aug 29 21:13:00 UTC 2019,Raydiance,Jess,,,,drone_violation,drone violation,contact_no,photo_n,whaleinfo_y,Jpod,,,wwf_n,1,kayakwwf_y,Not confirmed,Kw,uuid:5b18942c-4b6e-4b1d-b2c8-325d833043e6
+Fri Aug 30 19:00:29 UTC 2019,Fri Aug 30 19:01:39 UTC 2019,Fri Aug 30 00:00:00 UTC 2019,48.39894667,-123.023275,0.00E+00,3.9,Fri Aug 30 19:00:00 UTC 2019,Raydiance,Jess,EU,WO,,300_yards_under_power,300 yards under power,contact_no,,whaleinfo_n,Jpod,behavior_n,,wwf_y,2,,Western prince,Kw,uuid:bef4ea43-3434-4c40-b58c-bf7e1d91849f
+Fri Aug 30 19:57:19 UTC 2019,Fri Aug 30 19:58:02 UTC 2019,Fri Aug 30 00:00:00 UTC 2019,48.43657,-123.0672367,-3.099999905,3.9,Fri Aug 30 19:57:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km 300_yards_under_power,high speed within 1km,contact_no,photo_n,whaleinfo_y,Jpod,behavior_n,,wwf_n,2,,,Kw,uuid:0cb3d9ee-5b87-4875-91b9-f88a9879b9a1
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Fri Aug 30 19:59:40 UTC 2019,Fri Aug 30 20:00:21 UTC 2019,Fri Aug 30 00:00:00 UTC 2019,48.437525,-123.06523,-3.099999905,3.9,Fri Aug 30 19:59:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,Jpod,behavior_n,,wwf_n,2,,,Kw,uuid:5ad4ac65-b300-4ad4-8f06-224ce4a42f96
+Fri Aug 30 20:24:49 UTC 2019,Fri Aug 30 20:25:35 UTC 2019,Fri Aug 30 00:00:00 UTC 2019,48.47029333,-123.0861333,-5.5,3.9,Fri Aug 30 20:24:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km 300_yards_under_power,high speed within 1km,contact_no,photo_n,whaleinfo_y,Jpod,,,wwf_n,3,,,Kw,uuid:f8c99bd5-19ad-403f-8c79-cf3b06cd29a5
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Fri Aug 30 20:34:12 UTC 2019,Fri Aug 30 20:35:04 UTC 2019,Fri Aug 30 00:00:00 UTC 2019,48.47793667,-123.0969883,-8,3.9,Fri Aug 30 20:34:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km 300_yards_under_power 400yd_inthepath fast_departurewithin400yds,high speed within 1km,contact_no,photo_y,whaleinfo_y,Jpod,,,wwf_n,2,,,Kw,uuid:582680e0-2829-49c8-976c-371de09166ea
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+Fri Aug 30 21:35:45 UTC 2019,Fri Aug 30 21:36:20 UTC 2019,Fri Aug 30 00:00:00 UTC 2019,48.48122667,-123.1232067,-8.100000382,3.9,Fri Aug 30 21:35:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,Jpod,,,wwf_n,2,,,Kw,uuid:47860b39-febc-441e-8aa8-256ff66d3b78
+Fri Aug 30 22:35:05 UTC 2019,Fri Aug 30 22:36:15 UTC 2019,Fri Aug 30 00:00:00 UTC 2019,48.47245667,-123.1040967,-7.699999809,3.9,Fri Aug 30 22:35:00 UTC 2019,Raydiance,Jeas,PM,T,,high_speed_within_1km 300_yards_under_power,high speed within 1km,contact_no,photo_n,whaleinfo_y,Jpod,behavior_y,Dove,wwf_n,4,,,Kw,uuid:e143b87b-0387-41c1-a8fc-6fa2c625de6f
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Sat Aug 31 19:57:21 UTC 2019,Sat Aug 31 19:58:19 UTC 2019,Sat Aug 31 00:00:00 UTC 2019,48.45452333,-123.0468733,-1.799999952,3.9,Sat Aug 31 19:57:00 UTC 2019,Raydiance,Jess,EU,T,,high_speed_within_1km incorrectfast_approach,high speed within 1km,contact_no,photo_y,whaleinfo_y,Jpod,behavior_n,,wwf_y,2,,Blackfish,Kw,uuid:d79dc46c-b789-47c9-a8be-3f3231c8482b
+,,,,,,,,,,,,,,incorrectfast approach,,,,,,,,,,,,
+Sat Aug 31 21:28:04 UTC 2019,Sat Aug 31 21:29:18 UTC 2019,Sat Aug 31 00:00:00 UTC 2019,48.47427167,-123.11532,-2.099999905,3.9,Sat Aug 31 21:28:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km 300_yards_under_power fast_departurewithin400yds,high speed within 1km,contact_no,photo_n,whaleinfo_y,J,behavior_unk,,wwf_n,4,,,Em,uuid:79d722eb-2f35-4ad2-b85a-dadf7d2f6ed3
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+Thu Sep 05 18:12:14 UTC 2019,Thu Sep 05 18:12:55 UTC 2019,Thu Sep 05 00:00:00 UTC 2019,48.47235833,-123.0824933,150,3.9,Thu Sep 05 18:12:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,Srkw,behavior_n,,wwf_n,1,,,Kw,uuid:6b6ab360-1e39-4ad6-a2b9-c512e435d7d8
+Thu Sep 05 18:16:54 UTC 2019,Thu Sep 05 18:17:31 UTC 2019,Thu Sep 05 00:00:00 UTC 2019,48.47391833,-123.0881417,150,3.9,Thu Sep 05 18:16:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,J pod,behavior_n,,wwf_n,2,,,Kw,uuid:a3601ef9-8dc5-4edd-81f5-dd05cef213ca
+Thu Sep 05 18:43:53 UTC 2019,Thu Sep 05 18:44:58 UTC 2019,Thu Sep 05 00:00:00 UTC 2019,48.48469333,-123.1137883,150,3.9,Thu Sep 05 18:43:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km 300_yards_under_power 400yd_inthepath,high speed within 1km,contact_no,photo_y,whaleinfo_y,Jpod,behavior_n,,wwf_n,2,,,Kw,uuid:a10833e3-d795-45f8-b4ba-17d43a20f4dc
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Thu Sep 05 18:52:41 UTC 2019,Thu Sep 05 18:53:21 UTC 2019,Thu Sep 05 00:00:00 UTC 2019,48.484075,-123.116885,150,3.9,Thu Sep 05 18:52:00 UTC 2019,Raydiance,Jess,PM,WO,,300_yards_under_power no_go_zone,300 yards under power,contact_no,photo_y,whaleinfo_y,Jpod,behavior_n,,wwf_n,3,,,Kw,uuid:7d5cad6b-4579-4b88-b809-cc9a065f6db9
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Thu Sep 05 19:14:00 UTC 2019,Thu Sep 05 19:15:38 UTC 2019,Thu Sep 05 00:00:00 UTC 2019,48.48069667,-123.134515,88,3.9,Thu Sep 05 19:14:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_y,whaleinfo_y,Blackberry,,,,2,,,Em,uuid:3a16f25f-ed20-45bc-afa9-03ecffd38e21
+Thu Sep 05 19:21:21 UTC 2019,Thu Sep 05 19:23:39 UTC 2019,Thu Sep 05 00:00:00 UTC 2019,48.480115,-123.128925,88,3.9,Thu Sep 05 19:21:00 UTC 2019,Raydiance,Jess,MF,T,,high_speed_within_1km 300_yards_under_power,high speed within 1km,contact_yes,photo_y,whaleinfo_y,J,behavior_y,Dive,wwf_n,2,,,Em,uuid:ebe60fa2-bfc5-4ab3-9c68-cda374bc8d25
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Thu Sep 05 20:52:45 UTC 2019,Thu Sep 05 20:55:52 UTC 2019,Thu Sep 05 00:00:00 UTC 2019,48.42639,-123.0324967,-7.400000095,3.9,Thu Sep 05 20:52:00 UTC 2019,Raydiance,Jrds,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,Jpod,behavior_unk,,wwf_y,2,,,Em,uuid:bca514e7-ff28-4c3f-b098-b9ff86fd7568
+Thu Sep 05 21:51:19 UTC 2019,Thu Sep 05 21:54:28 UTC 2019,Thu Sep 05 00:00:00 UTC 2019,48.39106833,-123.033485,-7.400000095,3.9,Thu Sep 05 21:51:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km 300_yards_under_power,high speed within 1km,contact_no,photo_n,whaleinfo_y,J,behavior_unk,,wwf_n,3,,,Em,uuid:87c2136e-d50d-49ea-a454-69f403ef5cd9
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Thu Sep 05 22:17:03 UTC 2019,Thu Sep 05 22:17:42 UTC 2019,Thu Sep 05 00:00:00 UTC 2019,48.38606333,-123.0154333,-7.599999905,3.9,Thu Sep 05 22:17:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,J pod,behavior_n,,wwf_n,3,,,Kw,uuid:d0b52d48-34cc-45b7-b0a2-d3c93df7c91b
+Thu Sep 05 22:31:44 UTC 2019,Thu Sep 05 22:32:25 UTC 2019,Thu Sep 05 00:00:00 UTC 2019,48.37107667,-123.0090883,-7.599999905,3.9,Thu Sep 05 22:31:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km 300_yards_under_power,high speed within 1km,contact_no,photo_n,whaleinfo_y,J k pod,behavior_y,Dove,wwf_n,4,,,Kw,uuid:5a5792f9-8fd1-4b39-ade3-02ef3d6fd2e1
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+Thu Sep 05 22:39:06 UTC 2019,Thu Sep 05 22:39:56 UTC 2019,Thu Sep 05 00:00:00 UTC 2019,48.36377,-123.0063717,-7.599999905,3.9,Thu Sep 05 22:39:00 UTC 2019,Raydiance,Jess,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,J k pod,behavior_n,,wwf_n,4,,,Kw,uuid:e00bb12e-4975-4620-a4f8-509f4817b6d0
+Sat Sep 21 18:01:48 UTC 2019,Sat Sep 21 18:02:28 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.53566,-123.173845,0.00E+00,3.9,Sat Sep 21 18:01:00 UTC 2019,Raydiance,Taylor,PM,T,,fast_departurewithin400yds,fast departurewithin400yds,contact_no,photo_n,whaleinfo_y,L4 l44,behavior_n,,wwf_n,2,,,Kw,uuid:0306e57b-8826-4d6f-a9ed-1362ee0ae069
+Sat Sep 21 18:29:54 UTC 2019,Sat Sep 21 18:30:52 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.52072667,-123.1733367,0.00E+00,3.9,Sat Sep 21 18:29:00 UTC 2019,Raydiance,Taylor,PM,WO,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_no,photo_y,whaleinfo_y,L4 l44,behavior_n,,wwf_n,2,kayakwwf_n,,Kw,uuid:5119d03b-2184-4cd2-a136-2cce4df16be1
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sat Sep 21 18:33:59 UTC 2019,Sat Sep 21 18:34:38 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.5253,-123.1654417,0.00E+00,3.9,Sat Sep 21 18:34:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km 300_yards_under_power 400yd_inthepath no_go_zone,high speed within 1km,contact_no,photo_n,whaleinfo_y,L pod,behavior_n,,wwf_n,3,kayakwwf_n,,Kw,uuid:a74b95a2-a99c-4067-9a97-78b71c5e223c
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Sat Sep 21 19:00:53 UTC 2019,Sat Sep 21 19:01:39 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.50511333,-123.1533067,-4.400000095,3.9,Sat Sep 21 19:01:00 UTC 2019,Raydiance,Taylor,PM,F,,no_go_zone,no go zone,contact_no,photo_n,whaleinfo_y,L pod,behavior_n,,wwf_n,2,,,Kw,uuid:50a8962f-d7ae-4fd3-bdbe-7253502b6c58
+Sat Sep 21 19:19:17 UTC 2019,Sat Sep 21 19:23:38 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.49222833,-123.13728,-7.599999905,3.9,Sat Sep 21 19:19:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km 400yd_inthepath,high speed within 1km,contact_no,photo_n,whaleinfo_y,L pid,behavior_n,,wwf_n,2,,,Kw,uuid:442b7163-4060-4c79-845a-cc29ec6bf4e6
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sat Sep 21 19:23:46 UTC 2019,Sat Sep 21 19:24:21 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.49595,-123.13886,-8.300000191,3.9,Sat Sep 21 19:23:00 UTC 2019,Raydiance,Taylor,PM,F,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_no,photo_y,whaleinfo_y,L pod,behavior_n,,wwf_n,2,,,Kw,uuid:9a89a5c8-7ef2-4c9d-9864-738d967e8d79
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sat Sep 21 19:24:24 UTC 2019,Sat Sep 21 19:24:56 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.49564333,-123.139935,-8.300000191,3.9,Sat Sep 21 19:24:00 UTC 2019,Raydiance,Taylor,PM,WO,,300_yards_under_power 400yd_inthepath,300 yards under power,contact_no,photo_n,whaleinfo_y,L pod,behavior_n,,wwf_n,2,,,Kw,uuid:05a8dcae-ff1d-41b7-8f5e-454832badae1
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sat Sep 21 19:43:29 UTC 2019,Sat Sep 21 19:44:18 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.49716,-123.143745,-8.199999809,3.9,Sat Sep 21 19:43:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,Lpod,behavior_n,,wwf_n,2,,,Kw,uuid:420f7958-9d24-494a-b7d3-55dfa8319079
+Sat Sep 21 20:00:01 UTC 2019,Sat Sep 21 20:01:23 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.49434667,-123.1401567,-7.400000095,3.9,Sat Sep 21 20:00:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,L pod,behavior_n,,wwf_n,2,,,Kw,uuid:40de869d-6e55-4c1c-ae38-4f83797e9750
+Sat Sep 21 20:28:05 UTC 2019,Sat Sep 21 20:28:39 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.49479667,-123.1309633,-7.400000095,3.9,Sat Sep 21 20:28:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,L pod,behavior_n,,wwf_n,2,,,Kw,uuid:32c27734-d756-4c8a-8adb-96d29d922689
+Sat Sep 21 21:37:42 UTC 2019,Sat Sep 21 21:39:41 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.48993833,-123.1378067,-2.900000095,3.9,Sat Sep 21 21:37:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km 300_yards_under_power 400yd_inthepath no_go_zone,high speed within 1km,contact_no,photo_y,whaleinfo_y,L pod,behavior_n,,wwf_n,2,,,Kw,uuid:75e39e74-3914-4b5e-b346-27f5720d6c3a
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Sat Sep 21 21:55:45 UTC 2019,Sat Sep 21 21:57:00 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.48588333,-123.1216933,-2.900000095,3.9,Sat Sep 21 21:55:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km 300_yards_under_power 400yd_inthepath,high speed within 1km,contact_no,photo_y,whaleinfo_y,L pod,behavior_n,,wwf_n,2,kayakwwf_n,,Kw,uuid:02210d2c-6404-45de-8fbd-d4a0c7079ff0
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sat Sep 21 22:23:32 UTC 2019,Sat Sep 21 22:24:17 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.474365,-123.0983317,-2.900000095,3.9,Sat Sep 21 22:23:00 UTC 2019,Raydiance,Taylor,PK,WO,1,300_yards_under_power paddle_whale,300 yards under power,contact_no,photo_y,whaleinfo_y,L pod,behavior_n,,wwf_n,1,,,Kw,uuid:18cd14bc-b080-448c-820c-ae5b4c279c7d
+,,,,,,,,,,,,,,paddle whale,,,,,,,,,,,,
+Sat Sep 21 22:29:11 UTC 2019,Sat Sep 21 22:29:54 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.47173,-123.0934933,-2.900000095,3.9,Sat Sep 21 22:29:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km 400yd_inthepath,high speed within 1km,contact_no,photo_y,whaleinfo_y,L pod,behavior_n,,wwf_n,1,,,Kw,uuid:1abf3043-031b-4782-b7cd-97301dff3b8c
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sat Sep 21 23:06:53 UTC 2019,Sat Sep 21 23:07:30 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.454545,-123.0575717,-3.099999905,3.9,Sat Sep 21 23:06:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km,high speed within 1km,contact_no,photo_n,whaleinfo_y,L pod,behavior_n,,wwf_n,2,,,Kw,uuid:b88ffa07-703f-405e-a99a-70da0327b084
+Sat Sep 21 23:31:08 UTC 2019,Sat Sep 21 23:32:07 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.44897333,-123.03952,-3.099999905,3.9,Sat Sep 21 23:31:00 UTC 2019,Raydiance,Taylor,PM,T,,inshore_of_whales high_speed_within_1km no_go_zone,inshore of whales,contact_no,photo_n,whaleinfo_y,L,behavior_unk,,wwf_n,2,kayakwwf_n,,TGS,uuid:d2e9a05f-ba18-4946-9b67-9163f00e313b
+,,,,,,,,,,,,,,high speed within 1km,,,,,,,,,,,,
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Sat Sep 21 23:32:13 UTC 2019,Sat Sep 21 23:33:26 UTC 2019,Sat Sep 21 00:00:00 UTC 2019,48.44909333,-123.0403817,-3.099999905,3.9,Sat Sep 21 23:32:00 UTC 2019,Raydiance,Taylor,PM,F,,no_go_zone fishing_within200yds,no go zone,contact_no,photo_n,whaleinfo_y,L,behavior_n,,wwf_n,2,,6 fishing vessels,TGS,uuid:d00340f1-3b23-4c5f-b0e9-b9644154f937
+,,,,,,,,,,,,,,fishing within200yds,,,,,,,,,,,,
+Wed Sep 25 19:41:18 UTC 2019,Wed Sep 25 19:43:07 UTC 2019,Wed Sep 25 00:00:00 UTC 2019,48.49346333,-123.128295,-6.099999905,3.9,Wed Sep 25 19:41:00 UTC 2019,Raydiance,Taylor,PM,T,0,inshore_of_whales high_speed_within_1km no_go_zone,inshore of whales,contact_no,photo_n,whaleinfo_y,K-L,behavior_n,,wwf_n,1,,,LA,uuid:99e85d1e-18f4-4d33-aa26-b928557a7427
+,,,,,,,,,,,,,,high speed within 1km,,,,,,,,,,,,
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Wed Sep 25 21:26:43 UTC 2019,Wed Sep 25 21:28:12 UTC 2019,Wed Sep 25 00:00:00 UTC 2019,48.45248333,-123.047685,14.10000038,3.9,Wed Sep 25 21:26:00 UTC 2019,Raydiance,Taylor,PM,F,,inshore_of_whales no_go_zone fishing_within200yds,inshore of whales,contact_no,photo_y,whaleinfo_y,K-L,behavior_n,,wwf_n,1,,9 vessels,LA,uuid:d6e98f80-235a-4c90-9d9c-0caa73d920bf
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,,,fishing within200yds,,,,,,,,,,,,
+Wed Sep 25 21:32:45 UTC 2019,Wed Sep 25 21:34:36 UTC 2019,Wed Sep 25 00:00:00 UTC 2019,48.45120833,-123.0437617,14.10000038,3.9,,Raydiance,Taylor,PM,F,,high_speed_within_1km 200_yards_under_power 300_yards_under_power 400yd_inthepath no_go_zone,high speed within 1km,contact_no,photo_y,whaleinfo_y,K-L,behavior_n,,wwf_n,1,,,LA,uuid:7ddc3b14-a655-40e0-a9be-9afbe1ef3942
+,,,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,300 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Wed Sep 25 21:51:27 UTC 2019,Wed Sep 25 21:53:23 UTC 2019,Wed Sep 25 00:00:00 UTC 2019,48.44392,-123.0172717,2.400000095,3.9,Wed Sep 25 21:51:00 UTC 2019,Raydiance,Taylor,PM,T,,high_speed_within_1km no_go_zone,high speed within 1km,contact_no,photo_y,whaleinfo_y,"K33, K-L",behavior_n,,wwf_n,1,,3 vessels,LA,uuid:856ac35d-b1bd-4142-b58f-8988a900fcad
+,,,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,Total # of violations,,210,,,,,,100 yrds,,3,,,,,,,,,,,,,
+,,,,,,,,,,,200 yrds,,3,,,,,,,,,,,,,
+,,,,,,,,,,,300 yrds,,60,,,,,,,,,,,,,
+,,,,,,,,,,,400 yrds,,0,,,,,,,,,,,,,
+,,,# Boat counts,,144,(from 2019 Boat Count form),,,,,in the path,,35,,,,,,,,,,,,,
+,,,,,,,,,,,inshore,,7,,,,,,,,,,,,,
+,,,,,,,,,,,drone,,1,,,,,,,,,,,,,
+,,,,,,,,,,,fast approach,,1,,,,,,,,,,,,,
+,,,Overall rate,,2.916666667,,,,,,fast departure,,3,,,,,,,,,,,,,
+,,,,,,,,,,,high speed w/in 1km,,66,,,,,,,,,,,,,
+,,,,,,,,,,,fast w/in quarter mile,,0,,,,,,,,,,,,,
+,,,,,,,,,,,fishing 100y,,1,,,,,,,,,,,,,
+,,,,,,,,,,,fishing 200y,,4,,,,,,,,,,,,,
+,,,,,,,,,,,fishing inshore,,0,,,,,,,,,,,,,
+,,,,,,,,,,,paddling,,3,,,,,,,,,,,,,
+,,,,,,,,,,,kayaks outside ngz,,0,,,,,,,,,,,,,
+,,,,,,,,,,,spread kayaks w/ whales,,0,,,,,,,,,,,,,
+,,,,,,,,,,,offshore whales,,0,,,,,,,,,,,,,
+,,,,,,,,,,,shutdown within 100 yrd,,0,,,,,,,,,,,,,
+,,,,,,,,,,,shutdown within 200 yrd,,0,,,,,,,,,,,,,
+,,,,,,,,,,,sji ngz,,20,,,,,,,,,,,,,
+,,,,,,,,,,,travel behind,,1,,,,,,,,,,,,,
+,,,,,,,,,,,within 1/8 mi,,0,,,,,,,,,,,,,
+,,,,,,,,,,,within 1/2 mi LK,,2,,,,,,,,,,,,,
+,,,,,,,,,,,aircraft under1000ft,,0,,,,,,,,,,,,,
+,,,,,,,,,,,unknown,,0,,,,,,,,,,,,,
+,,,,,,,,,,,within 200 refuge,,0,,,,,,,,,,,,,

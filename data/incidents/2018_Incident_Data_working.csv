@@ -1,0 +1,505 @@
+start,end,today,geopoint_test:Latitude,geopoint_test:Longitude,geopoint_test:Altitude,geopoint_test:Accuracy,datetime_test,vessel,action,kayak_num,incidents,ODK conversion,select_photo,whaleinfo:whaleinfoYN,whaleinfo:whaleinfoY:whaleID,whaleinfo:whaleinfoY:Idphoto,whaleinfo:whaleinfoY:behavior,whaleinfo:whaleinfoY:behaviorchange,vesselwhaleflag,num_VWF,kayaklandflag,Initials,Comments,meta:instanceID
+Thu Jun 28 20:05:29 UTC 2018,Thu Jun 28 20:09:05 UTC 2018,Thu Jun 28 00:00:00 UTC 2018,49.0190017,-123.2345317,-8.699999809,10,Thu Jun 28 20:05:00 UTC 2018,PM,WO,,100_yards_under_power,100 yards under power,photo_y,info_yes,J pod,photo_y,behavior_y,Changed direction and speed to avoid vessel,vwf_n,1,klf_n,LMY,,uuid:4f83d1cb-23f2-41b1-809f-d966cdc98fe3
+Thu Jul 12 18:37:47 UTC 2018,Thu Jul 12 18:39:40 UTC 2018,Thu Jul 12 00:00:00 UTC 2018,48.4607661,-123.097326,-4.599999905,10,Thu Jul 12 18:37:00 UTC 2018,PM,WO,,400yd_inthepath,400yd inthepath,photo_n,info_yes,Know that it is residents but not which pod,photo_n,behavior_n,,vwf_n,1,,DKA,,uuid:0e1a9e60-027e-4507-adcd-d7c52c50cd39
+Thu Jul 12 20:06:33 UTC 2018,Thu Jul 12 20:07:36 UTC 2018,Thu Jul 12 00:00:00 UTC 2018,48.4622874,-123.086542,-9,10,Thu Jul 12 20:06:00 UTC 2018,PM,T,,high_speed_within_400,high speed within 400,photo_n,info_yes,Resident pods,photo_n,behavior_n,,vwf_n,1,klf_n,DKA,,uuid:7c6a0508-239b-4d5c-a827-3ea6a2efaccd
+Thu Jul 12 20:11:07 UTC 2018,Thu Jul 12 20:12:55 UTC 2018,Thu Jul 12 00:00:00 UTC 2018,48.4610708,-123.0882279,-9,10,Thu Jul 12 20:11:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_n,info_yes,Resident pods,photo_n,behavior_n,,vwf_n,1,klf_n,DKA,Boat had plenty of time to move out of the way but didn't,uuid:b3518df8-9705-4e6e-958d-ead051cd707f
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Thu Jul 12 21:54:38 UTC 2018,Thu Jul 12 21:57:17 UTC 2018,Thu Jul 12 00:00:00 UTC 2018,48.4907674,-122.9564425,-9.100000382,10,Thu Jul 12 21:54:00 UTC 2018,PM,T,,high_speed_within_400 Fast_withinquartermile_whales fast_departurewithin400yds,high speed within 400,photo_n,info_yes,"J27, k16",photo_n,behavior_unk,,vwf_n,1,,DKA,,uuid:4fcae811-adb8-4f02-9803-b1601f80be61
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+Thu Jul 12 23:29:37 UTC 2018,Thu Jul 12 23:31:07 UTC 2018,Thu Jul 12 00:00:00 UTC 2018,48.5687733,-123.0140701,-9.100000382,10,Thu Jul 12 23:29:00 UTC 2018,PM,T,,high_speed_within_400 Fast_withinquartermile_whales fast_departurewithin400yds,high speed within 400,photo_n,info_yes,"J, k pods",photo_n,behavior_n,,vwf_n,1,,DKA,,uuid:a9169e37-0963-4faa-ae47-1a777e486d12
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+Fri Jul 13 18:38:52 UTC 2018,Fri Jul 13 18:45:44 UTC 2018,Fri Jul 13 00:00:00 UTC 2018,48.52367,-123.1652583,18,10,Fri Jul 13 18:40:00 UTC 2018,PM,T,,200_yards_under_power no_go_zone withinhalfmile_Limekiln,200 yards under power,photo_y,info_yes,J16,photo_n,behavior_n,,vwf_n,1,,LMY,,uuid:4cae89b1-2c84-43dc-88e4-c5c2bda415aa
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,withinhalfmile Limekiln,,,,,,,,,,,,
+Fri Jul 13 19:07:27 UTC 2018,Fri Jul 13 19:08:43 UTC 2018,Fri Jul 13 00:00:00 UTC 2018,48.4865617,-123.1304983,2.3,10,Fri Jul 13 19:07:00 UTC 2018,PM,WO,,shutdown_within200yds,shutdown within200yds,photo_n,info_yes,J16,photo_n,behavior_unk,,vwf_n,1,,LMY,Possible film crew?,uuid:dcc14551-3424-4c1c-ab31-8d49256999b1
+Fri Jul 13 20:22:17 UTC 2018,Fri Jul 13 20:23:12 UTC 2018,Fri Jul 13 00:00:00 UTC 2018,48.4585067,-123.0454267,0.4,10,Fri Jul 13 20:22:00 UTC 2018,PM,WO,,200_yards_under_power,200 yards under power,photo_y,info_yes,J16,photo_n,behavior_unk,,vwf_n,2,,LMY,,uuid:c0c8999f-c73d-4950-a038-953b403b73fe
+Fri Jul 13 20:35:31 UTC 2018,Fri Jul 13 20:37:59 UTC 2018,Fri Jul 13 00:00:00 UTC 2018,48.4578607,-123.0492413,2.1,10,Fri Jul 13 20:35:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath no_go_zone Fast_withinquartermile_whales,high speed within 400,photo_n,info_yes,J16,photo_n,behavior_y,Groups became tight instead of spread,vwf_n,2,klf_n,LMY,,uuid:346a534b-d969-42cd-b665-7962d04c5a26
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Fri Jul 13 20:38:03 UTC 2018,Fri Jul 13 20:39:44 UTC 2018,Fri Jul 13 00:00:00 UTC 2018,48.46002,-123.0540433,2.2,10,Fri Jul 13 20:38:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath no_go_zone,high speed within 400,photo_n,info_yes,J16,photo_n,behavior_unk,,vwf_n,2,,LMY,,uuid:05ddadbf-024a-40d6-ae42-bd1c0a71a8f5
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Sat Jul 14 20:26:32 UTC 2018,Sat Jul 14 20:27:39 UTC 2018,Sat Jul 14 00:00:00 UTC 2018,48.4603955,-123.0513851,-5.400000095,10,Sat Jul 14 20:26:00 UTC 2018,PM,T,,high_speed_within_400 no_go_zone Fast_withinquartermile_whales,high speed within 400,photo_y,info_yes,"J,k pod",photo_n,behavior_unk,,vwf_n,2,,DKA,,uuid:79ff30e0-92f7-4946-b184-acfe54cd8306
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Sat Jul 14 20:34:13 UTC 2018,Sat Jul 14 20:36:23 UTC 2018,Sat Jul 14 00:00:00 UTC 2018,48.4583826,-123.0473876,-5.400000095,10,Sat Jul 14 20:34:00 UTC 2018,PM,T,,200_yards_under_power 400yd_inthepath Fast_withinquartermile_whales,200 yards under power,photo_y,info_yes,"J,k pods",photo_n,behavior_unk,,vwf_n,2,,DKA,,uuid:885006ba-f3fe-4f1f-98a8-60681599f03a
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Sat Jul 14 20:36:30 UTC 2018,Sat Jul 14 20:37:58 UTC 2018,Sat Jul 14 00:00:00 UTC 2018,48.4589273,-123.0478547,-5.400000095,10,Sat Jul 14 20:36:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath Fast_withinquartermile_whales,high speed within 400,photo_y,info_yes,"J,k",photo_n,behavior_unk,,vwf_n,2,,DKA,,uuid:76165a0e-d835-4759-9940-157376864cdc
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Sat Jul 14 20:44:35 UTC 2018,Sat Jul 14 20:45:23 UTC 2018,Sat Jul 14 00:00:00 UTC 2018,48.4590131,-123.046096,-5.400000095,10,Sat Jul 14 20:44:00 UTC 2018,PM,T,,no_go_zone,no go zone,photo_n,info_yes,"J,k",photo_n,behavior_n,,vwf_n,1,,DKA,,uuid:89ee07f4-6c8d-4a39-afe6-b1e95e6a1d3b
+Sat Jul 14 21:13:28 UTC 2018,Sat Jul 14 21:14:12 UTC 2018,Sat Jul 14 00:00:00 UTC 2018,48.4502476,-123.0523565,-7.900000095,10,Sat Jul 14 21:13:00 UTC 2018,PM,T,,high_speed_within_400 400yd_inthepath,high speed within 400,photo_y,info_yes,"J,k pods",photo_y,behavior_n,,vwf_n,1,,DKA,,uuid:8ad91c05-b49d-4e96-a0f1-5d5b05e00cc7
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sat Jul 14 21:14:16 UTC 2018,Sat Jul 14 21:14:57 UTC 2018,Sat Jul 14 00:00:00 UTC 2018,48.4490366,-123.0526911,-8,10,Sat Jul 14 21:14:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power Fast_withinquartermile_whales,high speed within 400,photo_y,info_yes,"J,k",photo_n,behavior_n,,vwf_n,1,,DKA,,uuid:d49403d2-fbe3-4462-94ac-bdd9bcb8fac1
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Sun Jul 15 17:12:20 UTC 2018,Sun Jul 15 17:15:43 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.518275,-123.161795,-2.2,10,Sun Jul 15 17:12:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath no_go_zone withinhalfmile_Limekiln Fast_withinquartermile_whales fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_n,info_yes,J pod,photo_n,behavior_y,Took Deep dives,vwf_n,2,klf_n,LMY,"Tried to contact, waved us off",uuid:6b94bbe3-36e0-4393-9356-199075e4f06f
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,withinhalfmile Limekiln,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sun Jul 15 17:29:30 UTC 2018,Sun Jul 15 17:36:11 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.5298696,-123.1675665,-18.7,10,Sun Jul 15 17:29:00 UTC 2018,PM,T,,400yd_inthepath no_go_zone shutdown_within200yds,400yd inthepath,photo_y,info_yes,J pod one male 3 females,photo_y,behavior_y,"Surfaced, swam around boat dived to other side",vwf_n,2,klf_n,LMY,,uuid:6ba80edf-065a-47e5-8cb4-cb841ca757eb
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Sun Jul 15 17:45:01 UTC 2018,Sun Jul 15 17:47:11 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.528445,-123.1693183,-5.8,10,Sun Jul 15 17:45:00 UTC 2018,EC,WO,,no_go_zone,no go zone,photo_y,info_yes,J pod,photo_n,behavior_n,,vwf_n,3,klf_n,LMY,Explorathor,uuid:41a14aa4-8343-4814-80f9-e0a68a4d5470
+Sun Jul 15 17:47:14 UTC 2018,Sun Jul 15 17:48:14 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.5294418,-123.1694095,4.2,10,Sun Jul 15 17:47:00 UTC 2018,PM,WO,,no_go_zone,no go zone,photo_y,info_yes,J pod,photo_n,behavior_n,,vwf_n,3,klf_n,LMY,,uuid:8977aa16-32d4-4d46-9722-5c52a8bd82e0
+Sun Jul 15 20:12:11 UTC 2018,Sun Jul 15 20:14:40 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.6061117,-123.2091167,-5.3,10,Sun Jul 15 20:12:00 UTC 2018,PM,WO,,withineighthmile_shore,withineighthmile shore,photo_y,info_yes,J pod,photo_n,behavior_n,,vwf_n,2,,LMY,,uuid:54f4551c-fc2a-462f-959f-8e098656fabb
+Sun Jul 15 20:15:34 UTC 2018,Sun Jul 15 20:16:56 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.6109367,-123.2067817,1.6,10,Sun Jul 15 20:15:00 UTC 2018,PM,T,,Fast_withinquartermile_whales,Fast withinquartermile whales,photo_n,info_yes,J pod,photo_n,behavior_unk,,,2,,LMY,,uuid:729861ee-bbf6-4273-9103-2e3b7e461e90
+Sun Jul 15 20:19:52 UTC 2018,Sun Jul 15 20:21:42 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.6146467,-123.2030083,28.3,10,Sun Jul 15 20:20:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath,high speed within 400,photo_y,info_yes,J pod,photo_y,behavior_y,1 TS,vwf_n,2,,LMY,,uuid:08194d98-2bb0-4dd6-b943-0dc2309a111d
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Jul 15 20:37:06 UTC 2018,Sun Jul 15 20:38:20 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.6361733,-123.2094368,-3.3,10,Sun Jul 15 20:37:00 UTC 2018,PM,T,,high_speed_within_400 400yd_inthepath shutdown_within200yds,high speed within 400,photo_y,info_yes,"J16, 17",photo_y,behavior_unk,,vwf_n,3,,LMY,,uuid:a40155f6-bf38-4d6f-ba66-4024833b1b0d
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Sun Jul 15 22:06:44 UTC 2018,Sun Jul 15 22:08:36 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.7300083,-123.2408683,-11.9,10,Sun Jul 15 22:06:00 UTC 2018,EC,WO,,withineighthmile_shore,withineighthmile shore,photo_y,info_yes,J16,photo_n,behavior_unk,,vwf_n,2,klf_n,,,uuid:b952b7be-5616-4fbc-94aa-7c117e52c86a
+Sun Jul 15 22:13:51 UTC 2018,Sun Jul 15 22:15:39 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.7307935,-123.2427214,-5.1,10,Sun Jul 15 22:14:00 UTC 2018,PM,T,,100_yards_under_power withineighthmile_shore travel_behind100_400yds,100 yards under power,photo_y,info_no,,photo_n,behavior_unk,,vwf_n,2,,LMY,,uuid:9e2cceca-f0e3-4d1d-b513-011d9da3e677
+,,,,,,,,,,,,withineighthmile shore,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sun Jul 15 17:12:32 UTC 2018,Sun Jul 15 17:45:07 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.51814667,-123.1616933,-1.899999976,0.88,Sun Jul 15 17:12:00 UTC 2018,PS,T,,100_yards_under_power 400yd_inthepath no_go_zone travel_behind100_400yds,100 yards under power,photo_n,info_yes,J,photo_n,behavior_unk,,vwf_n,2,,Adn,,uuid:a8447c87-9f8b-4c62-bee3-9232824fa18f
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sun Jul 15 22:19:21 UTC 2018,Sun Jul 15 22:20:54 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.734055,-123.2467167,2.6,10,Sun Jul 15 22:19:00 UTC 2018,EC,WO,,100_yards_under_power 400yd_inthepath,100 yards under power,photo_y,info_yes,J17 male,photo_y,behavior_n,,vwf_n,2,,LMY,,uuid:b8c589a3-8cbc-4215-ad9a-97be048d8d02
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Jul 15 17:45:11 UTC 2018,Sun Jul 15 17:46:52 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.528445,-123.1694533,-8.100000382,0.87,Sun Jul 15 17:45:00 UTC 2018,EC,WO,,no_go_zone,no go zone,photo_y,info_yes,J,photo_n,behavior_n,,vwf_n,3,,Adn,Kko,uuid:00681927-d7a4-40e9-99cc-bbbdae6df0bf
+Sun Jul 15 17:52:19 UTC 2018,Sun Jul 15 17:55:51 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.53427833,-123.17033,-1.399999976,0.91,Sun Jul 15 17:52:00 UTC 2018,EU,WO,5,400yd_inthepath,400yd inthepath,photo_y,info_yes,J,photo_n,behavior_y,Deep dive,vwf_n,3,klf_n,Adn,,uuid:5e278e32-3b96-4e0f-86fb-b6839e743ed0
+Sun Jul 15 22:49:54 UTC 2018,Sun Jul 15 22:53:19 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.74625,-123.2727267,-9.5,10,Sun Jul 15 22:50:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within100yds,400yd inthepath,photo_y,info_yes,J17 male J16 pod,photo_n,behavior_unk,,vwf_n,1,,LMY,2nd incident parked in path,uuid:9ced5bb6-da4b-42ce-8437-51e5c518920d
+,,,,,,,,,,,,shutdown within100yds,,,,,,,,,,,,
+Sun Jul 15 18:01:29 UTC 2018,Sun Jul 15 18:03:10 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.54010833,-123.1687917,-11.80000019,0.9,Sun Jul 15 18:01:00 UTC 2018,PM,WO,,Fast_withinquartermile_whales,Fast withinquartermile whales,photo_n,info_yes,J,photo_n,behavior_unk,,vwf_n,3,,Adn,,uuid:ab876a17-bc47-4755-a778-92d87b4f0082
+Sun Jul 15 22:14:54 UTC 2018,Sun Jul 15 22:16:24 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.73166667,-123.2432967,4.5,0.95,Sun Jul 15 22:15:00 UTC 2018,PM,WO,,400yd_inthepath,400yd inthepath,photo_n,info_yes,J16,,,,,2,,Adn,,uuid:51612679-65f0-46e4-b381-65f7e9b703a4
+Sun Jul 15 23:10:01 UTC 2018,Sun Jul 15 00:49:52 UTC 2018,Sun Jul 15 00:00:00 UTC 2018,48.76011833,-123.3007917,2.400000095,0.78,Sun Jul 15 23:10:00 UTC 2018,EU,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,J17,photo_n,behavior_unk,,vwf_n,2,,Adn,Spirit of orca. They had time to get out of the way and didn't,uuid:e9980ef9-65e3-462e-8839-411ef4ac1ab7
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Tue Jul 17 19:11:32 UTC 2018,Tue Jul 17 19:13:17 UTC 2018,Tue Jul 17 00:00:00 UTC 2018,48.45183,-123.0254017,29.79999924,0.96,Tue Jul 17 19:11:00 UTC 2018,PS,WO,,400yd_inthepath no_go_zone shutdown_within200yds,400yd inthepath,photo_y,info_yes,J16s,photo_y,behavior_n,,vwf_n,3,klf_n,TGS,,uuid:895d4eca-0710-486d-9cc1-2143158ec231
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Tue Jul 17 18:11:34 UTC 2018,Tue Jul 17 18:13:38 UTC 2018,Tue Jul 17 00:00:00 UTC 2018,48.477975,-123.0928067,150,3.9,Tue Jul 17 18:11:00 UTC 2018,PM,WO,,400yd_inthepath,400yd inthepath,photo_y,info_yes,J16,photo_y,behavior_n,,vwf_n,3,klf_n,DKA,,uuid:3b0549f7-7cdc-450c-b74f-bb0791a665b4
+Tue Jul 17 19:35:10 UTC 2018,Tue Jul 17 19:36:16 UTC 2018,Tue Jul 17 00:00:00 UTC 2018,48.44389333,-123.0142967,3.900000095,0.79,Tue Jul 17 19:35:00 UTC 2018,PM,T,,high_speed_within_400,high speed within 400,photo_y,info_yes,J16s,photo_n,behavior_unk,,vwf_n,4,klf_n,TGS,,uuid:71398f07-d927-401f-88a0-c35f32567bc4
+Tue Jul 17 19:59:49 UTC 2018,Tue Jul 17 20:01:05 UTC 2018,Tue Jul 17 00:00:00 UTC 2018,48.45539167,-123.02466,-14.69999981,0.86,Tue Jul 17 19:59:00 UTC 2018,PM,WO,,high_speed_within_400 200_yards_under_power 400yd_inthepath no_go_zone,high speed within 400,photo_y,info_yes,J17s,photo_n,behavior_unk,,vwf_n,2,klf_n,TGS,,uuid:68389a3f-0fff-456d-b764-b601d9ec406d
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Tue Jul 17 19:26:03 UTC 2018,Tue Jul 17 19:27:16 UTC 2018,Tue Jul 17 00:00:00 UTC 2018,48.44944833,-123.019845,150,3.9,Tue Jul 17 19:26:00 UTC 2018,PM,T,,high_speed_within_400 Fast_withinquartermile_whales,high speed within 400,photo_n,info_yes,J16&17,photo_y,behavior_n,,vwf_n,4,,DKA,,uuid:52d39bc9-9a6a-4146-9546-47b7e071908a
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Tue Jul 17 20:05:39 UTC 2018,Tue Jul 17 20:06:52 UTC 2018,Tue Jul 17 00:00:00 UTC 2018,48.45699167,-123.0333517,-64,0.85,Tue Jul 17 20:05:00 UTC 2018,PM,T,,high_speed_within_400 400yd_inthepath no_go_zone Fast_withinquartermile_whales,high speed within 400,photo_y,info_yes,J16s,photo_n,behavior_unk,,vwf_n,2,klf_n,TGS,,uuid:af61ac60-5ced-44c6-8336-3738943a8531
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Tue Jul 17 20:07:00 UTC 2018,Tue Jul 17 20:08:07 UTC 2018,Tue Jul 17 00:00:00 UTC 2018,48.45673,-123.0348033,-90.59999847,0.86,Tue Jul 17 20:07:00 UTC 2018,PM,F,,200_yards_under_power no_go_zone fishing_within200yds,200 yards under power,photo_y,info_yes,J16s,photo_n,behavior_unk,,vwf_n,2,klf_n,TGS,,uuid:44a9bdb6-c418-4bf8-91ad-55f856882e00
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,fishing within200yds,,,,,,,,,,,,
+Thu Jul 19 20:21:02 UTC 2018,Thu Jul 19 20:23:29 UTC 2018,Thu Jul 19 00:00:00 UTC 2018,48.72516833,-123.1917783,-8.800000191,3.9,Thu Jul 19 20:21:00 UTC 2018,PS,WO,,100_yards_under_power,100 yards under power,photo_y,info_yes,J pod,photo_y,behavior_n,,vwf_n,2,,DKA,,uuid:a5e4875c-aa01-48d8-adef-784fc6b10bd1
+Thu Jul 19 21:36:24 UTC 2018,Thu Jul 19 21:37:41 UTC 2018,Thu Jul 19 00:00:00 UTC 2018,48.675605,-123.2293867,-8.800000191,3.9,Thu Jul 19 21:36:00 UTC 2018,PM,T,,200_yards_under_power 400yd_inthepath,200 yards under power,photo_y,info_yes,J pod,photo_y,behavior_y,3 tail slaps,vwf_n,1,,DKA,,uuid:7399b9b9-9eb8-4af2-affd-3975cf04ec60
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Thu Jul 19 22:16:20 UTC 2018,Thu Jul 19 22:17:33 UTC 2018,Thu Jul 19 00:00:00 UTC 2018,48.63945333,-123.2063417,-8.800000191,3.9,Thu Jul 19 22:16:00 UTC 2018,PM,WO,,200_yards_under_power 400yd_inthepath Fast_withinquartermile_whales,200 yards under power,photo_n,info_no,J pod,photo_n,behavior_n,,vwf_n,1,,DKA,,uuid:af3b018b-8535-4bfb-a1e1-be88ea07456a
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Fri Jul 20 19:18:36 UTC 2018,Fri Jul 20 19:20:49 UTC 2018,Fri Jul 20 00:00:00 UTC 2018,48.724665,-123.17748,-7.9,10,Fri Jul 20 19:18:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath shutdown_within200yds Fast_withinquartermile_whales,high speed within 400,photo_y,info_yes,"J pod, one whale",photo_n,behavior_y,Changed direction to avoid boat,vwf_n,1,,LMY,,uuid:2b5f6f12-0ac6-4c5d-82ad-4be6ddf4951c
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Fri Jul 20 19:26:10 UTC 2018,Fri Jul 20 19:29:15 UTC 2018,Fri Jul 20 00:00:00 UTC 2018,48.7244954,-123.1828371,-8.4,10,Fri Jul 20 19:26:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,J pod,photo_n,behavior_unk,,vwf_n,1,,LMY,Already contacted,uuid:6d1a136e-0efe-42e3-aa00-0529b519c63d
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Fri Jul 20 19:43:15 UTC 2018,Fri Jul 20 19:44:21 UTC 2018,Fri Jul 20 00:00:00 UTC 2018,48.6990716,-123.2124756,-14,10,Fri Jul 20 19:43:00 UTC 2018,PM,T,,400yd_inthepath,400yd inthepath,photo_y,info_yes,J pod,photo_n,behavior_y,Breached,vwf_n,1,klf_n,LMY,,uuid:85cd9a14-54dd-4c2c-86f7-abdd77742e98
+Fri Jul 20 20:11:30 UTC 2018,Fri Jul 20 20:12:50 UTC 2018,Fri Jul 20 00:00:00 UTC 2018,48.6695604,-123.2298106,4.8,10,Fri Jul 20 20:11:00 UTC 2018,PM,WO,,200_yards_under_power 400yd_inthepath,200 yards under power,photo_n,info_yes,J pod,photo_n,behavior_unk,,vwf_n,1,,LMY,,uuid:61e4514d-cdc1-4f01-9463-cf4f6e425dc3
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Fri Jul 20 20:12:56 UTC 2018,Fri Jul 20 20:14:07 UTC 2018,Fri Jul 20 00:00:00 UTC 2018,48.6683485,-123.2280049,4.7,10,Fri Jul 20 20:13:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath Fast_withinquartermile_whales fast_departurewithin400yds,high speed within 400,photo_y,info_yes,J pod,photo_n,behavior_unk,,vwf_n,1,,LMY,,uuid:68fdd33d-3554-47e7-b643-f2ef3d39c4e9
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+Fri Jul 20 21:49:37 UTC 2018,Fri Jul 20 21:51:13 UTC 2018,Fri Jul 20 00:00:00 UTC 2018,48.5597133,-123.1845382,-23.5,10,Fri Jul 20 21:49:00 UTC 2018,PM,WO,,400yd_inthepath,400yd inthepath,photo_y,info_yes,J pod,photo_n,behavior_y,Went from breaching to deep dive,vwf_n,1,,LMY,,uuid:1e2419e6-4181-4ae6-940d-15d7e6e475d9
+Sat Jul 21 23:36:45 UTC 2018,Sat Jul 21 23:38:12 UTC 2018,Sat Jul 21 00:00:00 UTC 2018,48.49680333,-123.15091,-5.699999809,3.9,Sat Jul 21 23:36:00 UTC 2018,PM,T,,400yd_inthepath no_go_zone shutdown_within200yds,400yd inthepath,photo_y,info_yes,J50,photo_y,behavior_unk,,vwf_n,2,,DKA,,uuid:4a5d61ed-9697-4038-b5b9-d996d967987d
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Mon Jul 23 19:41:27 UTC 2018,Mon Jul 23 19:44:06 UTC 2018,Mon Jul 23 00:00:00 UTC 2018,48.49798833,-123.149995,-0.3000000119,3.9,Mon Jul 23 19:41:00 UTC 2018,PM,T,,no_go_zone,no go zone,photo_n,info_yes,"J16, J50 Scarlet",photo_n,behavior_unk,,vwf_n,1,klf_n,LMY,,uuid:c11874e4-c2d2-4676-9f24-3a55773636af
+Mon Jul 23 20:13:50 UTC 2018,Mon Jul 23 20:21:45 UTC 2018,Mon Jul 23 00:00:00 UTC 2018,0.00E+00,0.00E+00,-5.199999809,1.1,Mon Jul 23 20:14:00 UTC 2018,PM,T,,no_go_zone Fast_withinquartermile_whales,no go zone,photo_n,info_yes,"J16s, J50 scarlet, J26 Mike",photo_n,behavior_unk,,vwf_n,1,,LMY,,uuid:7794f025-1f28-4af7-96ac-c50853681d3e
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Mon Jul 23 20:24:01 UTC 2018,Mon Jul 23 20:25:21 UTC 2018,Mon Jul 23 00:00:00 UTC 2018,48.50622833,-123.15922,0.00E+00,3.9,Mon Jul 23 20:24:00 UTC 2018,PM,T,,no_go_zone,no go zone,photo_n,info_yes,J16's J50 J26,photo_n,behavior_unk,,vwf_n,2,klf_n,LMY,,uuid:dcc0811e-c1e8-4144-b1e2-aad6360a0188
+Mon Jul 23 21:23:11 UTC 2018,Mon Jul 23 21:25:53 UTC 2018,Mon Jul 23 00:00:00 UTC 2018,48.50363833,-123.155145,-0.6000000238,3.9,Mon Jul 23 21:23:00 UTC 2018,PK,T,1,400yd_inthepath paddle_whale no_go_zone travel_behind100_400yds,400yd inthepath,photo_y,info_yes,J16,photo_n,behavior_unk,,vwf_n,2,klf_n,LMY,,uuid:710a9073-f868-421a-a2dc-75ed2ddb0344
+,,,,,,,,,,,,paddle whale,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Mon Jul 23 22:13:55 UTC 2018,Mon Jul 23 22:15:26 UTC 2018,Mon Jul 23 00:00:00 UTC 2018,48.47437,-123.1056383,-0.6000000238,3.9,Mon Jul 23 22:14:00 UTC 2018,PM,WO,,no_go_zone,no go zone,photo_n,info_yes,J16's,photo_n,behavior_unk,,vwf_n,1,,LMY,,uuid:c5cc3a84-49a4-44e8-b694-e0ba59172bf4
+Tue Jul 24 19:25:34 UTC 2018,Tue Jul 24 19:27:36 UTC 2018,Tue Jul 24 00:00:00 UTC 2018,48.4602,-123.0672033,-19,10,Tue Jul 24 19:25:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath no_go_zone Fast_withinquartermile_whales fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_y,info_yes,J pod,photo_y,behavior_y,Pec slap and tail slap,vwf_n,2,,LMY,,uuid:098f3f8f-dc77-47a1-95c1-7cb558465b4d
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Tue Jul 24 19:27:39 UTC 2018,Tue Jul 24 19:28:58 UTC 2018,Tue Jul 24 00:00:00 UTC 2018,48.4612483,-123.0697183,-11.2,10,Tue Jul 24 19:27:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,K pod,photo_y,behavior_n,,vwf_n,2,klf_n,LMY,,uuid:0adead77-ee58-45f4-a064-786190a18c7c
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Tue Jul 24 19:36:52 UTC 2018,Tue Jul 24 19:39:07 UTC 2018,Tue Jul 24 00:00:00 UTC 2018,48.4704717,-123.0886983,-8.5,10,Tue Jul 24 19:37:00 UTC 2018,PM,T,,high_speed_within_400 Fast_withinquartermile_whales travel_behind100_400yds,high speed within 400,photo_y,info_yes,K pod,photo_n,behavior_unk,,vwf_n,2,klf_n,LMY,"Paralleled boat to try to make contact, DFW Intercepted them",uuid:2c8aaea1-a49a-474b-a585-57359ac6a1ee
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Tue Jul 24 20:03:20 UTC 2018,Tue Jul 24 20:13:13 UTC 2018,Tue Jul 24 00:00:00 UTC 2018,48.49367,-123.1466083,-24.7,10,Tue Jul 24 20:03:00 UTC 2018,PK,WO,1,400yd_inthepath paddle_whale,400yd inthepath,photo_y,info_yes,K pod,photo_y,behavior_unk,,vwf_n,2,klf_n,LMY,,uuid:2ef18369-44f2-4daa-af52-9369c1d3c8d3
+,,,,,,,,,,,,paddle whale,,,,,,,,,,,,
+Tue Jul 24 20:44:02 UTC 2018,Tue Jul 24 20:52:53 UTC 2018,Tue Jul 24 00:00:00 UTC 2018,48.5497153,-123.1819094,-12.6,10,Tue Jul 24 20:44:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,K  and J pod,photo_y,behavior_y,Lots of beaches 5+,vwf_n,1,klf_n,LMY,,uuid:a58f13ae-5781-4db0-a6c0-32f95258b467
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Tue Jul 24 20:57:19 UTC 2018,Tue Jul 24 20:59:15 UTC 2018,Tue Jul 24 00:00:00 UTC 2018,48.5688126,-123.1912732,9.2,10,Tue Jul 24 20:57:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,K and J pod,photo_y,behavior_unk,,vwf_n,2,klf_n,LMY,,uuid:58b55e44-ae4d-4019-b44f-036077280149
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Tue Jul 24 21:12:36 UTC 2018,Tue Jul 24 21:14:09 UTC 2018,Tue Jul 24 00:00:00 UTC 2018,48.5892867,-123.208685,-6,12.4,Tue Jul 24 21:12:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,K and J pod,photo_y,behavior_y,Dived to avoid boat,vwf_n,1,,LMY,,uuid:08f41635-e171-4bae-ada5-62485eed7e4c
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Tue Jul 24 23:03:40 UTC 2018,Tue Jul 24 23:05:13 UTC 2018,Tue Jul 24 00:00:00 UTC 2018,48.74511,-123.2821667,5.3,10,Tue Jul 24 23:03:00 UTC 2018,PM,T,,high_speed_within_400 400yd_inthepath withineighthmile_shore fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_y,info_yes,J and K pod,photo_n,behavior_unk,,vwf_n,1,,LMY,,uuid:f6ae6d89-b4f4-4e14-8992-cbbed4850a63
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,withineighthmile shore,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Tue Jul 24 23:25:09 UTC 2018,Tue Jul 24 23:26:37 UTC 2018,Tue Jul 24 00:00:00 UTC 2018,48.7387033,-123.2557567,11.7,10,Tue Jul 24 23:25:00 UTC 2018,EC,WO,,shutdown_within100yds,shutdown within100yds,photo_y,info_yes,J and K pod,photo_y,behavior_y,Whales dived to duct boat,vwf_n,1,,LMY,,uuid:0ccb6bae-e557-4cfa-94ee-058d422e0ba6
+Tue Jul 24 23:26:40 UTC 2018,Tue Jul 24 23:41:03 UTC 2018,Tue Jul 24 00:00:00 UTC 2018,48.7385417,-123.254565,9.4,10,Tue Jul 24 23:26:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within100yds,400yd inthepath,photo_y,info_yes,"Cappacinno, k pod",photo_y,behavior_y,"2 BR, 1 TS, 1 Dorsal slap",,1,,LMY,,uuid:b2982fb7-e1b9-4bec-b873-5f1704989dbd
+,,,,,,,,,,,,shutdown within100yds,,,,,,,,,,,,
+Tue Jul 24 23:27:45 UTC 2018,Tue Jul 24 23:41:17 UTC 2018,Tue Jul 24 00:00:00 UTC 2018,48.7386658,-123.2531264,6.3,10,Tue Jul 24 23:27:00 UTC 2018,MM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,,info_yes,J and K pod,photo_y,,,,,,LMY,Canadian fish and wildlife DFO,uuid:21998319-0cfe-4db3-8764-70da8fbbc8ff
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Wed Jul 25 21:48:56 UTC 2018,Wed Jul 25 21:50:14 UTC 2018,Wed Jul 25 00:00:00 UTC 2018,48.61154667,-123.207335,-7.900000095,3.9,Wed Jul 25 21:49:00 UTC 2018,PS,T,,200_yards_under_power 400yd_inthepath,200 yards under power,photo_y,info_yes,J16&17,photo_n,behavior_unk,,vwf_n,2,,DKA,,uuid:4daef489-9c87-4fce-b753-272611005a04
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Wed Jul 25 22:14:01 UTC 2018,Wed Jul 25 22:15:16 UTC 2018,Wed Jul 25 00:00:00 UTC 2018,48.63254333,-123.1959767,-7.900000095,3.9,Wed Jul 25 22:14:00 UTC 2018,PM,WO,,high_speed_within_400 200_yards_under_power 400yd_inthepath Fast_withinquartermile_whales,high speed within 400,photo_y,info_yes,J16&17,photo_n,behavior_unk,,vwf_n,2,,Dka,Giddy up is boat name,uuid:3615b420-bf18-4d1a-b54d-e0a1c850aaf3
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Wed Jul 25 22:38:14 UTC 2018,Wed Jul 25 22:39:53 UTC 2018,Wed Jul 25 00:00:00 UTC 2018,48.656655,-123.2116033,-7.900000095,3.9,Wed Jul 25 22:38:00 UTC 2018,PM,T,,200_yards_under_power 400yd_inthepath,200 yards under power,photo_y,info_yes,J35,photo_y,behavior_y,5 TS after boat went by,vwf_n,2,,Dka,,uuid:a5e38db6-37b1-4f95-a17f-304bf198b486
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Wed Jul 25 22:40:47 UTC 2018,Wed Jul 25 22:41:58 UTC 2018,Wed Jul 25 00:00:00 UTC 2018,48.65876333,-123.213575,-7.900000095,3.9,Wed Jul 25 22:40:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,J17,photo_y,behavior_unk,,vwf_n,2,,DKA,,uuid:de7ff606-e6ac-4de8-9d7d-022d3b0e7b0a
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Wed Jul 25 22:56:41 UTC 2018,Wed Jul 25 22:57:40 UTC 2018,Wed Jul 25 00:00:00 UTC 2018,48.67464167,-123.2340867,-7.5,3.9,Wed Jul 25 22:56:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,J17s,photo_y,behavior_n,,vwf_n,1,,Dka,,uuid:cec29ba5-f399-4e19-bd4f-7a994d0a25ab
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Wed Jul 25 23:40:33 UTC 2018,Wed Jul 25 23:43:04 UTC 2018,Wed Jul 25 00:00:00 UTC 2018,48.72228333,-123.1854417,-9.199999809,3.9,Wed Jul 25 23:40:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,"J35 and calf, L87",photo_y,behavior_n,,vwf_n,1,,Dka,,uuid:2cbdbba5-c349-412a-8892-2ec987ef1379
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Wed Jul 25 00:14:38 UTC 2018,Wed Jul 25 00:17:02 UTC 2018,Wed Jul 25 00:00:00 UTC 2018,48.74375167,-123.120595,-8.100000382,3.9,Wed Jul 25 00:14:00 UTC 2018,EC,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_n,info_yes,J35 and calf,photo_y,behavior_n,,vwf_n,1,,Dka,Guardian zodiac from white rock,uuid:8120ec91-6f0c-4ebf-9089-829bb32effa4
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Thu Jul 26 18:02:59 UTC 2018,Thu Jul 26 18:04:37 UTC 2018,Thu Jul 26 00:00:00 UTC 2018,48.37854167,-122.680095,-2.5,3.9,Thu Jul 26 18:03:00 UTC 2018,PM,T,,travel_behind100_400yds,travel behind100 400yds,photo_y,info_yes,J,photo_n,behavior_unk,,vwf_n,1,,LMY,,uuid:ef8c3206-5e26-44a4-ba71-8f91ceab9eef
+Thu Jul 26 18:24:10 UTC 2018,Thu Jul 26 18:26:21 UTC 2018,Thu Jul 26 00:00:00 UTC 2018,48.36775833,-122.6865967,-2.5,3.9,Thu Jul 26 18:24:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_y,info_yes,J or and K,photo_y,behavior_y,Changed directions and slowed down,vwf_n,1,,LMY,Same boat as last incident,uuid:de2e0e4b-ea17-4b5e-98fc-40bdb106ba1f
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Thu Jul 26 21:33:41 UTC 2018,Thu Jul 26 21:35:37 UTC 2018,Thu Jul 26 00:00:00 UTC 2018,48.41717667,-122.8237917,-3.599999905,3.9,Thu Jul 26 21:33:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath Fast_withinquartermile_whales withineighthmile_shore fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_y,info_yes,J35,photo_y,behavior_unk,,vwf_n,1,,LMY,,uuid:1ea3b480-7267-42f7-99c1-4f583f549d27
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,withineighthmile shore,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Thu Jul 26 22:35:34 UTC 2018,Thu Jul 26 22:37:08 UTC 2018,Thu Jul 26 00:00:00 UTC 2018,48.41266833,-122.840635,-5.800000191,3.9,Thu Jul 26 22:35:00 UTC 2018,PM,T,,200_yards_under_power 400yd_inthepath Fast_withinquartermile_whales travel_behind100_400yds,200 yards under power,photo_n,info_yes,J35 and older calf,photo_n,behavior_unk,,vwf_n,2,,LMY,,uuid:77d23307-dc9d-4cd6-aeb8-bc59a9e9603c
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Thu Jul 26 22:49:04 UTC 2018,Thu Jul 26 22:50:56 UTC 2018,Thu Jul 26 00:00:00 UTC 2018,48.410605,-122.8503217,-6.900000095,3.9,Thu Jul 26 22:49:00 UTC 2018,PM,WO,,200_yards_under_power 400yd_inthepath shutdown_within200yds travel_behind100_400yds,200 yards under power,photo_y,info_yes,J,photo_y,behavior_unk,,vwf_n,2,klf_n,LMY,,uuid:89e7f50a-2ae3-4731-84b1-5edb57c1b34c
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Thu Jul 26 23:07:44 UTC 2018,Thu Jul 26 23:10:00 UTC 2018,Thu Jul 26 00:00:00 UTC 2018,48.41292833,-122.8632283,-6.900000095,3.9,Thu Jul 26 23:07:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power Fast_withinquartermile_whales travel_behind100_400yds,high speed within 400,photo_y,info_yes,J35s,photo_y,behavior_y,Changed direction,vwf_n,2,,LMY,,uuid:74686247-a3f4-4513-8bf0-729d5a54544f
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Thu Jul 26 00:08:47 UTC 2018,Thu Jul 26 00:11:20 UTC 2018,Thu Jul 26 00:00:00 UTC 2018,48.42193,-122.917875,-8.300000191,3.9,Thu Jul 26 00:08:00 UTC 2018,PM,T,,high_speed_within_400 Fast_withinquartermile_whales fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_y,info_yes,J35,photo_n,behavior_y,Took a longer time to surface,vwf_n,1,,LMY,,uuid:fb0d73b0-b1c8-40a7-98c8-6396866b44c0
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Fri Jul 27 17:47:30 UTC 2018,Fri Jul 27 17:50:42 UTC 2018,Fri Jul 27 00:00:00 UTC 2018,48.45747,-123.0432267,-6.099999905,1.41,Fri Jul 27 17:48:00 UTC 2018,PM,F,,no_go_zone,no go zone,photo_n,info_yes,J pod,photo_y,behavior_unk,,vwf_n,2,klf_n,Adn,,uuid:c5c0152d-f567-4f5a-a3ee-c9bda5b5627a
+Fri Jul 27 17:50:49 UTC 2018,Fri Jul 27 17:52:08 UTC 2018,Fri Jul 27 00:00:00 UTC 2018,48.459235,-123.0499733,-7,1.23,Fri Jul 27 17:50:00 UTC 2018,PM,F,,no_go_zone,no go zone,photo_n,info_yes,J17s,photo_y,behavior_unk,,vwf_n,2,,Adn,,uuid:7400cb87-0346-4f25-99f7-31c25c8f1a03
+Fri Jul 27 00:28:39 UTC 2018,Fri Jul 27 00:32:04 UTC 2018,Fri Jul 27 00:00:00 UTC 2018,48.48542833,-123.1088067,-7.199999809,0.83,Fri Jul 27 00:28:00 UTC 2018,PM,WO,,400yd_inthepath no_go_zone shutdown_within200yds,400yd inthepath,photo_y,info_yes,J17s,photo_y,behavior_unk,,vwf_n,2,klf_n,TGS,J35 carrying calf,uuid:6523fdeb-a9bc-4ad7-8759-8e88a3fda131
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Fri Jul 27 00:32:18 UTC 2018,Fri Jul 27 00:33:27 UTC 2018,Fri Jul 27 00:00:00 UTC 2018,48.48630667,-123.11152,-4.300000191,0.83,Fri Jul 27 00:32:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_n,info_yes,J17s,photo_y,behavior_unk,,vwf_y,2,klf_n,TGS,,uuid:ebbb4054-fa96-4c63-9048-b4eb2fcbcfdd
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Sun Jul 29 18:39:22 UTC 2018,Sun Jul 29 18:40:29 UTC 2018,Sun Jul 29 00:00:00 UTC 2018,48.68369333,-123.2411283,-7.900000095,3.9,Sun Jul 29 18:39:00 UTC 2018,PM,T,,200_yards_under_power 400yd_inthepath,200 yards under power,photo_n,info_yes,J17s,photo_y,behavior_y,Breach and change in direction,vwf_n,1,,TGS,J35 carrying dead calf,uuid:e503243e-cca4-476d-af13-265e81deeda8
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Jul 29 19:24:53 UTC 2018,Sun Jul 29 19:30:31 UTC 2018,Sun Jul 29 00:00:00 UTC 2018,48.64461833,-123.2332017,-7.900000095,3.9,Sun Jul 29 19:25:00 UTC 2018,PM,T,,high_speed_within_400 100_yards_under_power 200_yards_under_power 400yd_inthepath,high speed within 400,photo_y,info_yes,J17s,photo_n,behavior_y,Deep/long dive,vwf_n,1,,Tmp,Commercial cargo ship with timber called Global Mermaid. Attempted contact via VHS.,uuid:94079594-1a1a-430c-937a-260699cc632f
+,,,,,,,,,,,,100 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Jul 29 21:24:25 UTC 2018,Sun Jul 29 21:25:57 UTC 2018,Sun Jul 29 00:00:00 UTC 2018,48.514685,-123.1573033,3.700000048,3.9,Sun Jul 29 21:24:00 UTC 2018,MF,T,,high_speed_within_400 no_go_zone withinhalfmile_Limekiln Fast_withinquartermile_whales,high speed within 400,photo_n,info_yes,J17s,photo_y,behavior_unk,,vwf_n,1,klf_y,TGS,J35 carrying dead calf,uuid:a4414476-aa7d-42a3-88e4-6fe9f825a1b5
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,withinhalfmile Limekiln,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Sun Jul 29 00:06:37 UTC 2018,Sun Jul 29 00:56:41 UTC 2018,Sun Jul 29 00:00:00 UTC 2018,48.59233333,-123.2040983,-9.399999619,3.9,Sun Jul 29 00:07:00 UTC 2018,PM,WO,,withineighthmile_shore travel_behind100_400yds,withineighthmile shore,photo_y,info_yes,J17s and j16s,photo_y,behavior_unk,,vwf_n,3,,Adn,Vessel name bula bula out of yakima,uuid:f00a6b5a-a586-46d3-ad7d-c1dcd747d481
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sun Jul 29 20:40:43 UTC 2018,Sun Jul 29 20:42:03 UTC 2018,Sun Jul 29 00:00:00 UTC 2018,48.55203333,-123.1856817,-5.099999905,1.05,Sun Jul 29 20:40:00 UTC 2018,PM,T,,400yd_inthepath,400yd inthepath,photo_n,info_yes,J17s,photo_y,behavior_unk,,vwf_n,1,klf_n,TGS,J35 carrying dead calf,uuid:12f6a7c9-53cc-4071-9df7-30d08e99b8fc
+Sun Jul 29 20:48:51 UTC 2018,Sun Jul 29 20:50:23 UTC 2018,Sun Jul 29 00:00:00 UTC 2018,48.54224667,-123.1777783,-6.599999905,1.03,Sun Jul 29 20:48:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath no_go_zone Fast_withinquartermile_whales fast_departurewithin400yds,high speed within 400,photo_n,info_yes,J17s,photo_y,behavior_unk,,vwf_n,1,klf_n,TGS,J35,uuid:34d470d1-7ac4-4cc6-a46d-0dc81d561c84
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+Sun Jul 29 20:58:59 UTC 2018,Sun Jul 29 21:01:07 UTC 2018,Sun Jul 29 00:00:00 UTC 2018,48.53012667,-123.1668617,-4.300000191,0.99,Sun Jul 29 20:59:00 UTC 2018,PM,WO,,no_go_zone travel_behind100_400yds,no go zone,photo_y,info_yes,J17s,photo_y,behavior_unk,,vwf_n,1,,Adn,,uuid:a5c8d8bc-b2f8-43e3-949e-a0e20c60b55f
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sun Jul 29 22:37:46 UTC 2018,Sun Jul 29 22:40:34 UTC 2018,Sun Jul 29 00:00:00 UTC 2018,48.54135667,-123.1746617,-1.399999976,0.88,Sun Jul 29 22:37:00 UTC 2018,MF,F,,400yd_inthepath no_go_zone fishing_within200yds,400yd inthepath,photo_y,info_yes,J17s,photo_y,behavior_y,Moved offshore,vwf_n,4,,Adn,Named intruder,uuid:ecf33ee7-50ec-4cb9-af8e-bb474f704954
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,fishing within200yds,,,,,,,,,,,,
+Sun Jul 29 22:40:40 UTC 2018,Sun Jul 29 22:42:14 UTC 2018,Sun Jul 29 00:00:00 UTC 2018,48.54283,-123.1751983,8,0.84,Sun Jul 29 22:40:00 UTC 2018,MF,F,,400yd_inthepath no_go_zone,400yd inthepath,photo_y,info_yes,J17s j16s,photo_y,behavior_y,Pushed offshore,vwf_n,4,,Adn,Boat named marathon,uuid:daa4a0d0-5ce6-4c98-a507-c7d81bb8f1f5
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Sun Jul 29 23:00:27 UTC 2018,Sun Jul 29 23:02:24 UTC 2018,Sun Jul 29 00:00:00 UTC 2018,48.556325,-123.1826033,0.6999999881,0.89,Sun Jul 29 23:00:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath no_go_zone shutdown_within200yds Fast_withinquartermile_whales,high speed within 400,photo_n,info_yes,"J pod, J17s",photo_y,behavior_unk,,vwf_n,3,klf_n,TGS,J35 carrying calf,uuid:f70df5ab-8102-4314-baa1-497a7d5446af
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Mon Jul 30 20:43:42 UTC 2018,Mon Jul 30 20:45:17 UTC 2018,Mon Jul 30 00:00:00 UTC 2018,48.9055233,-123.0478488,4.9,10,Mon Jul 30 20:43:00 UTC 2018,PM,T,,high_speed_within_400 100_yards_under_power Fast_withinquartermile_whales fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_n,info_yes,J26 or J27,photo_n,behavior_unk,,vwf_n,2,klf_n,LMY,,uuid:6cc26749-708c-43c8-a0d3-c24a507aecea
+,,,,,,,,,,,,100 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Mon Jul 30 21:10:45 UTC 2018,Mon Jul 30 21:11:45 UTC 2018,Mon Jul 30 00:00:00 UTC 2018,48.8836383,-123.0387117,-3.4,10,Mon Jul 30 21:10:00 UTC 2018,PM,T,,high_speed_within_400 Fast_withinquartermile_whales fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_n,info_no,J16s,photo_n,behavior_unk,,,2,klf_n,LMY,,uuid:ab7ff4d8-d2bc-4959-ba6e-0851298d4c5f
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Mon Jul 30 21:11:50 UTC 2018,Mon Jul 30 21:17:03 UTC 2018,Mon Jul 30 00:00:00 UTC 2018,48.8836917,-123.0384933,16.6,10,Mon Jul 30 21:11:00 UTC 2018,PM,WO,,high_speed_within_400 400yd_inthepath shutdown_within200yds fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_y,info_yes,J16s,photo_y,behavior_y,Long dives to avoid boat,vwf_n,2,,LMY,,uuid:9a55233b-2510-4346-bff6-feefad43ec9a
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Mon Jul 30 21:42:20 UTC 2018,Mon Jul 30 21:44:55 UTC 2018,Mon Jul 30 00:00:00 UTC 2018,48.8416754,-123.0419202,-7.7,10,Mon Jul 30 21:42:00 UTC 2018,PM,WO,,200_yards_under_power 400yd_inthepath shutdown_within200yds,200 yards under power,photo_y,info_yes,J16s,photo_y,behavior_y,"Long dive, stayed under longer to avoid boat",vwf_n,2,,LMY,,uuid:3b5bd6d9-5906-4cd6-80de-57dbba3b54a1
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Mon Jul 30 22:46:32 UTC 2018,Mon Jul 30 22:48:58 UTC 2018,Mon Jul 30 00:00:00 UTC 2018,48.7800338,-123.0379319,-4.5,10,Mon Jul 30 22:46:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath Fast_withinquartermile_whales fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_y,info_yes,J16s,photo_n,behavior_unk,,,2,klf_n,LMY,,uuid:94931f56-b31d-4f76-bb6a-23d5f71168e6
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sun Aug 12 17:46:33 UTC 2018,Sun Aug 12 17:48:21 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.46209833,-123.0780017,47.29999924,3.9,Sun Aug 12 17:46:00 UTC 2018,PM,T,,high_speed_within_400 no_go_zone Fast_withinquartermile_whales,high speed within 400,photo_y,info_yes,"J17's, l87,",photo_y,behavior_n,,vwf_n,2,,Dka,,uuid:b1cbf8a0-57dc-417c-9488-740459fc3c37
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Sun Aug 12 17:49:50 UTC 2018,Sun Aug 12 17:51:55 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.45736333,-123.0709167,47.29999924,3.9,Sun Aug 12 17:50:00 UTC 2018,PM,T,,400yd_inthepath no_go_zone Fast_withinquartermile_whales,400yd inthepath,photo_y,info_yes,"J17's, L87",photo_y,behavior_n,,,2,klf_n,Dka,,uuid:82819ca4-2c66-456b-9618-6f18ba671118
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Sun Aug 12 17:53:39 UTC 2018,Sun Aug 12 17:55:51 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.45285833,-123.0612833,47.29999924,3.9,Sun Aug 12 17:53:00 UTC 2018,PM,WO,,200_yards_under_power 400yd_inthepath,200 yards under power,photo_y,info_yes,J17's,photo_y,behavior_y,1 tail slap,vwf_n,2,,Dka,,uuid:45498ac1-de40-4bab-83ba-2041a04e6d9c
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Aug 12 18:06:29 UTC 2018,Sun Aug 12 18:09:07 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.44320667,-123.036395,47.29999924,3.9,Sun Aug 12 18:06:00 UTC 2018,PM,F,,fishing_within200yds,fishing within200yds,photo_y,info_yes,J17's,photo_y,behavior_n,,vwf_n,2,,Dka,18 fishing vessels actively fishing in no go zone as whales pass through,uuid:01a48177-e66f-4fd5-a606-359bc15ec084
+Sun Aug 12 18:21:47 UTC 2018,Sun Aug 12 18:23:21 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.43797667,-123.01643,47.29999924,3.9,Sun Aug 12 18:22:00 UTC 2018,GW,E,,200_yards_under_power 400yd_inthepath,200 yards under power,photo_y,info_yes,J17's,photo_y,behavior_n,,vwf_n,2,klf_n,Dka,,uuid:81d9f5a0-a88a-43c7-94b5-983b2456f479
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Aug 12 18:56:32 UTC 2018,Sun Aug 12 18:58:47 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.448835,-123.0179483,83.40000153,3.9,Sun Aug 12 18:57:00 UTC 2018,PM,F,,400yd_inthepath,400yd inthepath,photo_y,info_yes,J16,photo_y,behavior_n,,vwf_n,2,,Dka,,uuid:758f07ca-7259-4c8b-b8ed-1ba2b94fad23
+Sun Aug 12 19:09:33 UTC 2018,Sun Aug 12 19:11:18 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.45373,-123.0361817,52,3.9,Sun Aug 12 19:09:00 UTC 2018,PM,F,,no_go_zone,no go zone,photo_y,info_yes,J16's,photo_y,behavior_unk,,vwf_n,2,,Dka,16 fishing vessels actively fishing in no go zone as whales pass through,uuid:59bb1bfd-6349-4e86-9c55-7caf4df0f224
+Sun Aug 12 20:36:08 UTC 2018,Sun Aug 12 20:37:22 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.50155833,-123.1531517,52,3.9,Sun Aug 12 20:36:00 UTC 2018,PM,T,,200_yards_under_power 400yd_inthepath no_go_zone,200 yards under power,photo_y,info_yes,J16's,photo_y,behavior_n,,vwf_n,1,,Dka,Fishing boat traveling on top of area with whales,uuid:c11b2ae3-46f4-4cf0-9096-4a50bf511472
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Sun Aug 12 20:42:58 UTC 2018,Sun Aug 12 20:44:39 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.50195333,-123.15473,52,3.9,Sun Aug 12 20:43:00 UTC 2018,PM,T,,200_yards_under_power 400yd_inthepath no_go_zone withinhalfmile_Limekiln Fast_withinquartermile_whales fast_departurewithin400yds,200 yards under power,photo_y,info_yes,J16's,photo_y,behavior_n,,vwf_n,1,,Dka,,uuid:ee539bb7-f52e-4093-be3c-7030ba857e45
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,withinhalfmile Limekiln,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+Sun Aug 12 22:18:37 UTC 2018,Sun Aug 12 22:19:47 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.50293,-123.1480767,-5.699999809,3.9,Sun Aug 12 22:18:00 UTC 2018,EK,WO,8-May,paddle_whale sprdkayaks_whale,paddle whale,photo_y,info_yes,J16's & j17's,photo_y,behavior_n,,vwf_n,1,klf_y,Dka,,uuid:ee654212-4046-45d6-b72c-82ac74e1ef80
+,,,,,,,,,,,,sprdkayaks whale,,,,,,,,,,,,
+Sun Aug 12 22:31:50 UTC 2018,Sun Aug 12 22:32:47 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.510795,-123.1550667,-3.799999952,3.9,Sun Aug 12 22:31:00 UTC 2018,EK,WO,5,paddle_whale sprdkayaks_whale,paddle whale,photo_y,info_yes,J16's & j17's,photo_y,behavior_n,,vwf_n,1,klf_y,Dka,,uuid:1db607ad-26e1-4d20-a0a6-b67618d8f131
+,,,,,,,,,,,,sprdkayaks whale,,,,,,,,,,,,
+Sun Aug 12 18:44:25 UTC 2018,Sun Aug 12 18:47:21 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.44341167,-123.013505,-5.400000095,1.17,Sun Aug 12 18:44:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath Fast_withinquartermile_whales,high speed within 400,photo_y,info_yes,J16's,photo_y,behavior_y,"Tail slap, pec slap, change of direction",vwf_n,2,,Dka,"Fishing boat, but no nets deployed",uuid:23f25b33-6a35-4540-a124-56e5b428456e
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Sun Aug 12 18:47:28 UTC 2018,Sun Aug 12 18:49:02 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.44603667,-123.014525,-8.600000382,1.22,Sun Aug 12 18:47:00 UTC 2018,PM,T,,high_speed_within_400 no_go_zone Fast_withinquartermile_whales,high speed within 400,photo_y,info_yes,J16's,photo_y,behavior_n,,vwf_n,2,,DkA,,uuid:61b11109-0bf5-4d95-8cb7-db3a677ffcef
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Sun Aug 12 18:55:42 UTC 2018,Sun Aug 12 18:59:09 UTC 2018,Sun Aug 12 00:00:00 UTC 2018,48.44845,-123.0175733,-6.900000095,1.15,Sun Aug 12 18:55:00 UTC 2018,PM,F,,200_yards_under_power travel_behind100_400yds,200 yards under power,photo_n,info_yes,J16,photo_y,behavior_n,,vwf_n,2,,Md,,uuid:7cb654f4-5f01-40fe-8770-f631b54cfe35
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sat Aug 18 19:52:06 UTC 2018,Sat Aug 18 20:51:51 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.304615,-123.600895,-11.7,10,Sat Aug 18 19:52:00 UTC 2018,PM,T,,high_speed_within_400 400yd_inthepath Fast_withinquartermile_whales fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_n,info_yes,J pod,photo_n,behavior_unk,,vwf_n,2,,LMY,,uuid:3a7eef19-8018-4bf8-b047-2c67d5d513ad
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sat Aug 18 19:56:27 UTC 2018,Sat Aug 18 19:58:15 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3053977,-123.6023523,-2.7,10,Sat Aug 18 19:57:00 UTC 2018,PM,F,,shutdown_within100yds fishing_within100yds,shutdown within100yds,photo_y,info_yes,J pod,photo_y,behavior_y,Deep dived,vwf_n,2,,LMY,,uuid:5a9e6a55-c4e9-4c1f-ad19-a25f7c8d8f39
+,,,,,,,,,,,,fishing within100yds,,,,,,,,,,,,
+Sat Aug 18 20:03:46 UTC 2018,Sat Aug 18 20:05:43 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3054614,-123.6023182,-25.6,10,Sat Aug 18 20:03:00 UTC 2018,PM,T,,200_yards_under_power Fast_withinquartermile_whales travel_behind100_400yds,200 yards under power,photo_y,info_yes,J pod male,photo_n,behavior_unk,Deep dived,,2,,LMY,,uuid:b6e53341-307f-4b14-9762-b74cc312d6ca
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sat Aug 18 20:08:49 UTC 2018,Sat Aug 18 20:10:16 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3064817,-123.60052,5.2,10,Sat Aug 18 20:09:00 UTC 2018,PM,F,,100_yards_under_power 400yd_inthepath fishing_within100yds,100 yards under power,photo_y,info_yes,Residents,photo_y,behavior_y,Deep long dive,vwf_n,2,,LMY,,uuid:f591ab10-e63d-4eec-b10f-7163c2cf34a9
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,fishing within100yds,,,,,,,,,,,,
+Sat Aug 18 20:18:11 UTC 2018,Sat Aug 18 20:20:02 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3027771,-123.5890215,4.3,10,Sat Aug 18 20:18:00 UTC 2018,PM,F,,400yd_inthepath shutdown_within100yds,400yd inthepath,photo_y,info_yes,Residents,photo_y,behavior_y,Spyhop,,1,,LMY,,uuid:a0114d2e-b486-42ac-947e-59ef1edaafc9
+,,,,,,,,,,,,shutdown within100yds,,,,,,,,,,,,
+Sat Aug 18 20:26:34 UTC 2018,Sat Aug 18 20:51:02 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3027359,-123.5807733,-1.7,10,Sat Aug 18 20:26:00 UTC 2018,PM,WO,,100_yards_under_power 400yd_inthepath travel_behind100_400yds,100 yards under power,photo_y,info_yes,J pod,photo_y,behavior_y,Tail slap,vwf_n,1,klf_n,LMY,,uuid:6fbc408c-a9e9-4d3b-ba73-a60dfa6c6025
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sat Aug 18 20:36:29 UTC 2018,Sat Aug 18 20:50:36 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3036917,-123.571875,18.4,10,Sat Aug 18 20:36:00 UTC 2018,PM,T,,high_speed_within_400 400yd_inthepath Fast_withinquartermile_whales withineighthmile_shore fast_departurewithin400yds,high speed within 400,photo_y,info_yes,J pod,photo_y,behavior_unk,,vwf_n,1,,LMY,,uuid:46b547f9-5a8d-4d95-8f95-50021aa3c5c5
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,withineighthmile shore,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+Sat Aug 18 20:49:11 UTC 2018,Sat Aug 18 20:50:16 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3060617,-123.5634983,1.1,10,Sat Aug 18 20:49:00 UTC 2018,PM,T,,high_speed_within_400 400yd_inthepath Fast_withinquartermile_whales,high speed within 400,photo_y,info_yes,J pod,photo_n,behavior_n,,,1,,LMY,,uuid:7e71a73e-8bc5-4759-ad9f-6021d65f4b36
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Sat Aug 18 21:03:12 UTC 2018,Sat Aug 18 21:04:49 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3075366,-123.5469876,13.3,10,Sat Aug 18 21:03:00 UTC 2018,PM,F,,400yd_inthepath,400yd inthepath,photo_y,info_yes,J pod,photo_y,behavior_unk,,vwf_n,2,klf_n,LMY,,uuid:e890fb9b-e466-4de5-8798-74effe2e3e92
+Sat Aug 18 21:04:53 UTC 2018,Sat Aug 18 21:07:10 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3055617,-123.5468633,0.4,10,Sat Aug 18 21:05:00 UTC 2018,PM,T,,shutdown_within200yds travel_behind100_400yds,shutdown within200yds,photo_y,info_yes,J pod,photo_n,behavior_n,,vwf_n,1,,LMY,,uuid:a13fc0e7-b62b-4936-8f75-98da73a222fd
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sat Aug 18 21:07:47 UTC 2018,Sat Aug 18 21:08:52 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.30427,-123.5460267,4.6,10,Sat Aug 18 21:07:00 UTC 2018,PM,F,,shutdown_within100yds fishing_within100yds,shutdown within100yds,photo_y,info_yes,J pod,photo_n,behavior_n,,,2,,LMY,,uuid:3eb71baf-7e2b-46ef-827b-11634c445a1d
+,,,,,,,,,,,,fishing within100yds,,,,,,,,,,,,
+Sat Aug 18 21:23:26 UTC 2018,Sat Aug 18 21:25:27 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3113183,-123.5280117,23.7,10.1,Sat Aug 18 21:23:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within100yds,400yd inthepath,photo_y,info_yes,J pod,photo_y,behavior_y,Deep dived to avoid,vwf_n,1,,LMY,,uuid:3d84d4c9-745c-488a-9c23-78734528ddea
+,,,,,,,,,,,,shutdown within100yds,,,,,,,,,,,,
+Sat Aug 18 21:43:38 UTC 2018,Sat Aug 18 21:45:02 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3165384,-123.5036641,18.4,10,Sat Aug 18 21:43:00 UTC 2018,PM,T,,high_speed_within_400 400yd_inthepath Fast_withinquartermile_whales fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_y,info_yes,J pod,photo_n,behavior_y,Deep longer dives,vwf_n,1,,LMY,Jet ski,uuid:0dc371bb-6005-4f27-abc3-7eb2415acfe7
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sat Aug 18 21:45:05 UTC 2018,Sat Aug 18 21:46:08 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3166533,-123.50259,15.7,10,Sat Aug 18 21:45:00 UTC 2018,PM,T,,high_speed_within_400 400yd_inthepath Fast_withinquartermile_whales fast_departurewithin400yds travel_behind100_400yds,high speed within 400,photo_y,info_yes,J pod,photo_n,behavior_y,Deep longer dive,vwf_n,1,,LMY,,uuid:436339f7-e600-42da-9bfd-a7088ae0ecf0
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Sat Aug 18 22:39:06 UTC 2018,Sat Aug 18 22:40:45 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.3370983,-123.44415,-2.1,11.6,Sat Aug 18 22:39:00 UTC 2018,EC,WO,,400yd_inthepath,400yd inthepath,photo_y,info_yes,J pod,photo_n,behavior_n,,vwf_n,3,,LMY,Sea King,uuid:6b1d1b2b-1aa7-4ecd-a1ef-0ca2c8765d57
+Sat Aug 18 21:02:55 UTC 2018,Sat Aug 18 21:04:54 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.30772833,-123.546805,15.89999962,0.79,Sat Aug 18 21:03:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,J,photo_y,behavior_n,,vwf_n,1,,MD,,uuid:b1af4373-0f2d-42ce-a80e-b84bec253d00
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Sat Aug 18 21:06:01 UTC 2018,Sat Aug 18 21:10:37 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.30504833,-123.546025,1.799999952,0.79,Sat Aug 18 21:06:00 UTC 2018,PM,T,,200_yards_under_power 400yd_inthepath,200 yards under power,photo_y,info_yes,J,photo_y,behavior_y,Deep dive,,,,MD,,uuid:81622263-6663-49fe-9b84-56fc1567674a
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sat Aug 18 21:24:20 UTC 2018,Sat Aug 18 21:26:11 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.31126,-123.5280417,0.1000000015,0.85,Sat Aug 18 21:24:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within100yds shutdown_within200yds,400yd inthepath,photo_y,info_yes,J,photo_y,behavior_n,,,2,,MD,It was jetski,uuid:a678309c-1f5e-49b5-a3e6-54165c200a34
+,,,,,,,,,,,,shutdown within100yds,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Sat Aug 18 21:41:01 UTC 2018,Sat Aug 18 21:42:37 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.31791,-123.5083433,-11.80000019,0.8,Sat Aug 18 21:41:00 UTC 2018,EC,WO,,100_yards_under_power,100 yards under power,,info_yes,J,photo_y,behavior_n,,,2,,MD,,uuid:73e9ca87-321a-4fb4-a5cb-649f6b41594c
+Sat Aug 18 22:45:10 UTC 2018,Sat Aug 18 22:46:48 UTC 2018,Sat Aug 18 00:00:00 UTC 2018,48.33859333,-123.4346733,3.400000095,0.94,Sat Aug 18 22:45:00 UTC 2018,EC,WO,,100_yards_under_power 400yd_inthepath,100 yards under power,photo_y,info_yes,J,photo_y,behavior_n,,,3,,MD,,uuid:8838d9f4-b570-407d-b739-f2b4b8bd2ad3
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sat Sep 01 22:42:25 UTC 2018,Sat Sep 01 22:44:29 UTC 2018,Sat Sep 01 00:00:00 UTC 2018,49.103125,-123.3410683,-5.199999809,0.84,Sat Sep 01 22:42:00 UTC 2018,PM,F,,shutdown_within100yds fishing_within100yds,shutdown within100yds,photo_n,info_yes,J pod male or L87,photo_n,behavior_unk,,vwf_n,1,klf_n,LMY,,uuid:98a6f33f-ab24-45fa-9425-af8e59b31f21
+,,,,,,,,,,,,fishing within100yds,,,,,,,,,,,,
+Sat Sep 01 20:54:10 UTC 2018,Sat Sep 01 20:55:27 UTC 2018,Sat Sep 01 00:00:00 UTC 2018,49.0136483,-123.2071733,-10.9,10,Sat Sep 01 20:54:00 UTC 2018,PM,T,,Fast_withinquartermile_whales,Fast withinquartermile whales,photo_y,info_yes,Js,photo_y,behavior_n,,vwf_n,2,,Dka,,uuid:36c63add-7965-47bb-8316-cb5c7573dafc
+Sat Sep 01 21:49:08 UTC 2018,Sat Sep 01 21:50:16 UTC 2018,Sat Sep 01 00:00:00 UTC 2018,49.0565149,-123.2859903,0.2,10,Sat Sep 01 21:49:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath Fast_withinquartermile_whales fast_departurewithin400yds,high speed within 400,photo_y,info_yes,L87 and unidentified Js,photo_y,behavior_y,Tail slap,vwf_n,2,,Dka,,uuid:cc894729-bdb3-43ac-8568-6a0055fb7994
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+Sun Sep 02 18:53:40 UTC 2018,Sun Sep 02 18:57:39 UTC 2018,Sun Sep 02 00:00:00 UTC 2018,48.609495,-123.2109233,-0.200000003,0.93,Sun Sep 02 18:53:00 UTC 2018,EU,WO,,200_yards_under_power 400yd_inthepath,200 yards under power,photo_n,info_yes,J pod,photo_n,behavior_n,,vwf_n,3,,Rw,Orca mist. Involved in second incident too,uuid:873cf959-0f9d-4488-94e9-62095dad0313
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Sep 02 18:57:54 UTC 2018,Sun Sep 02 19:01:02 UTC 2018,Sun Sep 02 00:00:00 UTC 2018,48.606095,-123.2083667,-6.099999905,0.96,Sun Sep 02 18:58:00 UTC 2018,EU,WO,,200_yards_under_power 400yd_inthepath,200 yards under power,photo_n,info_yes,J pod,photo_n,behavior_y,Porpoised,vwf_n,3,,Rw,Vessel didn't shutdownwhen whales came up close,uuid:3d7cce4b-2803-465b-8a2b-64e8336d3251
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Sun Sep 02 19:10:59 UTC 2018,Sun Sep 02 19:13:33 UTC 2018,Sun Sep 02 00:00:00 UTC 2018,48.58888,-123.2062317,-3.700000048,0.83,Sun Sep 02 19:11:00 UTC 2018,PM,WO,,200_yards_under_power,200 yards under power,photo_y,info_yes,J pod,photo_y,behavior_n,,vwf_n,1,,Rw,Poss no idea whale was there,uuid:cefdac0d-4de2-42e6-832b-cb7c2f523e7b
+Mon Sep 03 20:07:30 UTC 2018,Mon Sep 03 20:09:06 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.49345667,-123.14642,-6.400000095,0.88,Mon Sep 03 20:07:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath withinhalfmile_Limekiln Fast_withinquartermile_whales,high speed within 400,photo_y,info_yes,J and L pod,photo_n,behavior_unk,,vwf_n,2,,LMY,,uuid:40ef0442-c272-4a04-b8a8-45e2d163a20f
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,withinhalfmile Limekiln,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Mon Sep 03 20:09:20 UTC 2018,Mon Sep 03 20:11:18 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.496455,-123.1515483,-1.5,0.88,Mon Sep 03 20:09:00 UTC 2018,PS,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_n,info_yes,J 16s,photo_n,behavior_unk,,vwf_n,2,,LMY,,uuid:fc959abf-44af-49f4-9160-5dd1e9489528
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Mon Sep 03 20:11:25 UTC 2018,Mon Sep 03 20:28:52 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.50070167,-123.1572667,-1.600000024,0.88,Mon Sep 03 20:11:00 UTC 2018,PM,WO,,200_yards_under_power 400yd_inthepath no_go_zone shutdown_within200yds,200 yards under power,photo_y,info_yes,J and L pod,photo_y,behavior_unk,,vwf_n,2,klf_n,LMY,,uuid:7a8dc2c5-af0d-41f3-896e-46a1c280c1f9
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Mon Sep 03 20:13:38 UTC 2018,Mon Sep 03 20:14:48 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.50455,-123.1613683,-5.900000095,0.88,Mon Sep 03 20:13:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,J and L pod,photo_y,behavior_y,Deep dived,vwf_n,2,,LMY,,uuid:d552ae80-7611-489d-8b18-5efd5aef982c
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Mon Sep 03 20:14:53 UTC 2018,Mon Sep 03 20:28:03 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.50677,-123.1636017,2.900000095,0.88,Mon Sep 03 20:14:00 UTC 2018,PM,WO,,high_speed_within_400 400yd_inthepath no_go_zone shutdown_within200yds withinhalfmile_Limekiln,high speed within 400,photo_y,info_yes,J and L pod,photo_n,behavior_n,,vwf_n,2,klf_n,LMY,,uuid:c49e879c-fa73-4f39-adf0-3138e0e82cb4
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+,,,,,,,,,,,,withinhalfmile Limekiln,,,,,,,,,,,,
+Mon Sep 03 20:21:00 UTC 2018,Mon Sep 03 20:22:00 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.51803,-123.16902,-7.099999905,0.88,Mon Sep 03 20:21:00 UTC 2018,PM,T,,high_speed_within_400 400yd_inthepath Fast_withinquartermile_whales,high speed within 400,,info_yes,J and L pod,photo_y,behavior_unk,,vwf_n,2,,LMY,,uuid:dfdb2da0-9046-4f44-a2ee-93e8437d438a
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Mon Sep 03 20:22:39 UTC 2018,Mon Sep 03 20:24:17 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.52064833,-123.167925,-4.400000095,0.88,Mon Sep 03 20:22:00 UTC 2018,PM,WO,,200_yards_under_power 400yd_inthepath withineighthmile_shore travel_behind100_400yds,200 yards under power,photo_y,info_yes,J and L pod,photo_y,behavior_y,Moved inshore,vwf_n,2,,LMY,,uuid:c9f3642f-e6ca-4d4f-b7bd-ad56fcd8476d
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,withineighthmile shore,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Mon Sep 03 20:24:35 UTC 2018,Mon Sep 03 20:29:28 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.522535,-123.1637267,-3.5,0.88,Mon Sep 03 20:24:00 UTC 2018,PM,F,,400yd_inthepath shutdown_within200yds fishing_within200yds withineighthmile_shore,400yd inthepath,photo_y,info_yes,J and L pod,,behavior_unk,,vwf_n,2,,LMY,,uuid:5bcfee66-dd99-4e76-8ced-83b4aab971e9
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+,,,,,,,,,,,,fishing within200yds,,,,,,,,,,,,
+,,,,,,,,,,,,withineighthmile shore,,,,,,,,,,,,
+Mon Sep 03 22:54:02 UTC 2018,Mon Sep 03 22:55:37 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.68941,-123.2438733,79.90000153,1.22,Mon Sep 03 22:54:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,J16s,photo_y,behavior_y,"2TS, 1CW",vwf_n,2,klf_n,LMY,,uuid:2c1783cb-13d6-469c-aca4-6bdc714f4e54
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Wed Sep 05 19:03:00 UTC 2018,Wed Sep 05 19:03:50 UTC 2018,Wed Sep 05 00:00:00 UTC 2018,48.650835,-123.030895,-5,3.9,Wed Sep 05 19:03:00 UTC 2018,PM,WO,,200_yards_under_power,200 yards under power,photo_n,info_yes,L pod,photo_n,behavior_n,,vwf_n,3,,Dka,,uuid:298c447c-2088-43a4-9d8d-f3483ea1abb4
+Mon Sep 03 18:25:55 UTC 2018,Mon Sep 03 18:27:01 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.38295333,-123.07922,-7.900000095,0.97,Mon Sep 03 18:26:00 UTC 2018,PM,T,,Fast_withinquartermile_whales,Fast withinquartermile whales,photo_n,info_yes,J16s,photo_n,behavior_unk,,vwf_n,1,klf_n,LMY,,uuid:cf2f45f6-b04b-412a-8ddd-051a49b00b79
+Mon Sep 03 18:52:24 UTC 2018,Mon Sep 03 18:53:36 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.39458,-123.120265,-8,0.96,Mon Sep 03 18:52:00 UTC 2018,PM,T,,Fast_withinquartermile_whales,Fast withinquartermile whales,photo_n,info_yes,J16s,photo_n,behavior_unk,,vwf_n,1,,LMY,,uuid:67f76c4b-a8b2-410e-bf3a-c56347705d84
+Mon Sep 03 19:06:27 UTC 2018,Mon Sep 03 19:07:28 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.41816333,-123.12532,-10.30000019,0.84,Mon Sep 03 19:06:00 UTC 2018,PM,WO,,200_yards_under_power 400yd_inthepath,200 yards under power,photo_y,info_yes,L pod,photo_n,behavior_unk,,vwf_n,3,klf_n,LMY,,uuid:b962e728-1ee5-4ef4-b830-8ab9c4ea1a0f
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Mon Sep 03 19:39:55 UTC 2018,Mon Sep 03 19:41:25 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.46759333,-123.1071917,-12.19999981,0.77,Mon Sep 03 19:40:00 UTC 2018,PM,T,,Fast_withinquartermile_whales,Fast withinquartermile whales,photo_n,info_yes,L and J pod,photo_n,behavior_unk,,vwf_n,2,,LMY,,uuid:3ac7964e-5434-4300-a6b7-c81ec1eb4afc
+Mon Sep 03 19:43:28 UTC 2018,Mon Sep 03 19:45:01 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.475835,-123.1109167,-8.800000191,0.83,Mon Sep 03 19:43:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power 400yd_inthepath shutdown_within200yds travel_behind100_400yds,high speed within 400,photo_y,info_yes,J and L pod,photo_y,behavior_y,Changed direction,vwf_n,1,klf_n,LMY,,uuid:0520971f-fd01-49ce-adf2-efdeb53c1ba2
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Mon Sep 03 20:50:44 UTC 2018,Mon Sep 03 20:51:42 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.54956667,-123.17637,-1,0.84,Mon Sep 03 20:50:00 UTC 2018,PM,T,,high_speed_within_400,high speed within 400,photo_y,info_yes,J and L pod,photo_n,behavior_n,,vwf_n,2,klf_n,LMY,,uuid:3fb70577-a840-424d-8799-56cc4dbc7482
+Mon Sep 03 20:51:51 UTC 2018,Mon Sep 03 20:54:19 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.55115667,-123.1767033,2.799999952,0.84,Mon Sep 03 20:51:00 UTC 2018,PM,WO,,shutdown_within200yds,shutdown within200yds,photo_y,info_yes,J and L pod,photo_y,behavior_n,,vwf_n,2,klf_n,LMY,,uuid:b4965e6e-1a46-4b08-b0c6-9bf1f77c84e3
+Mon Sep 03 20:54:58 UTC 2018,Mon Sep 03 20:56:29 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.55296167,-123.177035,0.5,0.85,Mon Sep 03 20:55:00 UTC 2018,PM,WO,,shutdown_within200yds,shutdown within200yds,photo_y,info_yes,J and L pod,photo_y,behavior_n,,vwf_n,2,klf_n,LMY,,uuid:c14868b5-3edb-4de1-8b95-cb6220a4bed7
+Mon Sep 03 20:59:34 UTC 2018,Mon Sep 03 21:02:40 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.55901833,-123.1804967,-11.60000038,0.86,Mon Sep 03 20:59:00 UTC 2018,PM,WO,,400yd_inthepath no_go_zone shutdown_within200yds,400yd inthepath,photo_y,info_yes,J and L pod,photo_y,behavior_n,,vwf_n,2,klf_n,LMY,,uuid:099e3c97-4836-40cd-a87d-36f594f3e0ff
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Fri Sep 07 21:22:26 UTC 2018,Fri Sep 07 21:23:44 UTC 2018,Fri Sep 07 00:00:00 UTC 2018,48.4369317,-122.9797683,-22.3,10,Fri Sep 07 21:22:00 UTC 2018,PM,T,,no_go_zone Fast_withinquartermile_whales fast_departurewithin400yds,no go zone,photo_n,info_yes,J pod,photo_n,behavior_unk,,vwf_n,1,klf_n,LMY,,uuid:ab0e1deb-a422-454f-9f54-f8c602d8fabd
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+Fri Sep 07 23:50:38 UTC 2018,Fri Sep 07 23:52:35 UTC 2018,Fri Sep 07 00:00:00 UTC 2018,48.5177559,-123.1676471,-11.5,10,Fri Sep 07 23:50:00 UTC 2018,PM,WO,,400yd_inthepath no_go_zone shutdown_within200yds withinhalfmile_Limekiln,400yd inthepath,photo_y,info_yes,J50,photo_n,behavior_y,Pushed offshore,vwf_n,1,,LMY,,uuid:88cf6fb4-53fb-44b1-8938-fc61911e34d4
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+,,,,,,,,,,,,withinhalfmile Limekiln,,,,,,,,,,,,
+Mon Sep 03 22:06:51 UTC 2018,Mon Sep 03 22:09:00 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.63431667,-123.2251633,-23.29999924,0.83,Mon Sep 03 22:06:00 UTC 2018,PS,T,,high_speed_within_400 400yd_inthepath,high speed within 400,photo_y,info_yes,J and L pod,photo_n,behavior_unk,,vwf_n,2,klf_n,LMY,,uuid:6333318c-99d5-4332-a100-c19de04d8ecb
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Fri Sep 07 00:33:56 UTC 2018,Fri Sep 07 00:35:02 UTC 2018,Fri Sep 07 00:00:00 UTC 2018,48.5680917,-123.1962617,-17.5,10,Fri Sep 07 00:34:00 UTC 2018,PM,WO,,withineighthmile_shore,withineighthmile shore,photo_y,info_yes,J16's,photo_y,behavior_n,,vwf_n,1,klf_n,LMY,,uuid:ad85fa19-7567-4380-8214-ea2c4d4fd59c
+Mon Sep 03 22:14:43 UTC 2018,Mon Sep 03 22:16:23 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.64472833,-123.226065,-5.800000191,0.78,Mon Sep 03 22:14:00 UTC 2018,PS,T,,,,photo_y,info_yes,J16s,photo_y,behavior_n,,vwf_n,2,klf_n,LMY,,uuid:e0dd3684-a18e-4e0b-b158-a8ea84eb7e5b
+Mon Sep 03 21:11:27 UTC 2018,Mon Sep 03 21:13:48 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.57159833,-123.192485,3.200000048,0.84,Mon Sep 03 21:11:00 UTC 2018,PK,T,1,400yd_inthepath paddle_whale no_go_zone,400yd inthepath,photo_y,info_yes,J and L pod,photo_y,behavior_n,,vwf_n,2,klf_n,LMY,,uuid:8feb5549-6b59-4bc4-9eb8-3af475de7077
+,,,,,,,,,,,,paddle whale,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Mon Sep 03 21:23:11 UTC 2018,Mon Sep 03 21:28:59 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.58227833,-123.20572,19.60000038,0.93,Mon Sep 03 21:23:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,J16s,photo_y,behavior_y,Deep dived,vwf_y,2,klf_n,LMY,,uuid:51e95df8-b2fa-439f-a12b-6366d6e09713
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Mon Sep 03 21:25:13 UTC 2018,Mon Sep 03 21:29:20 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.58477333,-123.2066617,9.300000191,0.93,Mon Sep 03 21:25:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,J16s,photo_y,behavior_y,Deep dived,vwf_n,3,klf_n,LMY,,uuid:a955869e-5d32-4083-adf9-6727d9f3f13d
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Mon Sep 03 21:26:41 UTC 2018,Mon Sep 03 21:28:03 UTC 2018,Mon Sep 03 00:00:00 UTC 2018,48.58638,-123.2070967,-11.5,0.93,Mon Sep 03 21:26:00 UTC 2018,PM,WO,,400yd_inthepath shutdown_within200yds,400yd inthepath,photo_y,info_yes,J16s,photo_y,behavior_y,Deep dived,vwf_n,3,klf_n,LMY,,uuid:af12a10f-37fe-430d-87ba-e6df4af94f33
+,,,,,,,,,,,,shutdown within200yds,,,,,,,,,,,,
+Tue Sep 11 19:06:35 UTC 2018,Tue Sep 11 19:08:07 UTC 2018,Tue Sep 11 00:00:00 UTC 2018,48.94713667,-123.0641483,-3.400000095,3.9,Tue Sep 11 19:06:00 UTC 2018,EC,T,,Fast_withinquartermile_whales fast_departurewithin400yds,Fast withinquartermile whales,photo_n,info_yes,Js,photo_n,behavior_n,,vwf_n,2,,Dka,,uuid:98ae7c3e-292a-4334-8d6d-2e493b358d22
+,,,,,,,,,,,,fast departurewithin400yds,,,,,,,,,,,,
+Wed Sep 12 19:57:07 UTC 2018,Wed Sep 12 19:58:15 UTC 2018,Wed Sep 12 00:00:00 UTC 2018,48.647695,-122.6876233,27.10000038,3.9,Wed Sep 12 19:57:00 UTC 2018,PM,WO,,200_yards_under_power 400yd_inthepath,200 yards under power,photo_y,info_yes,L pod,photo_y,behavior_n,,vwf_n,1,klf_n,LMY,,uuid:dcd088ef-9a51-44cc-a337-32701b223175
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+Wed Sep 12 20:43:20 UTC 2018,Wed Sep 12 20:44:23 UTC 2018,Wed Sep 12 00:00:00 UTC 2018,48.57337167,-122.7513667,27.10000038,3.9,Wed Sep 12 20:43:00 UTC 2018,PM,WO,,200_yards_under_power 400yd_inthepath travel_behind100_400yds,200 yards under power,photo_y,info_yes,J and L pod,photo_n,behavior_unk,,vwf_n,1,,LMY,,uuid:60362885-1283-4a29-9bac-14978b0b3c28
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Thu Sep 13 20:24:34 UTC 2018,Thu Sep 13 22:06:13 UTC 2018,Thu Sep 13 00:00:00 UTC 2018,48.29190833,-123.4024317,-5,3.9,Thu Sep 13 20:25:00 UTC 2018,EC,WO,,200_yards_under_power 400yd_inthepath travel_behind100_400yds,200 yards under power,photo_n,info_yes,J35,photo_n,behavior_y,1 tail slap,vwf_n,1,,Dka,Ocean magic,uuid:ade90567-c675-4fe2-9431-e569adfdf006
+,,,,,,,,,,,,400yd inthepath,,,,,,,,,,,,
+,,,,,,,,,,,,travel behind100 400yds,,,,,,,,,,,,
+Thu Sep 13 22:04:32 UTC 2018,Thu Sep 13 22:05:31 UTC 2018,Thu Sep 13 00:00:00 UTC 2018,48.39093333,-123.2041217,-6.900000095,3.9,Thu Sep 13 22:04:00 UTC 2018,EU,T,,high_speed_within_400,high speed within 400,photo_n,info_yes,J and K,photo_n,behavior_n,,vwf_n,1,klf_n,Dka,IE5,uuid:f7044e28-5081-455c-9e38-64e17ebfc198
+Thu Sep 13 00:33:50 UTC 2018,Thu Sep 13 00:35:14 UTC 2018,Thu Sep 13 00:00:00 UTC 2018,,,,,Thu Sep 13 00:33:00 UTC 2018,EC,WO,,200_yards_under_power,200 yards under power,photo_n,info_yes,Ks,photo_n,behavior_n,,vwf_n,1,,Dka,"Off of False Bay, K-Ko",uuid:f3d98c28-b442-4e5a-a95f-67093393be0a
+Sun Sep 23 20:47:51 UTC 2018,Sun Sep 23 21:14:42 UTC 2018,Sun Sep 23 00:00:00 UTC 2018,48.45057333,-123.0410417,-13.39999962,0.83,Sun Sep 23 21:13:00 UTC 2018,PM,WO,,400yd_inthepath,400yd inthepath,photo_y,info_yes,J26,photo_y,behavior_n,,vwf_n,1,,Adn,,uuid:3e4a728a-24ad-4b6e-8431-1dcac2e2387a
+Sun Sep 23 21:37:32 UTC 2018,Sun Sep 23 21:40:54 UTC 2018,Sun Sep 23 00:00:00 UTC 2018,48.45936833,-123.0809883,-1.700000048,1.07,Sun Sep 23 21:37:00 UTC 2018,PM,F,,no_go_zone fishing_within200yds,no go zone,photo_y,info_yes,J pod,,behavior_unk,,vwf_n,2,,Adn,21 fishing boats off eagle point when whales are present,uuid:3683d662-900e-48fa-a082-1189220aa844
+,,,,,,,,,,,,fishing within200yds,,,,,,,,,,,,
+Sun Sep 23 22:11:36 UTC 2018,Sun Sep 23 22:14:20 UTC 2018,Sun Sep 23 00:00:00 UTC 2018,48.487835,-123.1196617,-24,0.89,Sun Sep 23 22:11:00 UTC 2018,EC,WO,,no_go_zone,no go zone,photo_n,info_yes,J,photo_n,behavior_unk,,vwf_n,1,,Adn,Orca spirit adventures zodiac,uuid:36ebdee4-3cc1-4a72-81a1-60088e1e2d60
+Mon Sep 24 18:37:17 UTC 2018,Mon Sep 24 18:40:15 UTC 2018,Mon Sep 24 00:00:00 UTC 2018,48.47647667,-123.1059383,-22.79999924,0.79,Mon Sep 24 18:37:00 UTC 2018,PM,T,,high_speed_within_400 200_yards_under_power no_go_zone,high speed within 400,photo_y,info_yes,J,photo_y,behavior_unk,,vwf_n,2,,Adn,,uuid:a7d29e82-76ec-40b7-aecf-676d16a2db0f
+,,,,,,,,,,,,200 yards under power,,,,,,,,,,,,
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+Mon Sep 24 19:23:12 UTC 2018,Mon Sep 24 19:25:12 UTC 2018,Mon Sep 24 00:00:00 UTC 2018,48.45859,-123.0615883,25.10000038,0.81,Mon Sep 24 19:23:00 UTC 2018,PM,F,,no_go_zone fishing_within200yds withineighthmile_shore,no go zone,photo_y,,J pod,photo_y,behavior_unk,,vwf_n,2,klf_n,TGS,14 vessels within No Go Zone,uuid:41b73f36-6243-47e1-85b4-e7805c290cc4
+,,,,,,,,,,,,fishing within200yds,,,,,,,,,,,,
+,,,,,,,,,,,,withineighthmile shore,,,,,,,,,,,,
+Mon Sep 24 19:36:39 UTC 2018,Mon Sep 24 19:38:06 UTC 2018,Mon Sep 24 00:00:00 UTC 2018,48.45656333,-123.0558033,7.599999905,0.86,Mon Sep 24 19:36:00 UTC 2018,PM,T,,no_go_zone Fast_withinquartermile_whales,no go zone,photo_n,info_yes,J pod,photo_n,behavior_unk,,vwf_n,3,klf_n,Adn,,uuid:4968b680-2bbb-441a-8e3c-b4862d3ae596
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Mon Sep 24 20:16:16 UTC 2018,Mon Sep 24 20:17:46 UTC 2018,Mon Sep 24 00:00:00 UTC 2018,48.43861,-123.02085,-28.20000076,0.94,Mon Sep 24 20:16:00 UTC 2018,PM,T,,high_speed_within_400 no_go_zone Fast_withinquartermile_whales,high speed within 400,photo_y,info_yes,J pod,photo_y,behavior_unk,,vwf_n,4,klf_n,TGS,,uuid:aa783392-e694-4771-ad35-e3c24ee7717f
+,,,,,,,,,,,,no go zone,,,,,,,,,,,,
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Mon Sep 24 20:22:06 UTC 2018,Mon Sep 24 20:22:57 UTC 2018,Mon Sep 24 00:00:00 UTC 2018,48.43725833,-123.0127167,-25.60000038,0.84,Mon Sep 24 20:22:00 UTC 2018,PM,T,,no_go_zone Fast_withinquartermile_whales,no go zone,photo_n,,J,photo_n,behavior_n,,vwf_n,3,klf_n,Adn,,uuid:0e426db9-704f-4abf-a438-a3a5cdbacdde
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Mon Sep 24 20:26:48 UTC 2018,Mon Sep 24 20:27:44 UTC 2018,Mon Sep 24 00:00:00 UTC 2018,48.43817667,-123.0056683,-2.400000095,0.84,Mon Sep 24 20:26:00 UTC 2018,PM,T,,no_go_zone Fast_withinquartermile_whales,no go zone,photo_n,info_yes,J,photo_n,behavior_n,,vwf_n,3,,Adn,,uuid:b23002c3-c619-43eb-b472-b5bfcb8b5d57
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Mon Sep 24 22:11:24 UTC 2018,Mon Sep 24 22:13:13 UTC 2018,Mon Sep 24 00:00:00 UTC 2018,48.501505,-123.1484633,-7.900000095,0.83,Mon Sep 24 22:11:00 UTC 2018,EC,WO,,no_go_zone,no go zone,photo_y,info_yes,J pod,photo_n,behavior_n,,vwf_n,3,klf_n,TGS,Maruder IV,uuid:504d55b5-3190-41bb-93d0-2a5751a7e592
+Mon Sep 24 20:22:15 UTC 2018,Mon Sep 24 20:23:17 UTC 2018,Mon Sep 24 00:00:00 UTC 2018,48.43723833,-123.0124333,-4,3.9,Mon Sep 24 20:22:00 UTC 2018,PM,T,,no_go_zone Fast_withinquartermile_whales,no go zone,photo_n,info_yes,J pod,photo_n,behavior_unk,,vwf_n,2,klf_n,TGS,,uuid:283e4432-38da-4509-9b19-fa16857d14f0
+,,,,,,,,,,,,Fast withinquartermile whales,,,,,,,,,,,,
+Mon Sep 24 20:48:49 UTC 2018,Mon Sep 24 20:49:49 UTC 2018,Mon Sep 24 00:00:00 UTC 2018,48.45219667,-123.03489,-1.899999976,3.9,Mon Sep 24 20:48:00 UTC 2018,PM,F,,no_go_zone fishing_within200yds,no go zone,photo_n,info_yes,J,photo_n,behavior_y,Tail slap,vwf_n,2,klf_n,TGS,,uuid:d66763aa-d102-4259-b73c-788891af0c19
+,,,,,,,,,,,,fishing within200yds,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,
+,,,Total # of violations,,474,**excluding unknown,,,,,100 yrds,11,,,,,,,,,,,,
+,,,,,,,,,,,200 yrds,54,,,,,,,,,,,,
+,,,,,,,,,,,300 yrds,0,,,,,,,,,,,,
+,,,,,,,,,,,400 yrds,0,,,,,,,,,,,,
+,,,# Boat counts,,332,(from 2018 Boat Count form),,,,,in the path,110,,,,,,,,,,,,
+,,,,,,,,,,,inshore,0,,,,,,,,,,,,
+,,,,,,,,,,,drone,0,,,,,,,,,,,,
+,,,,,,,,,,,fast approach,0,,,,,,,,,,,,
+,,,Overall rate,,2.855421687,,,,,,fast departure,22,,,,,,,,,,,,
+,,,,,,,,,,,high speed w/in 400,52,,,,,,,,,,,,
+,,,,,,,,,,,fast w/in quarter mile,54,,,,,,,,,,,,
+,,,,,,,,,,,fishing 100y,4,,,,,,,,,,,,
+,,,,,,,,,,,fishing 200y,7,,,,,,,,,,,,
+,,,,,,,,,,,fishing inshore,0,,,,,,,,,,,,
+,,,,,,,,,,,paddling,5,,,,,,,,,,,,
+,,,,,,,,,,,kayaks outside ngz,0,,,,,,,,,,,,
+,,,,,,,,,,,spread kayaks w/ whales,2,,,,,,,,,,,,
+,,,,,,,,,,,offshore whales,0,,,,,,,,,,,,
+,,,,,,,,,,,shutdown within 100 yrd,9,,,,,,,,,,,,
+,,,,,,,,,,,shutdown within 200 yrd,41,,,,,,,,,,,,
+,,,,,,,,,,,sji ngz,54,,,,,,,,,,,,
+,,,,,,,,,,,travel behind,31,,,,,,,,,,,,
+,,,,,,,,,,,within 1/8 mi,11,,,,,,,,,,,,
+,,,,,,,,,,,within 1/2 mi LK,7,,,,,,,,,,,,
+,,,,,,,,,,,aircraft under1000ft,0,,,,,,,,,,,,
+,,,,,,,,,,,unknown,1,,,,,,,,,,,,
+,,,,,,,,,,,within 200 refuge,0,,,,,,,,,,,,

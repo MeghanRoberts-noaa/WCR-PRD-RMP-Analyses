@@ -1,0 +1,562 @@
+date,fishery_type,treaty,fish,entire a7?,notes,fraser_panel
+2012-08-02,net,yes,sockeye,yes,,yes
+2012-08-01,purse seine,no,sockeye,yes,,yes
+2012-08-01,gillnet,no,sockeye,yes,,yes
+2012-08-01,reef net,no,sockeye,yes,,yes
+2012-08-04,net,yes,sockeye,yes,,yes
+2012-08-07,net,yes,sockeye,yes,,yes
+2012-08-08,net,yes,sockeye,yes,,yes
+2012-08-10,purse seine,no,sockeye,yes,,yes
+2012-08-11,reef net,no,sockeye,yes,,yes
+2012-08-09,gillnet,no,sockeye,yes,,yes
+2013-08-25,net,yes,sockeye/pink,no,,yes
+2013-08-26,net,yes,sockeye/pink,no,,yes
+2013-08-24,reef net,no,nr sockeye/pink,yes,,yes
+2013-08-25,reef net,no,nr sockeye/pink,yes,,yes
+2013-08-27,purse seine,no,nr sockeye/pink,no,,yes
+2013-08-27,gillnet,no,nr sockeye/pink,no,,yes
+2013-08-28,net,yes,sockeye/pink,no,,yes
+2013-08-29,net,yes,sockeye/pink,no,,yes
+2013-08-28,purse seine,yes,nr sockeye/pink,no,,yes
+2013-08-29,purse seine,yes,nr sockeye/pink,no,,yes
+2013-08-28,gillnet,yes,sockeye/pink,no,,yes
+2013-08-29,gillnet,yes,sockeye/pink,no,,yes
+2013-08-28,reef net,no,nr sockeye/pink,yes,,yes
+2013-08-29,reef net,no,nr sockeye/pink,yes,,yes
+2013-08-30,reef net,no,nr sockeye/pink,yes,,yes
+2013-08-30,purse seine,no,nr sockeye/pink,no,,yes
+2013-08-30,gillnet,no,nr sockeye/pink,no,,yes
+2013-08-31,net,yes,sockeye/pink,no,,yes
+2013-09-01,net,yes,sockeye/pink,no,,yes
+2013-09-03,net,yes,sockeye/pink,no,,yes
+2013-08-31,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-01,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-02,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-03,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-02,purse seine,no,nr sockeye/pink,no,,yes
+2013-09-02,gillnet,no,nr sockeye/pink,no,,yes
+2013-09-04,net,yes,sockeye/pink,yes,,yes
+2013-09-06,net,yes,sockeye/pink,yes,,yes
+2013-09-04,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-05,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-06,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-05,purse seine,no,nr sockeye/pink,yes,,yes
+2013-09-05,gillnet,no,nr sockeye/pink,yes,,yes
+2013-09-07,net,yes,sockeye/pink,yes,,yes
+2013-09-08,net,yes,sockeye/pink,yes,,yes
+2013-09-10,net,yes,sockeye/pink,yes,,yes
+2013-09-07,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-08,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-09,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-10,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-09,purse seine,no,nr sockeye/pink,yes,,yes
+2013-09-09,gillnet,no,nr sockeye/pink,yes,,yes
+2013-09-11,net,yes,sockeye/pink,yes,,yes
+2013-09-12,net,yes,sockeye/pink,yes,,yes
+2013-09-11,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-12,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-13,reef net,no,nr sockeye/pink,yes,,yes
+2013-09-13,purse seine,no,nr sockeye/pink,yes,,yes
+2013-09-13,gillnet,no,nr sockeye/pink,yes,,yes
+2013-09-14,net,yes,sockeye/pink,yes,,yes
+2013-09-15,net,yes,sockeye/pink,yes,,yes
+2013-09-16,net,yes,sockeye/pink,yes,,yes
+2013-09-17,net,yes,sockeye/pink,yes,* only open until noon,yes
+2013-09-14,reef net,no,nr sockeye/pink,yes,,yes
+2014-08-07,net,yes,sockeye,yes,,yes
+2014-08-08,net,yes,sockeye,yes,,yes
+2014-08-09,purse seine,no,sockeye,yes,,yes
+2014-08-09,gillnet,no,sockeye,yes,,yes
+2014-08-10,reef net,no,sockeye,yes,,yes
+2014-08-10,net,yes,sockeye,yes,,yes
+2014-08-11,net,yes,sockeye,yes,,yes
+2014-08-12,purse seine,no,sockeye,yes,,yes
+2014-08-12,gillnet,no,sockeye,yes,,yes
+2014-08-11,reef net,no,sockeye,yes,,yes
+2014-08-13,net,yes,sockeye,yes,,yes
+2014-08-15,net,yes,sockeye,yes,,yes
+2014-08-14,purse seine,no,sockeye,yes,,yes
+2014-08-14,gillnet,no,socke,yes,,yes
+2014-08-13,reef net,no,sockeye,yes,,yes
+2014-08-16,net,yes,sockeye,yes,,yes
+2014-08-17,net,yes,sockeye,yes,,yes
+2014-08-19,net,yes,sockeye,yes,,yes
+2014-08-18,purse seine,no,sockeye,yes,,yes
+2014-08-18,gillnet,no,sockeye,yes,,yes
+2014-08-18,reef net,no,sockeye,yes,,yes
+2014-08-20,net,yes,sockeye,yes,,yes
+2014-08-21,purse seine,no,sockeye,yes,,yes
+2014-08-21,gillnet,no,sockeye,yes,,yes
+2014-08-21,reef net,no,sockeye,yes,,yes
+2014-08-23,net,yes,sockeye,yes,,yes
+2014-08-24,net,yes,sockeye,yes,,yes
+2014-08-25,purse seine,no,sockeye,yes,,yes
+2014-08-25,gillnet,no,sockeye,yes,,yes
+2014-08-23,reef net,no,sockeye,yes,,yes
+2014-08-24,reef net,no,sockeye,yes,,yes
+2014-08-25,reef net,no,sockeye,yes,,yes
+2014-08-27,net,yes,sockeye,yes,,yes
+2014-08-28,net,yes,sockeye,yes,,yes
+2014-08-29,net,yes,sockeye,yes,,yes
+2014-08-27,reef net,no,sockeye,yes,,yes
+2014-08-28,reef net,no,sockeye,yes,,yes
+2014-08-30,net,yes,sockeye,yes,,yes
+2014-09-02,net,yes,sockeye,yes,,yes
+2014-08-31,purse seine,no,sockeye,yes,,yes
+2014-09-01,gillnet,no,sockeye,yes,,yes
+2014-08-30,reef net,no,sockeye,yes,,yes
+2014-09-01,reef net,no,sockeye,yes,,yes
+2014-09-02,reef net,no,sockeye,yes,,yes
+2014-09-03,net,yes,sockeye,yes,,yes
+2014-09-04,net,yes,sockeye,yes,,yes
+2014-09-05,purse seine,no,sockeye,yes,,yes
+2014-09-05,gillnet,no,sockeye,yes,,yes
+2014-09-03,reef net,no,sockeye,yes,,yes
+2014-09-04,reef net,no,sockeye,yes,,yes
+2014-09-05,reef net,no,sockeye,yes,,yes
+2014-09-07,net,yes,sockeye,yes,,yes
+2014-09-08,net,yes,sockeye,yes,,yes
+2014-09-09,net,yes,sockeye,yes,,yes
+2014-09-06,purse seine,no,sockeye,yes,,yes
+2014-09-06,gillnet,no,sockeye,yes,,yes
+2014-09-06,reef net,no,sockeye,yes,,yes
+2014-09-07,reef net,no,sockeye,yes,,yes
+2014-09-08,reef net,no,sockeye,yes,,yes
+2014-09-09,reef net,no,sockeye,yes,,yes
+2014-09-10,net,yes,sockeye,yes,,yes
+2014-09-11,net,yes,sockeye,yes,,yes
+2014-09-12,net,yes,sockeye,yes,,yes
+2014-09-13,purse seine,no,sockeye,yes,,yes
+2014-09-13,gillnet,no,sockeye,yes,,yes
+2014-09-10,reef net,no,sockeye,yes,,yes
+2014-09-11,reef net,no,sockeye,yes,,yes
+2014-09-12,reef net,no,sockeye,yes,,yes
+2014-09-13,net,yes,sockeye,yes,,yes
+2014-09-14,net,yes,sockeye,yes,,yes
+2014-09-15,net,yes,sockeye,yes,,yes
+2014-09-16,net,yes,sockeye,yes,,yes
+2014-09-17,net,yes,sockeye,yes,,yes
+2014-09-18,net,yes,sockeye,yes,,yes
+2014-09-19,net,yes,sockeye,yes,,yes
+2014-09-20,net,yes,sockeye,yes,,yes
+2014-09-13,gillnet,no,sockeye,yes,,yes
+2014-09-14,gillnet,no,sockeye,yes,,yes
+2014-09-15,gillnet,no,sockeye,yes,,yes
+2014-09-16,gillnet,no,sockeye,yes,,yes
+2014-09-17,gillnet,no,sockeye,yes,,yes
+2014-09-18,gillnet,no,sockeye,yes,,yes
+2014-09-19,gillnet,no,sockeye,yes,,yes
+2014-09-20,gillnet,no,sockeye,yes,,yes
+2014-09-24,net,yes,sockeye,no,7a,yes
+2014-09-25,net,yes,sockeye,no,7a,yes
+2014-09-26,net,yes,sockeye,no,7a,yes
+2014-09-27,net,yes,sockeye,no,7a,yes
+2014-09-24,purse seine,no,sockeye,no,7a,yes
+2014-09-24,gillnet,no,sockeye,no,7a,yes
+2015-08-01,net,yes,sockeye/pink,yes,,yes
+2015-08-02,net,yes,sockeye/pink,yes,,yes
+2015-08-01,reef net,no,sockeye/pink,yes,,yes
+2015-08-02,purse seine,no,sockeye/pink,yes,,yes
+2015-08-02,gillnet,no,sockeye/pink,yes,,yes
+2015-08-06,net,yes,scoekye/pink,yes,,yes
+2015-08-06,reef net,no,sockeye/pink,yes,,yes
+2015-08-05,purse seine,no,sockeye/pink,yes,,yes
+2015-08-06,purse seine,no,sockeye/pink,yes,,yes
+2015-08-05,gillnet,no,sockeye/pink,yes,,yes
+2015-08-06,gillnet,no,sockeye/pink,yes,,yes
+2015-08-09,net,yes,sockeye/pink,yes,,yes
+2015-08-10,net,yes,sockeye/pink,yes,,yes
+2015-08-08,reef net,no,sockeye/pink,yes,,yes
+2015-08-08,purse seine,no,sockeye/pink,yes,,yes
+2015-08-08,gillnet,no,sockeye/pink,yes,,yes
+2015-08-27,net,yes,sockeye/pink,yes,,yes
+2015-08-28,net,yes,sockeye/pink,yes,,yes
+2015-08-26,reef net,no,sockeye/pink,yes,,yes
+2015-08-27,reef net,no,sockeye/pink,yes,,yes
+2015-08-25,purse seine,no,sockeye/pink,yes,,yes
+2015-08-26,purse seine,no,sockeye/pink,yes,,yes
+2015-08-25,gillnet,no,sockeye/pink,yes,,yes
+2015-08-26,gillnet,no,sockeye/pink,yes,,yes
+2015-08-31,net,yes,sockeye/pink,yes,,yes
+2015-08-30,reef net,no,sockeye/pink,yes,,yes
+2015-08-31,reef net,no,sockeye/pink,yes,,yes
+2015-08-30,purse seine,no,sockeye/pink,yes,,yes
+2015-08-30,gillnet,no,sockeye/pink,yes,,yes
+2015-09-01,reef net,no,sockeye/pink,yes,,yes
+2015-09-01,purse seine,no,sockeye/pink,yes,,yes
+2015-09-01,gillnet,no,sockeye/pink,yes,,yes
+2017-08-23,reef net,no,sockeye/pink,yes,,yes
+2017-08-24,reef net,no,sockeye/pink,yes,,yes
+2017-08-25,reef net,no,sockeye/pink,yes,,yes
+2017-08-26,reef net,yes,sockeye/pink,yes,,yes
+2017-08-25,purse seine,yes,sockeye/pink,yes,,yes
+2017-08-25,gillnet,yes,sockeye/pink,yes,,yes
+2017-08-25,reef net,no,sockeye/pink,yes,,yes
+2017-08-26,reef net,no,sockeye/pink,yes,,yes
+2017-08-29,purse seine,yes,sockeye/pink,yes,,yes
+2017-08-30,purse seine,yes,sockeye/pink,yes,,yes
+2017-08-29,gillnet,yes,sockeye/pink,yes,,yes
+2017-08-30,gillnet,yes,sockeye/pink,yes,,yes
+2017-08-29,reef net,yes,sockeye/pink,yes,,yes
+2017-08-30,reef net,yes,sockeye/pink,yes,,yes
+2017-08-29,purse seine,no,nr sockeye/pink,yes,,yes
+2017-08-29,gillnet,no,nr sockeye/pink,yes,,yes
+2017-08-29,reef net,no,nr sockeye/pink,yes,,yes
+2017-08-30,reef net,no,nr sockeye/pink,yes,,yes
+2017-09-01,net,yes,sockeye/pink,yes,,yes
+2017-09-02,net,yes,sockeye/pink,yes,,yes
+2017-09-03,net,yes,sockeye/pink,yes,,yes
+2017-09-01,reef net,yes,sockeye/pink,yes,,yes
+2017-09-02,reef net,yes,sockeye/pink,yes,,yes
+2017-09-03,reef net,yes,sockeye/pink,yes,,yes
+2017-09-01,purse seine,no,nr sockeye/pink,yes,,yes
+2017-09-02,purse seine,no,nr sockeye/pink,yes,,yes
+2017-09-03,purse seine,no,nr sockeye/pink,yes,,yes
+2017-09-01,gillnet,no,nr sockeye/pink,yes,,yes
+2017-09-02,gillnet,no,nr sockeye/pink,yes,,yes
+2017-09-03,gillnet,no,nr sockeye/pink,yes,,yes
+2017-09-01,reef net,no,nr sockeye/pink,yes,,yes
+2017-09-02,reef net,no,nr sockeye/pink,yes,,yes
+2017-09-03,reef net,no,nr sockeye/pink,yes,,yes
+2017-09-01,beach seine,no,nr sockeye/pink,yes,,yes
+2017-09-02,beach seine,no,nr sockeye/pink,yes,,yes
+2017-09-03,beach seine,no,nr sockeye/pink,yes,,yes
+2018-08-02,net,yes,sockeye,yes,,yes
+2018-08-03,net,yes,sockeye,yes,,yes
+2018-08-04,net,yes,sockeye,yes,,yes
+2018-08-03,purse seine,no,sockeye,yes,,yes
+2018-08-03,gillnet,no,sockeye,yes,,yes
+2018-08-06,reef net,no,sockeye,yes,,yes
+2018-08-07,net,yes,sockeye,yes,,yes
+2018-08-08,net,yes,sockeye,yes,,yes
+2018-08-06,purse seine,no,sockeye,yes,,yes
+2018-08-06,gillnet,no,sockeye,yes,,yes
+2018-08-08,reef net,no,sockeye,yes,,yes
+2018-08-09,purse seine,no,sockeye,yes,,yes
+2018-08-09,gillnet,no,sockeye,yes,,yes
+2018-08-09,reef net,no,sockeye,yes,,yes
+2018-08-15,net,yes,sockeye,yes,,yes
+2018-08-16,net,yes,sockeye,yes,,yes
+2018-08-17,purse seine,no,sockeye,yes,,yes
+2018-08-17,gillnet,no,sockeye,yes,,yes
+2018-08-18,reef net,no,sockeye,yes,,yes
+2018-08-24,net,yes,sockeye,yes,,yes
+2019-08-21,reef net,yes,nr sockeye/pink,yes,,yes
+2019-08-22,reef net,yes,nr sockeye/pink,yes,,yes
+2019-08-21,gillnet,yes,nr sockeye/pink,yes,,yes
+2019-08-22,gillnet,yes,nr sockeye/pink,yes,,yes
+2019-08-21,purse seine,yes,nr sockeye/pink,yes,,yes
+2019-08-22,purse seine,yes,nr sockeye/pink,yes,,yes
+2019-08-25,reef net,yes,nr sockeye/pink,yes,,yes
+2019-08-26,reef net,yes,nr sockeye/pink,yes,,yes
+2019-08-25,reef net,no,nr sockeye/pink,yes,,yes
+2019-08-26,reef net,no,nr sockeye/pink,yes,,yes
+2019-08-24,purse seine,no,nr sockeye/pink,yes,,yes
+2019-08-25,purse seine,no,nr sockeye/pink,yes,,yes
+2019-08-24,gillnet,no,nr sockeye/pink,yes,,yes
+2019-08-25,gillnet,no,nr sockeye/pink,yes,,yes
+2019-09-13,reef net,yes,nr sockeye/pink,yes,,yes
+2019-09-14,reef net,yes,nr sockeye/pink,yes,,yes
+2019-09-15,gillnet,yes,nr sockeye/pink,yes,,yes
+2019-09-16,gillnet,yes,nr sockeye/pink,yes,,yes
+2019-09-15,purse seine,yes,nr sockeye/pink,yes,,yes
+2019-09-16,purse seine,yes,nr sockeye/pink,yes,,yes
+2019-09-13,reef net,no,nr sockeye/pink,yes,,yes
+2019-09-14,reef net,no,nr sockeye/pink,yes,,yes
+2019-09-13,purse seine,no,nr sockeye/pink,yes,,yes
+2019-09-13,gillnet,no,nr sockeye/pink,yes,,yes
+2019-09-13,purse seine,no,nr sockeye/pink,no,7a,yes
+2019-09-14,purse seine,no,nr sockeye/pink,no,7a,yes
+2019-09-13,gillnet,no,nr sockeye/pink,no,7a,yes
+2019-09-14,gillnet,no,nr sockeye/pink,no,7a,yes
+2021-08-23,reef net,no,nr sockeye/pink,yes,,yes
+2021-08-27,purse seine,no,nr sockeye/pink,no,no Apex,yes
+2021-08-27,gillnet,no,nr sockeye/pink,no,no Apex,yes
+2021-08-29,net,yes,nr sockeye/pink,no,look at report,yes
+2021-08-31,purse seine,no,nr sockeye/pink,no,look at report,yes
+2021-08-31,gillnet,no,nr sockeye/pink,no,look at report,yes
+2021-08-31,reef net,no,nr sockeye/pink,yes,,yes
+2021-08-31,net,yes,nr sockeye/pink,no,look at report,yes
+2021-09-01,net,yes,nr sockeye/pink,no,look at report,yes
+2021-09-01,purse seine,no,nr sockeye/pink,no,look at report,yes
+2021-09-01,gillnet,no,nr sockeye/pink,no,look at report,yes
+2021-09-01,reef net,no,nr sockeye/pink,yes,,yes
+2021-09-04,net,yes,nr sockeye/pink,no,look at report,yes
+2021-09-05,net,yes,nr sockeye/pink,no,look at report,yes
+2021-09-06,net,yes,nr sockeye/pink,no,look at report,yes
+2021-09-08,net,yes,nr sockeye/pink,no,look at report,yes
+2021-09-09,net,yes,nr sockeye/pink,no,look at report,yes
+2021-09-11,net,yes,nr sockeye/pink,no,look at report,yes
+2021-09-12,net,yes,nr sockeye/pink,no,look at report,yes
+2021-09-11,reef net,no,nr sockeye/pink,yes,,yes
+2021-09-12,reef net,no,nr sockeye/pink,yes,,yes
+2021-09-14,reef net,no,nr sockeye/pink,yes,,yes
+2021-09-15,reef net,no,nr sockeye/pink,yes,,yes
+2021-09-15,reef net,no,nr sockeye/pink,yes,,yes
+2021-09-16,reef net,no,nr sockeye/pink,yes,,yes
+2021-09-17,reef net,no,nr sockeye/pink,yes,,yes
+2022-08-13,net,yes,sockeye,yes,,yes
+2022-08-13,reef net,no,sockeye,yes,,yes
+2022-08-14,net,yes,sockeye,yes,,yes
+2022-08-15,net,yes,sockeye,yes,,yes
+2022-08-16,net,yes,sockeye,yes,,yes
+2022-08-17,net,yes,sockeye,yes,,yes
+2022-08-21,net,yes,sockeye,yes,,yes
+2022-08-20,purse seine,no,sockeye,yes,,yes
+2022-08-20,gillnet,no,sockeye,yes,,yes
+2014-09-21,reef net,no,m_coho/m_chinook/sockeye,yes,,no
+2014-09-22,reef net,no,m_coho/m_chinook/sockeye,yes,,no
+2014-09-23,reef net,no,m_coho/m_chinook/sockeye,yes,,no
+2014-09-24,reef net,no,m_coho/m_chinook/sockeye,yes,,no
+2014-09-25,reef net,no,m_coho/m_chinook/sockeye,yes,,no
+2014-09-26,reef net,no,m_coho/m_chinook/sockeye,yes,,no
+2014-09-27,reef net,no,m_coho/m_chinook/sockeye,yes,,no
+2014-09-28,reef net,no,m_coho/m_chinook/sockeye,yes,,no
+2014-09-29,reef net,no,m_coho/m_chinook/sockeye,yes,,no
+2014-09-30,reef net,no,m_coho/m_chinook/sockeye,yes,,no
+2015-09-09,reef net,no,sockeye/pink/coho/chinook/chum,yes,,no
+2015-09-10,reef net,no,sockeye/pink/coho/chinook/chum,yes,,no
+2015-09-11,reef net,no,sockeye/pink/coho/chinook/chum,yes,,no
+2015-09-12,reef net,no,sockeye/pink/coho/chinook/chum,yes,,no
+2015-09-13,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-14,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-15,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-16,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-17,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-18,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-19,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-20,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-21,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-22,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-23,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-24,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-25,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-26,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-27,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-28,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-29,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-30,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2015-09-27,reef net,yes,sockeye/pink/m_coho/m_chinook,yes,,no
+2016-09-04,reef net,no,sockeye/chinook/chum/coho,yes,,no
+2016-09-05,reef net,no,sockeye/chinook/chum/coho,yes,,no
+2016-09-06,reef net,no,sockeye/chinook/chum/coho,yes,,no
+2016-09-07,reef net,no,sockeye/chinook/chum/coho,yes,,no
+2016-09-08,reef net,no,sockeye/chinook/chum/coho,yes,,no
+2016-09-09,reef net,no,sockeye/chinook/chum/coho,yes,,no
+2016-09-10,reef net,no,sockeye/chinook/chum/coho,yes,,no
+2016-09-11,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-12,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-13,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-14,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-15,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-16,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-17,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-18,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-19,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-20,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-21,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-22,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-23,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-24,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-25,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-26,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-27,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-28,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-29,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2016-09-30,reef net,no,sockeye/m_chinook/m_coho,yes,,no
+2017-08-28,gillnet,no,atlantic_salmon,no,,no
+2017-08-29,gillnet,no,atlantic_salmon,no,,no
+2017-08-30,gillnet,no,atlantic_salmon,no,,no
+2017-08-31,gillnet,no,atlantic_salmon,no,,no
+2017-09-01,gillnet,no,atlantic_salmon,no,,no
+2017-09-02,gillnet,no,atlantic_salmon,no,,no
+2017-09-03,gillnet,no,atlantic_salmon,no,,no
+2017-09-04,gillnet,no,atlantic_salmon,no,,no
+2017-08-28,beach_seine,no,atlantic_salmon,no,,no
+2017-08-29,beach_seine,no,atlantic_salmon,no,,no
+2017-08-30,beach_seine,no,atlantic_salmon,no,,no
+2017-08-31,beach_seine,no,atlantic_salmon,no,,no
+2017-09-01,beach_seine,no,atlantic_salmon,no,,no
+2017-09-02,beach_seine,no,atlantic_salmon,no,,no
+2017-09-03,beach_seine,no,atlantic_salmon,no,,no
+2017-09-04,beach_seine,no,atlantic_salmon,no,,no
+2017-09-06,gillnet,no,atlantic_salmon,no,,no
+2017-09-07,gillnet,no,atlantic_salmon,no,,no
+2017-09-08,gillnet,no,atlantic_salmon,no,,no
+2017-09-09,gillnet,no,atlantic_salmon,no,,no
+2017-09-06,beach_seine,no,atlantic_salmon,no,,no
+2017-09-07,beach_seine,no,atlantic_salmon,no,,no
+2017-09-08,beach_seine,no,atlantic_salmon,no,,no
+2017-09-09,beach_seine,no,atlantic_salmon,no,,no
+2017-09-10,gillnet,no,atlantic_salmon,no,,no
+2017-09-11,gillnet,no,atlantic_salmon,no,,no
+2017-09-12,gillnet,no,atlantic_salmon,no,,no
+2017-09-10,beach_seine,no,atlantic_salmon,no,,no
+2017-09-11,beach_seine,no,atlantic_salmon,no,,no
+2017-09-12,beach_seine,no,atlantic_salmon,no,,no
+2017-09-24,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2017-09-25,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2017-09-26,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2017-09-27,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2017-09-28,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2017-09-29,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2017-09-30,reef net,no,sockeye/pink/m_coho/m_chinook,yes,,no
+2018-09-16,reef net,no,m_coho/m_chinook,yes,,no
+2018-09-19,reef net,no,m_coho/m_chinook,yes,,no
+2018-09-20,reef net,no,m_coho/m_chinook,yes,,no
+2018-09-21,reef net,no,m_coho/m_chinook,yes,,no
+2018-09-22,reef net,no,m_coho/m_chinook,yes,,no
+2018-09-23,reef net,no,m_coho/m_chinook,yes,,no
+2018-09-24,reef net,no,m_coho/m_chinook,yes,,no
+2018-09-25,reef net,no,m_coho/m_chinook,yes,,no
+2018-09-26,reef net,no,m_coho/m_chinook,yes,,no
+2018-09-27,reef net,no,m_coho/m_chinook,yes,,no
+2018-09-28,reef net,no,m_coho/m_chinook,yes,,no
+2018-09-29,reef net,no,m_coho/m_chinook,yes,,no
+2018-09-30,reef net,no,m_coho/m_chinook/sockeye,yes,,no
+2019-09-22,reef net,no,m_coho/m_chinook/pink,yes,,no
+2019-09-23,reef net,no,m_coho/m_chinook/pink,yes,,no
+2019-09-24,reef net,no,m_coho/m_chinook/pink,yes,,no
+2019-09-25,reef net,no,m_coho/m_chinook/pink,yes,,no
+2019-09-26,reef net,no,m_coho/m_chinook/pink,yes,,no
+2019-09-27,reef net,no,m_coho/m_chinook/pink,yes,,no
+2019-09-28,reef net,no,m_coho/m_chinook/pink,yes,,no
+2019-09-29,reef net,no,m_coho/m_chinook/pink,yes,,no
+2019-09-30,reef net,no,m_coho/m_chinook/pink,yes,,no
+2020-09-13,reef net,no,coho/m_chinook,yes,,no
+2020-09-14,reef net,no,coho/m_chinook,yes,,no
+2020-09-15,reef net,no,coho/m_chinook,yes,,no
+2020-09-16,reef net,no,coho/m_chinook,yes,,no
+2020-09-17,reef net,no,coho/m_chinook,yes,,no
+2020-09-18,reef net,no,coho/m_chinook,yes,,no
+2020-09-19,reef net,no,coho/m_chinook,yes,,no
+2020-09-20,reef net,no,coho/m_chinook,yes,,no
+2020-09-21,reef net,no,coho/m_chinook,yes,,no
+2020-09-22,reef net,no,coho/m_chinook,yes,,no
+2020-09-23,reef net,no,coho/m_chinook,yes,,no
+2020-09-24,reef net,no,coho/m_chinook,yes,,no
+2020-09-25,reef net,no,coho/m_chinook,yes,,no
+2020-09-26,reef net,no,coho/m_chinook,yes,,no
+2020-09-27,reef net,no,coho/m_chinook,yes,,no
+2020-09-28,reef net,no,coho/m_chinook,yes,,no
+2020-09-29,reef net,no,coho/m_chinook,yes,,no
+2020-09-30,reef net,no,coho/m_chinook,yes,,no
+2021-09-11,reef net,no,pink/coho/chinook,yes,,no
+2021-09-12,reef net,no,pink/coho/chinook,yes,,no
+2021-09-19,reef net,no,pink/coho/chinook,yes,,no
+2021-09-20,reef net,no,pink/coho/chinook,yes,,no
+2021-09-21,reef net,no,pink/coho/chinook,yes,,no
+2021-09-22,reef net,no,pink/coho/chinook,yes,,no
+2021-09-23,reef net,no,pink/coho/chinook,yes,,no
+2021-09-24,reef net,no,pink/coho/chinook,yes,,no
+2021-09-25,reef net,no,pink/coho/chinook,yes,,no
+2021-09-26,reef net,no,coho,yes,,no
+2021-09-27,reef net,no,coho,yes,,no
+2021-09-28,reef net,no,coho,yes,,no
+2021-09-29,reef net,no,coho,yes,,no
+2021-09-30,reef net,no,coho,yes,,no
+2022-09-11,reef net,no,coho/m_chinook,yes,,no
+2022-09-12,reef net,no,coho/m_chinook,yes,,no
+2022-09-13,reef net,no,coho/m_chinook,yes,,no
+2022-09-14,reef net,no,coho/m_chinook,yes,,no
+2022-09-15,reef net,no,coho/m_chinook,yes,,no
+2022-09-16,reef net,no,coho/m_chinook,yes,,no
+2022-09-17,reef net,no,coho/m_chinook,yes,,no
+2022-09-18,reef net,no,coho/m_chinook,yes,,no
+2022-09-19,reef net,no,coho/m_chinook,yes,,no
+2022-09-20,reef net,no,coho/m_chinook,yes,,no
+2022-09-21,reef net,no,coho/m_chinook,yes,,no
+2022-09-22,reef net,no,coho/m_chinook,yes,,no
+2022-09-23,reef net,no,coho/m_chinook,yes,,no
+2022-09-24,reef net,no,coho/m_chinook,yes,,no
+2022-09-25,reef net,no,m_coho/m_chinook,yes,,no
+2022-09-26,reef net,no,m_coho/m_chinook,yes,,no
+2022-09-27,reef net,no,m_coho/m_chinook,yes,,no
+2022-09-28,reef net,no,m_coho/m_chinook,yes,,no
+2022-09-29,reef net,no,m_coho/m_chinook,yes,,no
+2022-09-30,reef net,no,m_coho/m_chinook,yes,,no
+2023-08-20,net,yes,pink ,yes,,yes
+2023-08-23,net,yes,nr sockeye/pink,yes,,yes
+2023-08-24,net,yes,nr sockeye/pink,yes,,yes
+2023-08-25,net,yes,nr sockeye/pink,yes,,yes
+2023-08-24,purse seine,no,nr sockeye/pink,yes,,yes
+2023-08-25,purse seine,no,nr sockeye/pink,yes,,yes
+2023-08-23,reef net,no,nr sockeye/pink,yes,,yes
+2023-08-24,reef net,no,nr sockeye/pink,yes,,yes
+2023-08-25,reef net,no,nr sockeye/pink,yes,,yes
+2023-08-24,gillnet,no,nr sockeye/pink,yes,,yes
+2023-08-25,gillnet,no,nr sockeye/pink,yes,,yes
+2023-08-26,net,yes,nr sockeye/pink,yes,,yes
+2023-08-27,net,yes,nr sockeye/pink,yes,,yes
+2023-08-28,net,yes,nr sockeye/pink,yes,,yes
+2023-08-29,net,yes,nr sockeye/pink,yes,,yes
+2023-08-30,net,yes,nr sockeye/pink,yes,,yes
+2023-08-27,purse seine,no,nr sockeye/pink,yes,,yes
+2023-08-28,purse seine,no,nr sockeye/pink,yes,,yes
+2023-08-29,purse seine,no,nr sockeye/pink,yes,,yes
+2023-08-26,gillnet,no,nr sockeye/pink,yes,,yes
+2023-08-27,gillnet,no,nr sockeye/pink,yes,,yes
+2023-08-28,gillnet,no,nr sockeye/pink,yes,,yes
+2023-08-29,gillnet,no,nr sockeye/pink,yes,,yes
+2023-08-26,reef net,no,nr sockeye/pink,yes,,yes
+2023-08-27,reef net,no,nr sockeye/pink,yes,,yes
+2023-08-28,reef net,no,nr sockeye/pink,yes,,yes
+2023-08-29,reef net,no,nr sockeye/pink,yes,,yes
+2023-08-30,net,yes,nr sockeye/pink,yes,,yes
+2023-08-31,net,yes,nr sockeye/pink,yes,,yes
+2023-09-01,net,yes,nr sockeye/pink,yes,,yes
+2023-09-02,net,yes,nr sockeye/pink,yes,,yes
+2023-08-30,purse seine,no,nr sockeye/pink,yes,,yes
+2023-08-31,purse seine,no,nr sockeye/pink,yes,,yes
+2023-09-01,purse seine,no,nr sockeye/pink,yes,,yes
+2023-08-30,gillnet,no,nr sockeye/pink,yes,,yes
+2023-08-31,gillnet,no,nr sockeye/pink,yes,,yes
+2023-09-01,gillnet,no,nr sockeye/pink,yes,,yes
+2023-08-30,reef net,no,nr sockeye/pink,yes,,yes
+2023-08-31,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-01,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-02,net,yes,nr sockeye/pink,yes,,yes
+2023-09-03,net,yes,nr sockeye/pink,yes,,yes
+2023-09-04,net,yes,nr sockeye/pink,yes,,yes
+2023-09-05,net,yes,nr sockeye/pink,yes,,yes
+2023-09-02,purse seine,no,nr sockeye/pink,yes,,yes
+2023-09-03,purse seine,no,nr sockeye/pink,yes,,yes
+2023-09-04,purse seine,no,nr sockeye/pink,yes,,yes
+2023-09-05,purse seine,no,nr sockeye/pink,yes,,yes
+2023-09-02,gillnet,no,nr sockeye/pink,yes,,yes
+2023-09-03,gillnet,no,nr sockeye/pink,yes,,yes
+2023-09-04,gillnet,no,nr sockeye/pink,yes,,yes
+2023-09-05,gillnet,no,nr sockeye/pink,yes,,yes
+2023-09-02,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-03,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-04,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-05,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-06,net,yes,nr sockeye/pink,yes,,yes
+2023-09-07,net,yes,nr sockeye/pink,yes,,yes
+2023-09-08,net,yes,nr sockeye/pink,yes,,yes
+2023-09-06,purse seine,no,nr sockeye/pink,yes,,yes
+2023-09-07,purse seine,no,nr sockeye/pink,yes,,yes
+2023-09-08,purse seine,no,nr sockeye/pink,yes,,yes
+2023-09-06,gillnet,no,nr sockeye/pink,yes,,yes
+2023-09-07,gillnet,no,nr sockeye/pink,yes,,yes
+2023-09-08,gillnet,no,nr sockeye/pink,yes,,yes
+2023-09-06,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-07,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-08,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-09,net,yes,nr sockeye/pink,yes,,yes
+2023-09-10,net,yes,nr sockeye/pink,yes,,yes
+2023-09-11,net,yes,nr sockeye/pink,yes,,yes
+2023-09-12,net,yes,nr sockeye/pink,yes,,yes
+2023-09-09,purse seine,no,nr sockeye/pink,yes,,yes
+2023-09-10,purse seine,no,nr sockeye/pink,yes,,yes
+2023-09-11,purse seine,no,nr sockeye/pink,yes,,yes
+2023-09-12,purse seine,no,nr sockeye/pink,yes,,yes
+2023-09-09,gillnet,no,nr sockeye/pink,yes,,yes
+2023-09-10,gillnet,no,nr sockeye/pink,yes,,yes
+2023-09-11,gillnet,no,nr sockeye/pink,yes,,yes
+2023-09-12,gillnet,no,nr sockeye/pink,yes,,yes
+2023-09-09,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-10,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-11,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-12,reef net,no,nr sockeye/pink,yes,,yes
+2023-09-13,net,yes,nr sockeye/pink,yes,,yes

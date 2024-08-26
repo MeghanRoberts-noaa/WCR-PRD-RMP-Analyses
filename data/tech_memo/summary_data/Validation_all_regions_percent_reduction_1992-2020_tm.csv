@@ -1,0 +1,16 @@
+TimeStep,Scenario,avg_percent_reduction_Salish,avg_percent_reduction_OR,avg_percent_reduction_NOF,avg_percent_reduction_Cali,avg_percent_reduction_SWWCVI
+Jul_Sep,ZeroBC,8.73,1.43,6.34,0.06,10.79
+Jul_Sep,ZeroPFMC,1.07,15.93,6.34,36.34,3.4
+Jul_Sep,ZeroPS,5.12,0.04,0.3,0,1.17
+Jul_Sep,ZeroSEAK,1.54,0.9,4.58,0.03,4.59
+Jul_Sep,ZeroUS,7.97,16.86,11.59,36.38,9.41
+May_Jun,ZeroBC,4.55,0.21,1.02,0.03,2.36
+May_Jun,ZeroPFMC,1.15,6.81,2.67,20.99,1.95
+May_Jun,ZeroPS,1.35,0.03,0.23,0,0.94
+May_Jun,ZeroSEAK,0.76,0.05,0.26,0.01,0.82
+May_Jun,ZeroUS,3.28,6.89,3.16,21,3.73
+Oct_Apr,ZeroBC,1.63,0.17,0.48,0.03,0.55
+Oct_Apr,ZeroPFMC,0.06,2.77,0.99,5.49,0.56
+Oct_Apr,ZeroPS,1.99,0.01,0.12,0,0.08
+Oct_Apr,ZeroSEAK,0.31,0.07,0.26,0.06,0.35
+Oct_Apr,ZeroUS,2.35,2.85,1.37,5.55,0.99

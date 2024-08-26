@@ -1,0 +1,1002 @@
+---
+title: "SRKW Sightings During and After Recreational Fishing"
+author: "Meghan Roberts"
+date: "2023-10-20"
+output: html_document
+---
+
+```{r setup, include=FALSE, echo=TRUE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+library(here)
+library(janitor)
+library(tidyverse)
+library(leaflet)
+library(dplyr)
+library(lubridate)
+library(remotes)
+library(leaflet.extras)
+library(readr)
+library(sf)
+library(rmapshaper)
+library(writexl)
+```
+## Summary Finding
+**There seems to be no clear change in where SRKW are found when the recreational Chinook fishery in MA 7 open as opposed to when it is closed.** 
+
+It is difficult to determine if we would be able to detect any changes in SRKW sighting location given the small number of days in which the SRKW and recreational fisheries have overlapped in recent years. There were only two days of overlap in 2019 and 2021, five days in 2022 and twenty days in 2020. In years prior to 2019, it would be difficult to compare SRKW distribution when the fishery was open as compared to closed since the fishery was open for several months at a time and it would be difficult to say whether changes in SRKW sightings were due to the fishery or seasonal habitat use changes. There is co-occurrence of vessels and SRKW in MA 7 when fishing has been open in 2019, 2020 and 2022.
+
+## SRKW Sightings by Year
+### 2022
+
+In 2022, the recreational Chinook fishery in MA 7 was open for nine days total. It was structured as three, three day long openers. The dates were July 13-15, July 21-23, and July 28-30. There were no vessel incidents between boaters and SRKWs in this time frame.
+
+All sightings data for when the fishery is open comes from four days: July 13th (Wednesday), July 23rd (Saturday), July 28th (Thursday) and July 29th (Friday). Whereas, the sightings data for when the fishery is closed comes three days: August 4th (Thursday), August 5th (Friday) and August 6th (Saturday).
+
+This map demonstrates how SRKW sightings occur in different locations when the recreational fishery is open as compared to when it is closed. Specifically, the region south of San Juan Island has more sightings when the fishery is closed compared to when it is open. But it is possible, given the limited number of days with SRKW sightings, that this difference is random and not attributed to the fishery presence.
+
+Aerial survey data was filtered to only include the days when SRKW were present in MA 7. On these days, vessels are present in the same regions as SRKW.
+
+```{r, fig.align='center'}
+#specifically rec fishing in MA 7
+sightings<-read_csv(here("data","srkw_sightings.csv")) %>% 
+  clean_names()
+## next lines are commented out because they were used once to fix mistakes in the fishery_status df
+# fishery_status<-read_csv(here("data","fishery_status_incorrect.csv"))
+# fishery_status[843, 3] = "closed"
+# fishery_status[846, 3] = "open"
+# write.csv(fishery_status, here("data", "fishery_status.csv"), row.names=FALSE)
+fishery_status<-read_csv(here("data","fishery_status.csv"))
+fishery_open_2022<-fishery_status %>% 
+  filter(year==2022) %>% 
+  filter(fishery_status=="open")
+fishery_closed_2022<-fishery_status %>% 
+  filter(year==2022) %>% 
+  filter(fishery_status=="closed")
+aerial_survey<-read_csv(here("data","aerial_data.csv")) %>% 
+  clean_names()
+aerial_survey$survey_date <- as.Date(aerial_survey$survey_datetime)
+
+#making a new dataframe of closed days (same n as open) that can be looked at representatively
+date<-c("2022-06-30", "2022-07-01", "2022-07-02", "2022-07-06", "2022-07-07", "2022-07-08", "2022-08-04", "2022-08-05", "2022-08-06")
+compare_days_2022<-data.frame(date = date)
+compare_days_2022$date<-as.Date(compare_days_2022$date)
+compare_days_2022$year<-2022
+compare_days_2022$fishery_status<-"open"
+sightings_filter<-sightings %>% 
+  filter(year==2022) %>% 
+  filter(act_lat!=0.00000) %>% 
+  filter(fish_area==7) %>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+
+sightings_filter$sight_date <- as.Date(sightings_filter$sight_date, format = "%m/%d/%Y")
+SRKW_fishery_open_2022<-fishery_open_2022 %>% 
+  left_join(sightings_filter, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+# SRKW_fishery_closed_2022<-fishery_closed_2022 %>% 
+#   left_join(sightings_filter, by = c("date" = "sight_date"))%>% 
+#   filter(!(is.na(pod) & is.na(likely_pod)))
+SRKW_fishery_closed_2022<-compare_days_2022 %>% 
+  left_join(sightings_filter, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+
+aerial_2022_open <- aerial_survey[aerial_survey$survey_date %in% SRKW_fishery_open_2022$date, ]
+aerial_2022_closed <- aerial_survey[aerial_survey$survey_date %in% SRKW_fishery_closed_2022$date, ]
+
+# # Create a Leaflet map for the open data
+# map_2022 <- leaflet(SRKW_fishery_open_2022) %>%
+#   addTiles() %>%
+#   addCircleMarkers(
+#     lng = ~act_long,
+#     lat = ~act_lat,
+#     group = "Open",  # Add a group for open data
+#     color = "blue",
+#   clusterOptions = markerClusterOptions()  # Enable marker clustering
+#   )
+# 
+# map_2022 <- leaflet(aerial_2022_open) %>%
+#   addTiles() %>%
+#   addCircleMarkers(
+#     lng = ~longitude_decimal_degrees_wgs84,
+#     lat = ~latitude_decimal_degrees_wgs84,
+#     group = "Open",  # Add a group for open data
+#     color="red",
+#   clusterOptions = markerClusterOptions()  # Enable marker clustering
+#   )
+# 
+# map_2022 <- map_2022 %>% addCircleMarkers(
+#   data = SRKW_fishery_closed_2022,
+#   lng = ~act_long,
+#   lat = ~act_lat,
+#   group = "Closed",
+#  # fillColor = "blue",
+#   clusterOptions = markerClusterOptions()  # Enable marker clustering
+# )
+# 
+# # Add a layer control to toggle between open and closed data
+# map_2022 <- map_2022 %>% addLayersControl(
+#   baseGroups = c("Open", "Closed"),
+#   options = layersControlOptions(collapsed = FALSE)
+# )
+# 
+# 
+# # Display the map
+# map_2022
+```
+
+
+```{r}
+## Creating a static map to show boat and whale hotspots
+# Create a grid
+library(sf)
+library(sp)
+library(raster)
+# Convert the data frame to an sf object
+aerial_2022_open_sf <- st_as_sf(aerial_2022_open, coords = c("longitude_decimal_degrees_wgs84", "latitude_decimal_degrees_wgs84"), crs = 4326)
+SRKW_fishery_open_2022_sf<- st_as_sf(SRKW_fishery_open_2022, coords = c("act_long", "act_lat"), crs = 4326)
+
+grid_2022 <- raster(extent(aerial_2022_open_sf), ncol = 20, nrow = 20)
+grid_counts_aerial_2022 <- rasterize(aerial_2022_open_sf, grid_2022, field = 1, fun = "count")
+grid_df_a_2022 <- as.data.frame(grid_counts_aerial_2022, xy = TRUE)
+grid_counts_SRKW_2022 <- rasterize(SRKW_fishery_open_2022_sf, grid_2022, field = 1, fun = "count")
+grid_df_SRKW_2022 <- as.data.frame(grid_counts_SRKW_2022, xy = TRUE)
+
+# Rename the columns for compatibility with ggplot
+colnames(grid_df_a_2022) <- c("lon", "lat", "count")
+colnames(grid_df_SRKW_2022) <- c("lon", "lat", "count")
+
+san_juan <- st_read(here("data", "shapefiles", "San_Juan", "county.shp")) %>% 
+  filter(COUNTY=="SAN JUAN")
+
+# Create a ggplot visualization with grid_df
+plot <- ggplot() +
+   geom_sf(data = san_juan, fill = "darkgreen", color = "darkgreen", size = 1) +  # Add the shapefile
+  geom_point(data = grid_df_a_2022, aes(x = lon, y = lat, size = count, color = "Vessels"), alpha = 0.5) +
+  geom_point(data = grid_df_SRKW_2022, aes(x = lon, y = lat, size = count, color = "SRKW"), alpha = 0.5) +
+  scale_color_manual(values = c("Vessels" = "red", "SRKW" = "black")) +  # Set custom colors
+  scale_size_continuous(
+    range = c(5, 20),
+    breaks = c(1, 5, 10, 15, 30, 45),  # Specify the desired break points
+    name = "Number"
+  ) +
+  labs(title = "Overlap of SRKW and Vessels in MA 7") +
+  theme_minimal() +
+  coord_quickmap() +  # Adjust aspect ratio
+  coord_sf()
+
+# Add a legend
+plot + guides(
+  color = guide_legend(title = "Dataset"),
+  size = guide_legend(title = "Number of Occurrences")
+)
+
+```
+
+
+```{r}
+# Create a Leaflet map for the open data
+map_2022 <- leaflet(SRKW_fishery_open_2022) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~act_long,
+    lat = ~act_lat,
+    group = "Open",  # Add a group for open data
+    color = "blue",
+    fillOpacity = 0.5,
+    popup = ~paste("Date: ", format(date, format = "%m/%d/%Y"))
+    #clusterOptions = markerClusterOptions()  # Enable marker clustering
+  )
+
+map_2022 <- map_2022 %>%
+  addCircleMarkers(
+    data = aerial_2022_open,
+    lng = ~longitude_decimal_degrees_wgs84,
+    lat = ~latitude_decimal_degrees_wgs84,
+    group = "Open",  # Add a group for open data
+    color = "red",
+    fillOpacity = 0.2,
+    popup = ~paste("Date: ", format(survey_date, format = "%m/%d/%Y"))
+    # clusterOptions = markerClusterOptions(
+    #   iconCreateFunction = JS(
+    #     "function (cluster) {
+    #       var childCount = cluster.getChildCount();
+    #       var c = 'marker-cluster-';
+    #       if (childCount < 10) {
+    #         c += 'small';
+    #       } else if (childCount < 100) {
+    #         c += 'medium';
+    #       } else {
+    #         c += 'large';
+    #       }
+    #       return new L.DivIcon({
+    #         html: '<div><span>' + childCount + '</span></div>',
+    #         className: c,
+    #         iconSize: new L.Point(40, 40)
+    #       });
+    #     }"
+    #   )
+    # )
+  )
+
+map_2022 <- map_2022 %>%
+  addCircleMarkers(
+    data = aerial_2022_closed,
+    lng = ~longitude_decimal_degrees_wgs84,
+    lat = ~latitude_decimal_degrees_wgs84,
+    group = "Closed",  # Add a group for open data
+    color = "red",
+    fillOpacity = 0.2,
+    popup = ~paste("Date: ", format(survey_date, format = "%m/%d/%Y"))
+    # clusterOptions = markerClusterOptions(
+    #   iconCreateFunction = JS(
+    #     "function (cluster) {
+    #       var childCount = cluster.getChildCount();
+    #       var c = 'marker-cluster-';
+    #       if (childCount < 10) {
+    #         c += 'small';
+    #       } else if (childCount < 100) {
+    #         c += 'medium';
+    #       } else {
+    #         c += 'large';
+    #       }
+    #       return new L.DivIcon({
+    #         html: '<div><span>' + childCount + '</span></div>',
+    #         className: c,
+    #         iconSize: new L.Point(40, 40)
+    #       });
+    #     }"
+    #   )
+    # )
+  )
+
+map_2022 <- map_2022 %>% addCircleMarkers(
+  data = SRKW_fishery_closed_2022,
+  lng = ~act_long,
+  lat = ~act_lat,
+  group = "Closed",
+  color = "blue",  # Use the same color for open and closed whale data
+  fillOpacity = 0.5,
+  popup = ~paste("Date: ", format(date, format = "%m/%d/%Y"))
+  #clusterOptions = markerClusterOptions(
+    # iconCreateFunction = JS(
+    #   "function (cluster) {
+    #     var childCount = cluster.getChildCount();
+    #     var c = 'marker-cluster-';
+    #     if (childCount < 10) {
+    #       c += 'small';
+    #     } else if (childCount < 100) {
+    #       c += 'medium';
+    #     } else {
+    #       c += 'large';
+    #     }
+    #     return new L.DivIcon({
+    #       html: '<div><span>' + childCount + '</span></div>',
+    #       className: c,
+    #       iconSize: new L.Point(40, 40)
+    #     });
+    #   }"
+    # )
+ # )
+)
+
+# Add a layer control to toggle between the groups
+map_2022 <- map_2022 %>% addLayersControl(
+  baseGroups = c("Open", "Closed"),
+  options = layersControlOptions(collapsed = FALSE)
+)
+
+# Define legend parameters
+legend_labels <- c("SRKW Sightings", "Vessel Occurrence")
+legend_colors <- c("blue", "red")
+
+# Add the legend
+map_2022 <- map_2022 %>% addLegend(
+  position = "bottomright",
+  colors = legend_colors,
+  labels = legend_labels,
+  title = "Data Groups"
+)
+
+# Display the map
+map_2022
+ 
+
+```
+
+
+### 2021
+
+In 2021, the recreational Chinook fishery in MA 7 was open for seven days total. It was open from July 1st to July 7th. There was one vessel incident between recreational boaters and SRKWs on July 1st. There were no other vessel incidents on days when the recreational Chinook fishery was open in 2021.
+
+When the fishery was open, SRKW sightings data only exists for July 1st (Thursday) and 2nd (Friday). The next day that had sightings with actual coordinates (as opposed to center of quadrant coordinates) was July 27th (Tuesday) which had one sighting and August 30th (Monday) which had three sightings. Due to the temporal lag of the next sightings it does not make sense to compare whale distribution during and after recreational fishing. There are also no sightings right before the fishery opens to compare to.
+
+```{r, fig.align='center'}
+#specifically rec fishing in MA 7
+fishery_open_2021<-fishery_status %>% 
+  filter(year==2021) %>% 
+  filter(fishery_status=="open")
+fishery_closed_2021<-fishery_status %>% 
+  filter(year==2021) %>% 
+  filter(fishery_status=="closed")
+#making a new dataframe of closed days (same n as open) that can be looked at representatively
+date<-c("2021-07-08", "2021-07-09", "2021-07-10", "2021-07-11", "2021-07-12", "2021-07-13", "2021-07-14")
+compare_days_2021<-data.frame(date = date)
+compare_days_2021$date<-as.Date(compare_days_2021$date)
+compare_days_2021$year<-2021
+compare_days_2021$fishery_status<-"open"
+sightings_filter_2021<-sightings %>% 
+  filter(year==2021) %>% 
+  filter(act_lat!=0.00000) %>% 
+  filter(fish_area==7) #%>% 
+  #filter(!(is.na(pod) & is.na(likely_pod)))
+
+sightings_filter_2021$sight_date <- as.Date(sightings_filter_2021$sight_date, format = "%m/%d/%Y")
+SRKW_fishery_open_2021<-fishery_open_2021 %>% 
+  left_join(sightings_filter_2021, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+# SRKW_fishery_closed_2021<-fishery_closed_2021 %>% 
+#   left_join(sightings_filter_2021, by = c("date" = "sight_date"))%>% 
+#   filter(!(is.na(pod) & is.na(likely_pod)))
+SRKW_fishery_closed_2021<-compare_days_2021 %>% 
+  left_join(sightings_filter_2021, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+
+aerial_2021_open <- aerial_survey[aerial_survey$survey_date %in% SRKW_fishery_open_2021$date, ]
+aerial_2021_closed <- aerial_survey[aerial_survey$survey_date %in% SRKW_fishery_closed_2021$date, ]
+
+# # Create a Leaflet map for the open data
+# map_2021 <- leaflet(SRKW_fishery_open_2021) %>%
+#   addTiles() %>%
+#   addMarkers(
+#     lng = ~act_long,
+#     lat = ~act_lat,
+#     group = "Fishery Open"  # Add a group for open data
+#   )
+# 
+# # Add markers for the closed data in a different color
+# map_2021 <- map_2021 %>% addMarkers(
+#     data = SRKW_fishery_closed_2021,
+#     lng = ~act_long,
+#     lat = ~act_lat,
+#     group = "Fishery Closed"  # Add a group for closed data
+#   )
+# 
+# # Add a layer control to toggle between open and closed data
+# map_2021 <- map_2021 %>% addLayersControl(
+#   baseGroups = c("Open", "Closed"),
+#   options = layersControlOptions(collapsed = FALSE)
+# )
+# #map_2021
+```
+
+```{r}
+# Create a Leaflet map for the open data
+map_2021 <- leaflet(SRKW_fishery_open_2021) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~act_long,
+    lat = ~act_lat,
+    group = "Open",  # Add a group for open data
+    color = "blue",
+    fillOpacity = 0.5,
+    popup = ~paste("Date: ", format(date, format = "%m/%d/%Y"))
+    #clusterOptions = markerClusterOptions()  # Enable marker clustering
+  )
+
+map_2021 <- map_2021 %>%
+  addCircleMarkers(
+    data = aerial_2021_open,
+    lng = ~longitude_decimal_degrees_wgs84,
+    lat = ~latitude_decimal_degrees_wgs84,
+    group = "Open",  # Add a group for open data
+    color = "red",
+    fillOpacity = 0.2,
+    popup = ~paste("Date: ", format(survey_date, format = "%m/%d/%Y"))
+    # clusterOptions = markerClusterOptions(
+    #   iconCreateFunction = JS(
+    #     "function (cluster) {
+    #       var childCount = cluster.getChildCount();
+    #       var c = 'marker-cluster-';
+    #       if (childCount < 10) {
+    #         c += 'small';
+    #       } else if (childCount < 100) {
+    #         c += 'medium';
+    #       } else {
+    #         c += 'large';
+    #       }
+    #       return new L.DivIcon({
+    #         html: '<div><span>' + childCount + '</span></div>',
+    #         className: c,
+    #         iconSize: new L.Point(40, 40)
+    #       });
+    #     }"
+    #   )
+    # )
+  )
+
+map_2021 <- map_2021 %>%
+  addCircleMarkers(
+    data = aerial_2021_closed,
+    lng = ~longitude_decimal_degrees_wgs84,
+    lat = ~latitude_decimal_degrees_wgs84,
+    group = "Closed",  # Add a group for open data
+    color = "red",
+    fillOpacity = 0.2,
+    popup = ~paste("Date: ", format(survey_date, format = "%m/%d/%Y"))
+    # clusterOptions = markerClusterOptions(
+    #   iconCreateFunction = JS(
+    #     "function (cluster) {
+    #       var childCount = cluster.getChildCount();
+    #       var c = 'marker-cluster-';
+    #       if (childCount < 10) {
+    #         c += 'small';
+    #       } else if (childCount < 100) {
+    #         c += 'medium';
+    #       } else {
+    #         c += 'large';
+    #       }
+    #       return new L.DivIcon({
+    #         html: '<div><span>' + childCount + '</span></div>',
+    #         className: c,
+    #         iconSize: new L.Point(40, 40)
+    #       });
+    #     }"
+    #   )
+    # )
+  )
+
+map_2021 <- map_2021 %>% addCircleMarkers(
+  data = SRKW_fishery_closed_2021,
+  lng = ~act_long,
+  lat = ~act_lat,
+  group = "Closed",
+  color = "blue",  # Use the same color for open and closed whale data
+  fillOpacity = 0.5,
+  popup = ~paste("Date: ", format(date, format = "%m/%d/%Y"))
+  #clusterOptions = markerClusterOptions(
+    # iconCreateFunction = JS(
+    #   "function (cluster) {
+    #     var childCount = cluster.getChildCount();
+    #     var c = 'marker-cluster-';
+    #     if (childCount < 10) {
+    #       c += 'small';
+    #     } else if (childCount < 100) {
+    #       c += 'medium';
+    #     } else {
+    #       c += 'large';
+    #     }
+    #     return new L.DivIcon({
+    #       html: '<div><span>' + childCount + '</span></div>',
+    #       className: c,
+    #       iconSize: new L.Point(40, 40)
+    #     });
+    #   }"
+    # )
+ # )
+)
+
+# Add a layer control to toggle between the groups
+map_2021 <- map_2021 %>% addLayersControl(
+  baseGroups = c("Open", "Closed"),
+  options = layersControlOptions(collapsed = FALSE)
+)
+
+# Define legend parameters
+legend_labels <- c("SRKW Sightings", "Vessel Occurrence")
+legend_colors <- c("blue", "red")
+
+# Add the legend
+map_2021 <- map_2021 %>% addLegend(
+  position = "bottomright",
+  colors = legend_colors,
+  labels = legend_labels,
+  title = "Data Groups"
+)
+
+# Display the map
+#map_2021
+```
+
+
+### 2020
+
+In 2020, the recreational Chinook fishery in MA 7 was open for the entire month of July and the last ten days of August (22-31). There were 16 vessel incidents total between boaters and SRKWs when the recreational fishery was open spread across eight days. 
+
+When the recreational fishery was open, there were are many (>200) observations of SRKW in MA 7. But there was only one recorded sighting of SRKW in MA 7 in the first 3 weeks of August when the fishery was closed, so sightings from the month of September were used to contrast with SRKW sightings when the fishery was open. The distribution of SRKW does not change drastically when comparing sightings when the fishery was open to when the fishery was closed. There are more observations when the fishery was open as compared to when it was closed so this could explain why the distribution is slightly different. It is also important to note that SRKW use of this region changes temporally, so their use in September could be different than it is in July and the last week of August.
+
+Aerial survey data was filtered to only include the days when SRKW were present in MA 7. On these days, vessels are present in the same regions as SRKW.
+```{r, fig.align='center'}
+#specifically rec fishing in MA 7
+fishery_open_2020<-fishery_status %>% 
+  filter(year==2020) %>% 
+  filter(fishery_status=="open")
+fishery_closed_2020<-fishery_status %>% 
+  filter(year==2020) %>% 
+  filter(fishery_status=="closed")
+sightings_filter_2020<-sightings %>% 
+  filter(year==2020) %>% 
+  filter(act_lat!=0.00000) %>% 
+  filter(fish_area==7) %>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+#creating a dataframe for days in September
+start_date <- ymd("2020-09-01")
+end_date <- ymd("2020-09-30")
+date_list <- seq(start_date, end_date, by = "days")
+compare_days_2020<-data.frame(date = date_list)
+compare_days_2020$date<-as.Date(compare_days_2020$date)
+compare_days_2020$year<-2020
+compare_days_2020$fishery_status<-"open"
+compare_days_2020 <- rbind(fishery_closed_2020, compare_days_2020)
+
+sightings_filter_2020$sight_date <- as.Date(sightings_filter_2020$sight_date, format = "%m/%d/%Y")
+SRKW_fishery_open_2020<-fishery_open_2020 %>% 
+  left_join(sightings_filter_2020, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+# SRKW_fishery_closed_2020<-fishery_closed_2020 %>% 
+#   left_join(sightings_filter_2020, by = c("date" = "sight_date"))%>% 
+#   filter(!(is.na(pod) & is.na(likely_pod)))
+SRKW_fishery_closed_2020<-compare_days_2020 %>% 
+  left_join(sightings_filter_2020, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+
+aerial_2020_open <- aerial_survey[aerial_survey$survey_date %in% SRKW_fishery_open_2020$date, ]
+aerial_2020_closed <- aerial_survey[aerial_survey$survey_date %in% SRKW_fishery_closed_2020$date, ]
+
+# # Create a Leaflet map for the open data
+# map_2020 <- leaflet(SRKW_fishery_open_2020) %>%
+#   addTiles() %>%
+#   addCircleMarkers(
+#     lng = ~act_long,
+#     lat = ~act_lat,
+#     group = "Open",  # Add a group for open data
+#   clusterOptions = markerClusterOptions()  # Enable marker clustering
+#   )
+# 
+# map_2020 <- map_2020 %>% addCircleMarkers(
+#   data = SRKW_fishery_closed_2020,
+#   lng = ~act_long,
+#   lat = ~act_lat,
+#   group = "Closed",
+#   clusterOptions = markerClusterOptions()  # Enable marker clustering
+# )
+# 
+# # Add a layer control to toggle between open and closed data
+# map_2020 <- map_2020 %>% addLayersControl(
+#   baseGroups = c("Open", "Closed"),
+#   options = layersControlOptions(collapsed = FALSE)
+# )
+# 
+# # Display the map
+# map_2020
+```
+
+```{r}
+# Create a Leaflet map for the open data
+map_2020 <- leaflet(SRKW_fishery_open_2020) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~act_long,
+    lat = ~act_lat,
+    group = "Open",  # Add a group for open data
+    color = "blue",
+    fillOpacity = 0.5,
+    popup = ~paste("Date: ", format(date, format = "%m/%d/%Y"))
+    #clusterOptions = markerClusterOptions()  # Enable marker clustering
+  )
+
+map_2020 <- map_2020 %>%
+  addCircleMarkers(
+    data = aerial_2020_open,
+    lng = ~longitude_decimal_degrees_wgs84,
+    lat = ~latitude_decimal_degrees_wgs84,
+    group = "Open",  # Add a group for open data
+    color = "red",
+    fillOpacity = 0.2,
+    popup = ~paste("Date: ", format(survey_date, format = "%m/%d/%Y"))
+    # clusterOptions = markerClusterOptions(
+    #   iconCreateFunction = JS(
+    #     "function (cluster) {
+    #       var childCount = cluster.getChildCount();
+    #       var c = 'marker-cluster-';
+    #       if (childCount < 10) {
+    #         c += 'small';
+    #       } else if (childCount < 100) {
+    #         c += 'medium';
+    #       } else {
+    #         c += 'large';
+    #       }
+    #       return new L.DivIcon({
+    #         html: '<div><span>' + childCount + '</span></div>',
+    #         className: c,
+    #         iconSize: new L.Point(40, 40)
+    #       });
+    #     }"
+    #   )
+    # )
+  )
+
+map_2020 <- map_2020 %>%
+  addCircleMarkers(
+    data = aerial_2020_closed,
+    lng = ~longitude_decimal_degrees_wgs84,
+    lat = ~latitude_decimal_degrees_wgs84,
+    group = "Closed",  # Add a group for open data
+    color = "red",
+    fillOpacity = 0.2,
+    popup = ~paste("Date: ", format(survey_date, format = "%m/%d/%Y"))
+    # clusterOptions = markerClusterOptions(
+    #   iconCreateFunction = JS(
+    #     "function (cluster) {
+    #       var childCount = cluster.getChildCount();
+    #       var c = 'marker-cluster-';
+    #       if (childCount < 10) {
+    #         c += 'small';
+    #       } else if (childCount < 100) {
+    #         c += 'medium';
+    #       } else {
+    #         c += 'large';
+    #       }
+    #       return new L.DivIcon({
+    #         html: '<div><span>' + childCount + '</span></div>',
+    #         className: c,
+    #         iconSize: new L.Point(40, 40)
+    #       });
+    #     }"
+    #   )
+    # )
+  )
+
+map_2020 <- map_2020 %>% addCircleMarkers(
+  data = SRKW_fishery_closed_2020,
+  lng = ~act_long,
+  lat = ~act_lat,
+  group = "Closed",
+  color = "blue",  # Use the same color for open and closed whale data
+  fillOpacity = 0.5,
+  popup = ~paste("Date: ", format(date, format = "%m/%d/%Y"))
+  #clusterOptions = markerClusterOptions(
+    # iconCreateFunction = JS(
+    #   "function (cluster) {
+    #     var childCount = cluster.getChildCount();
+    #     var c = 'marker-cluster-';
+    #     if (childCount < 10) {
+    #       c += 'small';
+    #     } else if (childCount < 100) {
+    #       c += 'medium';
+    #     } else {
+    #       c += 'large';
+    #     }
+    #     return new L.DivIcon({
+    #       html: '<div><span>' + childCount + '</span></div>',
+    #       className: c,
+    #       iconSize: new L.Point(40, 40)
+    #     });
+    #   }"
+    # )
+ # )
+)
+
+# Add a layer control to toggle between the groups
+map_2020 <- map_2020 %>% addLayersControl(
+  baseGroups = c("Open", "Closed"),
+  options = layersControlOptions(collapsed = FALSE)
+)
+
+# Define legend parameters
+legend_labels <- c("SRKW Sightings", "Vessel Occurrence")
+legend_colors <- c("blue", "red")
+
+# Add the legend
+map_2020 <- map_2020 %>% addLegend(
+  position = "bottomright",
+  colors = legend_colors,
+  labels = legend_labels,
+  title = "Data Groups"
+)
+
+# Display the map
+map_2020
+```
+
+
+### 2019
+
+In 2019, the recreational Chinook fishery in MA 7 was open for the entire month of July. There were 5 vessel incidents between boaters and SRKWs on July 5th.
+
+All sightings data for when the fishery is open comes from two days: July 5th (Friday) and July 6th (Saturday). The month of August was used as a comparison to show where the SRKW were when the fishery was closed. In August, there is SRKW sightings data in MA 7 for ten days. August 16th (Friday) and August 17th (Saturday) were the first set of days in August that SRKW were found in MA 7. These days are plotted as the days the fishery was closed.
+
+This map demonstrates how SRKW sightings occur in similar locations when the recreational fishery is open as compared to when it is closed. Specifically, the region south of San Juan Island has a similar number sightings when the fishery is closed compared to when it is open.
+
+Aerial survey data was filtered to only include the days when SRKW were present in MA 7. On these days, vessels are present in the same regions as SRKW.
+
+```{r, fig.align='center'}
+#specifically rec fishing in MA 7
+fishery_open_2019<-fishery_status %>% 
+  filter(year==2019) %>% 
+  filter(fishery_status=="open")
+fishery_closed_2019<-fishery_status %>% 
+  filter(year==2019) %>% 
+  filter(fishery_status=="closed")
+sightings_filter_2019<-sightings %>% 
+  filter(year==2019) %>% 
+  filter(act_lat!=0.00000) %>% 
+  filter(fish_area==7) %>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+#creating a dataframe for days in September
+date_list <- c("2019-08-16", "2019-08-17")
+compare_days_2019<-data.frame(date = date_list)
+compare_days_2019$date<-as.Date(compare_days_2019$date)
+compare_days_2019$year<-2019
+compare_days_2019$fishery_status<-"open"
+compare_days_2019 <- rbind(fishery_closed_2019, compare_days_2019)
+
+sightings_filter_2019$sight_date <- as.Date(sightings_filter_2019$sight_date, format = "%m/%d/%Y")
+SRKW_fishery_open_2019<-fishery_open_2019 %>% 
+  left_join(sightings_filter_2019, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+# SRKW_fishery_closed_2020<-fishery_closed_2020 %>% 
+#   left_join(sightings_filter_2020, by = c("date" = "sight_date"))%>% 
+#   filter(!(is.na(pod) & is.na(likely_pod)))
+SRKW_fishery_closed_2019<-compare_days_2019 %>% 
+  left_join(sightings_filter_2019, by = c("date" = "sight_date"))%>% 
+  filter(!(is.na(pod) & is.na(likely_pod)))
+
+aerial_2019_open <- aerial_survey[aerial_survey$survey_date %in% SRKW_fishery_open_2019$date, ]
+aerial_2019_closed <- aerial_survey[aerial_survey$survey_date %in% SRKW_fishery_closed_2019$date, ]
+
+# # Create a Leaflet map for the open data
+# map_2019 <- leaflet(SRKW_fishery_open_2019) %>%
+#   addTiles() %>%
+#   addCircleMarkers(
+#     lng = ~act_long,
+#     lat = ~act_lat,
+#     group = "Open",  # Add a group for open data
+#   clusterOptions = markerClusterOptions()  # Enable marker clustering
+#   )
+# 
+# map_2019 <- map_2019 %>% addCircleMarkers(
+#   data = SRKW_fishery_closed_2019,
+#   lng = ~act_long,
+#   lat = ~act_lat,
+#   group = "Closed",
+#   clusterOptions = markerClusterOptions()  # Enable marker clustering
+# )
+# 
+# # Add a layer control to toggle between open and closed data
+# map_2019 <- map_2019 %>% addLayersControl(
+#   baseGroups = c("Open", "Closed"),
+#   options = layersControlOptions(collapsed = FALSE)
+# )
+# 
+# # Display the map
+# map_2019
+```
+
+```{r}
+# Create a Leaflet map for the open data
+map_2019 <- leaflet(SRKW_fishery_open_2019) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~act_long,
+    lat = ~act_lat,
+    group = "Open",  # Add a group for open data
+    color = "blue",
+    fillOpacity = 0.5,
+    popup = ~paste("Date: ", format(date, format = "%m/%d/%Y"))
+    #clusterOptions = markerClusterOptions()  # Enable marker clustering
+  )
+
+map_2019 <- map_2019 %>%
+  addCircleMarkers(
+    data = aerial_2019_open, 
+    lng = ~longitude_decimal_degrees_wgs84,
+    lat = ~latitude_decimal_degrees_wgs84,
+    group = "Open",  # Add a group for open data
+    color = "red",
+    fillOpacity = 0.2,
+    popup = ~paste("Date: ", format(survey_date, format = "%m/%d/%Y"))
+    # clusterOptions = markerClusterOptions(
+    #   iconCreateFunction = JS(
+    #     "function (cluster) {
+    #       var childCount = cluster.getChildCount();
+    #       var c = 'marker-cluster-';
+    #       if (childCount < 10) {
+    #         c += 'small';
+    #       } else if (childCount < 100) {
+    #         c += 'medium';
+    #       } else {
+    #         c += 'large';
+    #       }
+    #       return new L.DivIcon({
+    #         html: '<div><span>' + childCount + '</span></div>',
+    #         className: c,
+    #         iconSize: new L.Point(40, 40)
+    #       });
+    #     }"
+    #   )
+    # )
+  )
+
+map_2019 <- map_2019 %>%
+  addCircleMarkers(
+    data = aerial_2019_closed,
+    lng = ~longitude_decimal_degrees_wgs84,
+    lat = ~latitude_decimal_degrees_wgs84,
+    group = "Closed",  # Add a group for open data
+    color = "red",
+    fillOpacity = 0.2,
+    popup = ~paste("Date: ", format(survey_date, format = "%m/%d/%Y"))
+    # clusterOptions = markerClusterOptions(
+    #   iconCreateFunction = JS(
+    #     "function (cluster) {
+    #       var childCount = cluster.getChildCount();
+    #       var c = 'marker-cluster-';
+    #       if (childCount < 10) {
+    #         c += 'small';
+    #       } else if (childCount < 100) {
+    #         c += 'medium';
+    #       } else {
+    #         c += 'large';
+    #       }
+    #       return new L.DivIcon({
+    #         html: '<div><span>' + childCount + '</span></div>',
+    #         className: c,
+    #         iconSize: new L.Point(40, 40)
+    #       });
+    #     }"
+    #   )
+    # )
+  )
+
+map_2019 <- map_2019 %>% addCircleMarkers(
+  data = SRKW_fishery_closed_2019,
+  lng = ~act_long,
+  lat = ~act_lat,
+  group = "Closed",
+  color = "blue",  # Use the same color for open and closed whale data
+  fillOpacity = 0.5,
+  popup = ~paste("Date: ", format(date, format = "%m/%d/%Y"))
+  #clusterOptions = markerClusterOptions(
+    # iconCreateFunction = JS(
+    #   "function (cluster) {
+    #     var childCount = cluster.getChildCount();
+    #     var c = 'marker-cluster-';
+    #     if (childCount < 10) {
+    #       c += 'small';
+    #     } else if (childCount < 100) {
+    #       c += 'medium';
+    #     } else {
+    #       c += 'large';
+    #     }
+    #     return new L.DivIcon({
+    #       html: '<div><span>' + childCount + '</span></div>',
+    #       className: c,
+    #       iconSize: new L.Point(40, 40)
+    #     });
+    #   }"
+    # )
+ # )
+)
+
+# Add a layer control to toggle between the groups
+map_2019 <- map_2019 %>% addLayersControl(
+  baseGroups = c("Open", "Closed"),
+  options = layersControlOptions(collapsed = FALSE)
+)
+
+# Define legend parameters
+legend_labels <- c("SRKW Sightings", "Vessel Occurrence")
+legend_colors <- c("blue", "red")
+
+# Add the legend
+map_2019 <- map_2019 %>% addLegend(
+  position = "bottomright",
+  colors = legend_colors,
+  labels = legend_labels,
+  title = "Data Groups"
+)
+
+# Display the map
+map_2019
+```
+
+
+```{r}
+# Determine the total number of boats off the west side of San Juan island each day the survey was run
+## add in 2023 recreational fishing days
+date_23<-c("2023-07-13", "2023-07-14", "2023-07-15", "2023-07-21", "2023-07-28", "2023-07-29")
+fish_23<-as.data.frame(date_23) %>%
+  rename(date=date_23)
+fish_23$date <- ymd(fish_23$date)
+fish_23$year<-2023
+fish_23$fishery_status<-"open"
+
+fishery_status<-full_join(fishery_status, fish_23)
+
+fishery_status_open<-fishery_status %>% filter(fishery_status=="open")
+aerial_open<-inner_join(fishery_status_open, aerial_survey, by=c("date"="survey_date"))
+aerial_open_sf <- st_as_sf(aerial_open, coords = c("longitude_decimal_degrees_wgs84", "latitude_decimal_degrees_wgs84"), crs = 4326)
+westside <- st_read(here("data", "shapefiles", "san_juan_westside", "san_juan_westside-polygon.shp")) 
+westside_aerial <- st_intersection(aerial_open_sf, westside)
+
+#sum number of boats total for that day
+aerial_open<-aerial_open %>% group_by(date) %>% summarise(total_boats=sum(boat_count)) %>% filter(date!="2018-07-08") #remove date with errors
+aerial_open <- aerial_open %>%
+  mutate(year = lubridate::year(date),
+         month = lubridate::month(date),
+         day = lubridate::day(date), 
+         month_day = sprintf("%02d-%02d", month, day))
+westside_aerial<-westside_aerial %>% group_by(date) %>% summarise(total_boats=sum(boat_count))
+westside_aerial <- westside_aerial %>%
+  mutate(year = lubridate::year(date),
+         month = lubridate::month(date),
+         day = lubridate::day(date), 
+         month_day = sprintf("%02d-%02d", month, day))
+## comment this out to not include days with no boat sigthings
+#need to add in days with 0 sightings on west side
+#create a df with these days
+#do not include "2017-07-22", "2018-07-08" and "2021-07-03" because these days seem wonky
+date_noboat<-c("2019-07-25")
+no_westside<-as.data.frame(date_noboat) %>%
+  rename(date=date_noboat)
+no_westside$date<-as.Date(no_westside$date)
+no_westside$total_boats<-0
+no_westside$year<-2019
+westside_aerial<-full_join(westside_aerial, no_westside)
+
+#good from here
+westside_aerial_csv<-westside_aerial %>% dplyr::select(date, total_boats)
+westside_aerial_csv <- westside_aerial_csv[order(westside_aerial_csv$date), ]
+write_xlsx(westside_aerial_csv, path = here("data","daily_boat_count_SJI.xlsx"))
+
+ggplot(westside_aerial, aes(x = as.Date(month_day, format="%m-%d"), y = total_boats, color = factor(year))) +
+  geom_line() +
+  labs(x = "Date", y = "Total Boats", title = "Total Boats on the West Side of San Juan Island", color="Year") +
+  theme_minimal()
+
+# ggplot(aerial_open, aes(x = date, y = total_boats, color = factor(year))) +
+#   geom_line() +
+#   labs(x = "Date", y = "Total Boats", title = "Total Boats by Month and Day for Each Year") +
+#   theme_minimal()
+
+westside_aerial_average<-westside_aerial %>% st_drop_geometry() %>% dplyr::select(year, total_boats) %>% 
+  group_by(year) %>% summarise(average_westside_boats=round(mean(total_boats),0),
+                               min_westside_boats=min(total_boats), 
+                               max_westside_boats=max(total_boats)
+                               )
+aerial_open_average<-aerial_open %>% dplyr::select(year, total_boats) %>% 
+  group_by(year) %>% summarise(average_total_boats=round(mean(total_boats),0))
+average_boats<-full_join(westside_aerial_average, aerial_open_average) %>% 
+  mutate(westside_percent=round((average_westside_boats/average_total_boats)*100, 2))
+#average_boats<-as.data.frame(average_boats) %>% dplyr::select(-geometry)
+write_xlsx(average_boats, path = here("data","avg_boat_count_SJI.xlsx"))
+
+plot<-ggplot() +
+   geom_sf(data = westside, fill = "transparent", color = "blue", size = 10, linetype = "dashed")+
+   geom_sf(data = san_juan, fill = "darkgreen", color = "darkgreen", size = 1)+theme_minimal()
+plot
+ggsave(here("saved_figures","westside_shapefile.jpeg"), plot, width = 7, height = 8, units = "in", dpi = 300)
+```
+
+
+## Determine location of the boats on 2019-07-25 and in 2021
+none are on the west side of SJI
+```{r}
+aerial_open_sf_2019_07_25<- aerial_open_sf %>% filter(date=="2017-07-22")
+plot<-ggplot() +
+   geom_sf(data = westside, fill = "transparent", color = "blue", size = 3)+
+   geom_sf(data = san_juan, fill = "darkgreen", color = "darkgreen", size = 1)+
+  geom_sf(data = aerial_open_sf_2019_07_25, fill = "red", color = "red", size = 1)
+plot
+ggsave(here("saved_figures", "aerial", "WSJI_2019_07_25.jpeg"), plot, width = 7, height = 8, units = "in", dpi = 300)
+
+#look in 2021
+aerial_open_sf_2021_07_01<- aerial_open_sf %>% filter(date=="2021-07-03")
+plot<-ggplot() +
+   geom_sf(data = westside, fill = "transparent", color = "blue", size = 3)+
+   geom_sf(data = san_juan, fill = "darkgreen", color = "darkgreen", size = 1)+
+  geom_sf(data = aerial_open_sf_2021_07_01, fill = "red", color = "red", size = 1)
+plot
+```
+
+
+

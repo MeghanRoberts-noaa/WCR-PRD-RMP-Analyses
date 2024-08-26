@@ -1,0 +1,938 @@
+---
+title: "incidents"
+author: "Meghan Roberts"
+date: "2023-08-22"
+output: html_document
+---
+
+This markdown contains the incident figures (heatmap style) and the overlap between fishing days open compared to SRKW presence in MA 7. Incident data was sent by Soundwatch. 2015 data is incomplete (dataset stops in July but should run until September) but has not yet been updated by Soundwatch.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+library(here)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+library(kableExtra)
+library(stringr)
+library(janitor)
+library(tidyr)
+library(lubridate)
+library(sf)
+```
+
+First filter the data to make sf dataframes containing location of incidents between fishing vessels and SRKW, what type of vessel committed incident (personal or commercial), the type of incident, etc. Also filter to just include incidents in MA 7.
+### note that one vessel can have multiple incidents per day
+### excluded entries where species_name was NA (2014)
+### up until 2016, I pulled out entries that were commercial fishing vessels or if the incident description contained information about fishing (mostly private vessels)
+### after 2016 I included vessels whose activity was fishing or the the other two categories
+```{r}
+## enter the data and sort out entries that fishing vessel interactions with southern residents
+## filtering to only MA 7
+## filtering for any vessels fishing (recreational and commercial)
+
+orca<-read_csv(here("data","orca_fishery_overlap.csv")) %>% 
+  clean_names() 
+
+orca_20<-orca %>% dplyr::select(c(date, year, fishery_status)) %>% 
+  dplyr::filter(year=="2020") %>% 
+  filter(fishery_status=="open") %>% 
+  dplyr::select(date)
+month_lookup <- c("Jan" = "01", "Feb" = "02", "Mar" = "03", "Apr" = "04", "May" = "05", "Jun" = "06","Jul" = "07", "Aug" = "08", "Sep" = "09", "Oct" = "10", "Nov" = "11", "Dec" = "12")
+# Split the date column into day and month columns
+split_date <- strsplit(orca_20$date, "-")
+day <- as.integer(sapply(split_date, "[", 1))
+month <- sapply(split_date, "[", 2)
+# Map month abbreviations to month numbers
+month_numeric <- month_lookup[month]
+# Create the "YYYY-MM-DD" date format
+orca_20$date <- paste("2020", month_numeric, day, sep = "-")
+orca_20$date<-as.Date(orca_20$date)
+
+orca_21<-orca %>% dplyr::select(c(date, year, fishery_status)) %>% 
+  filter(year=="2021") %>% 
+  filter(fishery_status=="open") %>% 
+  dplyr::select(date)
+split_date <- strsplit(orca_21$date, "-")
+day <- as.integer(sapply(split_date, "[", 1))
+month <- sapply(split_date, "[", 2)
+# Map month abbreviations to month numbers
+month_numeric <- month_lookup[month]
+# Create the "YYYY-MM-DD" date format
+orca_21$date <- paste("2021", month_numeric, day, sep = "-")
+orca_21$date<-as.Date(orca_21$date)
+
+#orca_21$date <- as.Date(paste("2021", orca_21$date, sep = "/"), format = "%Y/%m/%d")
+
+orca_22<-orca %>% dplyr::select(c(date, year, fishery_status)) %>% 
+  filter(year=="2022") %>% 
+  filter(fishery_status=="open") %>% 
+  dplyr::select(date)
+split_date <- strsplit(orca_22$date, "-")
+day <- as.integer(sapply(split_date, "[", 1))
+month <- sapply(split_date, "[", 2)
+# Map month abbreviations to month numbers
+month_numeric <- month_lookup[month]
+# Create the "YYYY-MM-DD" date format
+orca_22$date <- paste("2022", month_numeric, day, sep = "-")
+orca_22$date<-as.Date(orca_22$date)
+#orca_22$date <- as.Date(paste("2022", orca_22$date, sep = "/"), format = "%Y/%m/%d")
+
+orca_23<-orca %>% dplyr::select(c(date, year, fishery_status)) %>% 
+  filter(year=="2023") %>% 
+  filter(fishery_status=="open") %>% 
+  dplyr::select(date)
+split_date <- strsplit(orca_23$date, "-")
+day <- as.integer(sapply(split_date, "[", 1))
+month <- sapply(split_date, "[", 2)
+# Map month abbreviations to month numbers
+month_numeric <- month_lookup[month]
+# Create the "YYYY-MM-DD" date format
+orca_23$date <- paste("2023", month_numeric, day, sep = "-")
+orca_23$date<-as.Date(orca_23$date)
+#orca_22$date <- as.Date(paste("2022", orca_22$date, sep = "/"), format = "%Y/%m/%d")
+
+#shapefile
+shapefile <- st_read(here("data","shapefiles", "Salmon MAC", "salmon_catchMCAs.shp")) %>% 
+  clean_names() %>% 
+  filter(grepl("7", area_name))
+shapefile_crs <- st_crs(shapefile)
+
+#2011
+##Check 2011 and 2012 for vessel type code that means commercial fishing
+i_2011<-read_csv(here("data","incidents","2011_Incident_Data_working.csv")) %>% 
+  clean_names() %>% 
+  dplyr::select(c(monitor_event_date, short_title, latitude_dd, longitude_dd, species_name, vessel_type_code, species_code)) %>% 
+       filter(grepl("fishing", short_title, ignore.case = TRUE) | 
+           grepl("MF", vessel_type_code, ignore.case = TRUE))%>% 
+     filter(grepl("SR", species_code, ignore.case = TRUE)| 
+           grepl("southern resident", species_name, ignore.case = TRUE)) %>% 
+  mutate(longitude_dd=longitude_dd*-1)
+i_2011$monitor_event_date <- as.Date(i_2011$monitor_event_date, format = "%m/%d/%Y")
+
+#here
+i_2011_sf <- st_as_sf(i_2011, coords = c("longitude_dd", "latitude_dd"))
+st_crs(i_2011_sf) <- 4326
+filtered_2011 <- shapefile %>%
+  st_intersection(i_2011_sf) %>%
+  st_drop_geometry()
+
+
+#2012
+i_2012<-read_csv(here("data","incidents","2012_Incident_Data_working.csv")) %>% 
+  clean_names() %>% 
+  dplyr::select(c(monitor_eve, short_titl, latitude_1, long_1, species_na, vessel_type, species_co)) %>% 
+  filter(grepl("fishing", short_titl, ignore.case = TRUE) | 
+           grepl("fishing", vessel_type, ignore.case = TRUE))%>%  
+    filter(grepl("SR", species_co, ignore.case = TRUE)| 
+           grepl("southern resident", species_na, ignore.case = TRUE)) 
+i_2012$monitor_eve <- as.Date(i_2012$monitor_eve, format = "%m/%d/%Y")
+
+
+i_2012_sf <- st_as_sf(i_2012, coords = c("long_1", "latitude_1"))
+st_crs(i_2012_sf) <- 4326
+filtered_2012 <- shapefile %>%
+  st_intersection(i_2012_sf) %>%
+  st_drop_geometry()
+
+#2013
+i_2013<-read_csv(here("data","incidents","2013_Incident_Data_working.csv")) %>% 
+  clean_names() %>% 
+  dplyr::select(c(date, vessel_type, short_titl, latitude_dd, long_dd, species_na, species_co))%>%
+  filter(grepl("fishing", short_titl, ignore.case = TRUE) | 
+           grepl("fishing", vessel_type, ignore.case = TRUE))%>% 
+   filter(grepl("SR", species_co, ignore.case = TRUE)| 
+           grepl("southern resident", species_na, ignore.case = TRUE))
+i_2013$date <- as.Date(i_2013$date, format = "%m/%d/%Y")
+i_2013 <- i_2013 %>%
+  filter(substr(date, 1, 4) == "2013")
+
+i_2013_sf <- st_as_sf(i_2013, coords = c("long_dd", "latitude_dd"))
+st_crs(i_2013_sf) <- 4326
+filtered_2013 <- shapefile %>%
+  st_intersection(i_2013_sf) %>%
+  st_drop_geometry()
+
+#2014
+i_2014<-read_csv(here("data","incidents","2014_Incident_Data_working.csv")) %>% 
+  clean_names() %>% 
+  dplyr::select(c(monitor_event_date, short_title, vessel_type_code, latitude_dd, longitude_dd, species_name, species_code)) %>% 
+    filter(grepl("fishing", short_title, ignore.case = TRUE) | 
+           grepl("MF", vessel_type_code, ignore.case = TRUE))%>% 
+     filter(grepl("SR", species_code, ignore.case = TRUE)| 
+           grepl("southern resident", species_name, ignore.case = TRUE)) %>% 
+  mutate(longitude_dd=longitude_dd*-1) #accidently forgot negative on longitude
+i_2014$monitor_event_date <- mdy(i_2014$monitor_event_date)
+
+
+i_2014_sf <- st_as_sf(i_2014, coords = c("longitude_dd", "latitude_dd"))
+st_crs(i_2014_sf) <- 4326
+filtered_2014 <- shapefile %>%
+  st_intersection(i_2014_sf) %>%
+  st_drop_geometry()
+
+#2015
+i_2015<-read_csv(here("data","incidents","2015_Incident_Data_working.csv")) %>% 
+  clean_names() %>% 
+  dplyr::select(c(monitor_event_date, latitude_dd, longitude_dd, short_title, vessel_type_code, species_code, species_name)) %>% 
+   filter(grepl("fishing", short_title, ignore.case = TRUE) | 
+           grepl("MF", vessel_type_code, ignore.case = TRUE)) %>% 
+  filter(grepl("SR", species_code, ignore.case = TRUE)| 
+           grepl("southern resident", species_name, ignore.case = TRUE))%>% 
+  mutate(longitude_dd=longitude_dd*-1) #accidently forgot negative on longitude
+
+  i_2015$monitor_event_date <- as.Date(i_2015$monitor_event_date, format = "%A, %B %d, %Y") 
+
+
+i_2015_sf <- st_as_sf(i_2015, coords = c("longitude_dd", "latitude_dd"))
+st_crs(i_2015_sf) <- 4326
+filtered_2015 <- shapefile %>%
+  st_intersection(i_2015_sf) %>%
+  st_drop_geometry()
+
+
+#2016
+#2016 and onwards is already filtered by srkw
+#data collection is different from here onwards
+i_2016<-read_csv(here("data","incidents","2016_Incident_Data_working.csv")) %>% 
+  clean_names() %>% 
+  dplyr::select(c(today, lat_edit, longitude_7, vessel, incidents, action, odk_conversion)) %>% 
+  fill(today, lat_edit, longitude_7, vessel, incidents, action) %>%
+   filter(grepl("fishing", incidents, ignore.case = TRUE) | 
+           grepl("MF", vessel, ignore.case = TRUE) | 
+           grepl("F", action, ignore.case = TRUE))
+i_2016$today <- as.POSIXct(i_2016$today, format = "%a %b %d %H:%M:%S UTC %Y")
+
+
+i_2016_sf <- st_as_sf(i_2016, coords = c("longitude_7", "lat_edit"))
+st_crs(i_2016_sf) <- 4326
+filtered_2016 <- shapefile %>%
+  st_intersection(i_2016_sf) %>%
+  st_drop_geometry()
+
+#2017
+i_2017<-read_csv(here("data","incidents","2017_Incident_Data_working.csv")) %>% 
+  clean_names() %>% 
+  dplyr::select(c(date, latitude_6, longitude_7, vessel, action, incidents, odk_conversion)) %>%  
+  fill(date, latitude_6, longitude_7, vessel, action, incidents) %>% 
+   filter(grepl("fishing", incidents, ignore.case = TRUE) | 
+           grepl("MF", vessel, ignore.case = TRUE) | 
+           grepl("F", action, ignore.case = TRUE))   %>%
+  mutate(date_new = as.Date(paste("2017", date), format = "%Y %d-%b")) 
+
+i_2017_sf <- st_as_sf(i_2017, coords = c("longitude_7", "latitude_6"))
+st_crs(i_2017_sf) <- 4326
+filtered_2017 <- shapefile %>%
+  st_intersection(i_2017_sf) %>%
+  st_drop_geometry()
+
+#2018
+i_2018<-read_csv(here("data","incidents","2018_Incident_Data_working.csv")) %>% 
+   clean_names() %>% 
+   dplyr::select(c(today, geopoint_test_latitude, geopoint_test_longitude, vessel, incidents, action, odk_conversion)) %>%
+   fill(today, geopoint_test_latitude, geopoint_test_longitude, vessel, incidents, action) 
+i_2018 <- i_2018[-(478:504),] #summary stats removed
+i_2018<-i_2018%>%
+   filter(grepl("fishing", incidents, ignore.case = TRUE) | 
+           grepl("MF", vessel, ignore.case = TRUE) | 
+           grepl("F", action, ignore.case = TRUE))
+i_2018$today <- as.POSIXct(i_2018$today, format = "%a %b %d %H:%M:%S UTC %Y")
+
+
+i_2018_sf <- st_as_sf(i_2018, coords = c("geopoint_test_longitude", "geopoint_test_latitude"))
+st_crs(i_2018_sf) <- 4326
+filtered_2018 <- shapefile %>%
+  st_intersection(i_2018_sf) %>%
+  st_drop_geometry()
+
+#2019
+i_2019<-read_csv(here("data","incidents","2019_Incident_Data_working.csv")) %>% 
+  clean_names()%>% 
+  # select(c(today, geopoint_test_latitude, geopoint_test_longitude, vessel, incidents, action, odk_conversion)) %>%
+  fill(today, geopoint_test_latitude, geopoint_test_longitude, vessel, incidents, action) 
+i_2019 <- i_2019[-(213:239),] #summary stats removed
+i_2019<-i_2019%>% 
+   filter(grepl("fishing", incidents, ignore.case = TRUE) | 
+           grepl("MF", vessel, ignore.case = TRUE) | 
+           grepl("F", action, ignore.case = TRUE))
+i_2019$today <- as.POSIXct(i_2019$today, format = "%a %b %d %H:%M:%S UTC %Y")
+
+
+i_2019_sf <- st_as_sf(i_2019, coords = c("geopoint_test_longitude", "geopoint_test_latitude"))
+st_crs(i_2019_sf) <- 4326
+filtered_2019 <- shapefile %>%
+  st_intersection(i_2019_sf) %>%
+  st_drop_geometry()
+
+#2020
+i_2020<-read_csv(here("data","incidents","2020_Incident_Data_working.csv")) %>% 
+  clean_names()%>% 
+   dplyr::select(c(date,lat,long, vessel, incidents, action, x15)) %>%
+  fill(date,lat,long, vessel, incidents, action) %>% 
+   filter(grepl("fishing", incidents, ignore.case = TRUE) | 
+           grepl("MF", vessel, ignore.case = TRUE) | 
+           grepl("F", action, ignore.case = TRUE))
+i_2020$date <- as.Date(paste("2020", i_2020$date), format = "%Y %d-%b")
+
+
+i_2020_sf <- st_as_sf(i_2020, coords = c("long", "lat"))
+st_crs(i_2020_sf) <- 4326
+filtered_2020 <- shapefile %>%
+  st_intersection(i_2020_sf) %>%
+  st_drop_geometry()
+
+#2021
+i_2021<-read_csv(here("data","incidents","2021_Incident_Data_working.csv")) %>% 
+  clean_names() %>% 
+    dplyr::select(c(date,lat,long, vessel, incidents, action, x15)) %>%
+  fill(date,lat,long, vessel, incidents, action) %>% 
+   filter(grepl("fishing", incidents, ignore.case = TRUE) | 
+           grepl("MF", vessel, ignore.case = TRUE) | 
+           grepl("F", action, ignore.case = TRUE))
+i_2021$date <- as.Date(paste("2021", i_2021$date), format = "%Y %d-%b")
+
+
+i_2021_sf <- st_as_sf(i_2021, coords = c("long", "lat"))
+st_crs(i_2021_sf) <- 4326
+filtered_2021 <- shapefile %>%
+  st_intersection(i_2021_sf) %>%
+  st_drop_geometry()
+
+#2022
+i_2022<-read_csv(here("data","incidents","Master SW_Incident_data_2022_results.csv")) %>% 
+  clean_names()%>% 
+    dplyr::select(c(data_start,latitude,longitude, data_vessel, data_incidents, data_action, x16)) %>%
+  #fill(date,lat,long, vessel, incidents, action) %>% 
+   filter(grepl("fishing", data_incidents, ignore.case = TRUE) | 
+           grepl("MF", data_vessel, ignore.case = TRUE) | 
+           grepl("F", data_action, ignore.case = TRUE))
+i_2022$date <- mdy(i_2022$data_start)
+
+
+i_2022_sf <- st_as_sf(i_2022, coords = c("longitude", "latitude"))
+st_crs(i_2022_sf) <- 4326
+filtered_2022 <- shapefile %>%
+  st_intersection(i_2022_sf) %>%
+  st_drop_geometry()
+
+```
+
+Then, filter to only keep incidents that occurred when recreational fishing was open. 
+Also create a plot to show the average number of incidents per day, and write code to determine the max in any given year.
+```{r}
+#filter by rec days
+# Filter rows with dates in July, August, and September
+filtered_2011_rec <- filtered_2011 %>%
+  filter(format(monitor_event_date, "%m") %in% c("07", "08", "09"))
+# Filter rows with dates in July, August, and September
+filtered_2012_rec <- filtered_2012 %>%
+  filter(format(monitor_eve, "%m") %in% c("07", "08", "09"))
+filtered_2013_rec <- filtered_2013 %>%
+  filter(format(date, "%m") %in% c("07", "08", "09"))
+# Filter rows with dates in July, August, and September
+filtered_2014_rec <- filtered_2014 %>%
+  filter(month(monitor_event_date) %in% c(7, 8, 9))
+filtered_2015_rec <- filtered_2015 %>%
+  filter(month(monitor_event_date) %in% c(7, 8, 9))
+# Filter rows with dates in July, August, and September
+filtered_2016_rec <- filtered_2016 %>%
+  filter(month(today) %in% c(7, 8, 9))
+filtered_2017_rec <- filtered_2017 %>% 
+  filter(month(date_new) %in% c(7, 8, 9))
+# Filter rows with dates in July and August
+filtered_2018_rec <- filtered_2018 %>%
+  filter(month(today) %in% c(7, 8))
+# Filter rows with dates in July
+filtered_2019_rec <- filtered_2019 %>%
+  filter(month(today) %in% c(7))
+filtered_2020_rec <- filtered_2020 %>%
+  semi_join(orca_20, by = "date") #orca_20 contains the specific days open in 2020
+filtered_2021_rec <- filtered_2021 %>%
+ semi_join(orca_21, by = "date")
+filtered_2022_rec <- filtered_2022 %>%
+  semi_join(orca_22, by = "date")
+
+## Determining the max number of incidents on any particular day ranging from 2018 to 2022
+all_incidents_2018_2022<-full_join(filtered_2018_rec, filtered_2019_rec)
+filtered_2020_rec<- filtered_2020_rec %>% rename(today=date) %>% rename(odk_conversion=x15)
+all_incidents_2018_2022<-full_join(all_incidents_2018_2022, filtered_2020_rec)
+filtered_2021_rec<- filtered_2021_rec %>% rename(today=date) %>% rename(odk_conversion=x15)
+all_incidents_2018_2022<-full_join(all_incidents_2018_2022, filtered_2021_rec)
+#all_incidents_2018_2022<-full_join(all_incidents_2018_2022, filtered_2022_rec) #remove 2022 (no incidents)
+incidents_per_day_2018_2022<-all_incidents_2018_2022 %>% group_by(today) %>% summarise(total_count=n())
+
+avg_11<-nrow(filtered_2011_rec)/92
+avg_12<-nrow(filtered_2012_rec)/92
+avg_13<-nrow(filtered_2013_rec)/92
+avg_14<-nrow(filtered_2014_rec)/92
+avg_15<-nrow(filtered_2015_rec)/92 #zero
+avg_16<-nrow(filtered_2016_rec)/92
+avg_17<-nrow(filtered_2017_rec)/92
+avg_18<-nrow(filtered_2018_rec)/65
+avg_19<-nrow(filtered_2019_rec)/31
+avg_20<-nrow(filtered_2020_rec)/41
+avg_21<-nrow(filtered_2021_rec)/7
+avg_22<-nrow(filtered_2022_rec)/9  #zero
+
+average<-(c(avg_11, avg_12, avg_13, avg_14, avg_15, avg_16, avg_17, avg_18, avg_19, avg_20, avg_21, avg_22))
+year<-(c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022))
+
+average_df<-data.frame(ave=average, year=year)
+
+## Average incidents per day (total incidents/number of days of retention) of Chinook retention (commercial vessels and recreational vessels whose primary activity was fishing) for 2018-2022 was 0.21 incidents
+average_2018_2022<-average_df %>% slice(8:12)
+mean(average_2018_2022$ave)
+
+ggplot(average_df, aes(x=year, y=ave))+
+  geom_line(size=1.0)+
+  theme_minimal()+
+  scale_x_continuous(breaks = year) +
+  labs(x="Year", y="Average Incidents per Day Chinook Rentention")
+```
+
+Create a dataframe (fishery_status) that notes when the fishery is open vs closed instead of just having when it is open
+```{r}
+#creating a df with days the fishery is open
+fishery_status<-orca %>% dplyr::select(-orcas_sighted)
+fishery_status$date <- as.Date(paste("2023", fishery_status$date), format="%Y %d-%b")
+fishery_status$date<- format(fishery_status$date, format = "%m/%d")
+
+#creating a dataframe to compare the above 2020-2022 to in order to get full dates through September represented in figure
+# Define function to generate data frame for each year
+generate_year_data <- function(year, open_dates) {
+  start_date <- as.Date(paste(year, "07", "01", sep = "-"))
+  end_date <- as.Date(paste(year, "09", "30", sep = "-"))
+
+  # Generate date vector
+  date_vector <- seq.Date(start_date, end_date, by = "days")
+  date_strings <- format(date_vector, "%m/%d")
+
+  # Determine fishery_status
+  # fishery_status <- ifelse(date_strings %in% open_dates, "open", "closed")
+
+  # Create data frame
+  data <- data.frame(
+    year = rep(year, length(date_strings)),
+    date = date_strings #,
+    # fishery_status = fishery_status
+  )
+  return(data)
+}
+
+# Define open dates (none in this case)
+open_dates <- character()
+
+# Generate data for 2020, 2021, and 2022
+extra_data_2020 <- generate_year_data(2020, open_dates)
+extra_data_2021 <- generate_year_data(2021, open_dates)
+extra_data_2022 <- generate_year_data(2022, open_dates)
+extra_data_2023 <- generate_year_data(2023, open_dates)
+
+# Combine the data frames
+full_data <- rbind(extra_data_2020, extra_data_2021, extra_data_2022, extra_data_2023)
+
+#left join to put back in the correct open dates
+fishery_status<-full_join(full_data, fishery_status)
+#replace NA values with closed
+fishery_status <- fishery_status %>%
+  mutate(fishery_status = coalesce(fishery_status, "closed"))
+
+
+#2011 to 2017
+years <- 2011:2017
+date_strings_list <- list()
+
+for (year in years) {
+  start_date <- as.Date(paste(year, "-07-01", sep = ""))
+  end_date <- as.Date(paste(year, "-09-30", sep = ""))
+  
+  date_vector <- seq.Date(start_date, end_date, by = "days")
+  date_strings <- format(date_vector, "%m/%d")
+  
+  date_strings_list[[as.character(year)]] <- date_strings
+}
+
+extra_data_1 <- data.frame(
+  year = rep(years, each = length(date_strings)),
+  date = unlist(date_strings_list))
+
+##for 2018 and 2019
+# Define function to generate data frame for each year
+generate_year_data <- function(year, start_month, start_day, end_month, end_day, open_dates) {
+  start_date <- as.Date(paste(year, start_month, start_day, sep = "-"))
+  end_date <- as.Date(paste(year, end_month, end_day, sep = "-"))
+
+  # Generate date vector
+  date_vector <- seq.Date(start_date, end_date, by = "days")
+  date_strings <- format(date_vector, "%m/%d")
+
+  # Determine fishery_status
+  fishery_status <- ifelse(date_strings %in% open_dates, "open", "closed")
+
+  # Create data frame
+  data <- data.frame(
+    year = rep(year, length(date_strings)),
+    date = date_strings,
+    fishery_status = fishery_status
+  )
+  return(data)
+}
+
+# Generate data for 2018
+open_dates_2018 <- c("07/01", "07/02", "07/03", "07/04", "07/05", "07/06", "07/07", "07/08", "07/09", "07/10", "07/11", "07/12", "07/13", "07/14", "07/15", "07/16", "07/17", "07/18", "07/19", "07/20", "07/21", "07/22", "07/23", "07/24", "07/25", "07/26", "07/27", "07/28", "07/29", "07/30", "07/31", "08/01", "08/02", "08/03", "08/04", "08/05", "08/06", "08/07", "08/08", "08/09", "08/10", "08/11", "08/12", "08/13", "08/14", "08/15", "08/16", "08/17", "08/18", "08/19", "08/20", "08/21", "08/22", "08/23", "08/24", "08/25", "08/26", "08/27", "08/28", "08/29", "08/30", "08/31")
+extra_data_2 <- generate_year_data(2018, "07", "01", "09", "30", open_dates_2018)
+
+# Generate data for 2019
+open_dates_2019 <- c("07/01", "07/02", "07/03", "07/04", "07/05", "07/06", "07/07", "07/08", "07/09", "07/10", "07/11", "07/12", "07/13", "07/14", "07/15", "07/16", "07/17", "07/18", "07/19", "07/20", "07/21", "07/22", "07/23", "07/24", "07/25", "07/26", "07/27", "07/28", "07/29", "07/30", "07/31")
+extra_data_3 <- generate_year_data(2019, "07", "01", "09", "30", open_dates_2019)
+
+fishery_status <- bind_rows(fishery_status, extra_data_1, extra_data_2, extra_data_3)
+fishery_status <- fishery_status [order(fishery_status $year), ] #reorder years
+fishery_status$fishery_status[is.na(fishery_status$fishery_status)] <- "open"
+```
+
+Make a figure to show the overlap between when SRKW were in MA 7 and when the recreational fishery was open
+```{r, include=FALSE}
+fishery_status_1<-fishery_status %>% rename("md_date_for"="date") %>% 
+  filter(year>2011)
+
+fishery_status_1$date <- gsub("/", "-", fishery_status_1$md_date_for)
+
+date_parts <- strsplit(fishery_status_1$date, "-")
+
+# Combine month/day and year to create a date column
+fishery_status_1$date <- as.Date(paste(fishery_status_1$year, fishery_status_1$md_date_for), format = "%Y %m/%d")
+# # Create a new_date column in "year-month-day" format
+# orca$date <- sprintf("%04d-%02d-%02d", orca$year, 
+#                          as.POSIXlt(orca$md_date_for)$mon + 1, 
+#                          as.POSIXlt(orca$md_date_for)$mday)
+
+srkw_sightings1<-read_csv(here("data","SRKW_sightings_2023.csv")) %>% 
+  clean_names() 
+
+srkw_sightings1$sight_date <- mdy(srkw_sightings1$sight_date)
+srkw_sightings1<-srkw_sightings1 %>% 
+  filter(year(sight_date) >= 2014 & year(sight_date) <= 2023) %>% 
+  filter(month(sight_date) >= 7 & month(sight_date) <= 9) %>% 
+  filter(fish_area==7) %>% 
+  filter(pod!=c("NA", "Ts?", "NRs", "NRs?"))
+srkw_sightings1$date <- sprintf('%d/%d', month(srkw_sightings1$sight_date), day(srkw_sightings1$sight_date))
+unique_dates_df <- srkw_sightings1 %>%
+  distinct(sight_date)%>%
+  mutate(sighting = "yes") 
+  
+unique_dates_df <- unique_dates_df %>%
+  rename("date" = "sight_date")
+
+fishery_status_1$date <- as.Date(fishery_status_1$date)
+
+fishery_status_1<-left_join(fishery_status_1, unique_dates_df, by="date")
+fishery_status_1$year<-as.numeric(fishery_status_1$year)
+# fishery_status_1<-fishery_status_1%>% filter(year>2016)
+fishery_status_1$sighting <- ifelse(is.na(fishery_status_1$sighting), "no", fishery_status_1$sighting) 
+#sighting column is the conservative estimate
+fishery_status_1<-fishery_status_1 %>% filter(year>2013)
+
+# Create the customized stacked line graph
+rec<-ggplot(fishery_status_1, aes(x = as.Date(md_date_for, format="%m/%d"), fill = factor(fishery_status))) +
+  geom_tile(aes(y = year, height = 0.4), color = "white", position = position_nudge(y = -0.2)) +  # Adjust height and add white border
+  geom_tile(aes(y = year + 0.2, fill = factor(sighting)), height = 0.4, color = "white") +  # Adjust height and add white border
+  scale_fill_manual(values = c("closed"="lightgreen", "no"="lightblue", "open"="darkgreen", "yes"="darkblue"), labels = c("closed"="Rec Chinook Fishery Closed", "no"="Orcas Absent", "open"="Mark Selective Chinook Retention", "yes"="Orcas Present")) +
+  labs(x = "Date", y = "Year", fill = "Status") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  scale_y_continuous(breaks = unique(fishery_status_1$year), labels = unique(fishery_status_1$year)) +
+  theme(panel.grid.major = element_blank(),  # Remove major grid lines
+        panel.grid.minor = element_blank(),
+        axis.text.x = element_text(angle = 90),
+    panel.grid = element_blank() )  +# Remove minor grid lines
+  scale_x_date(date_breaks = "5 day", date_labels = "%m/%d")  # Adjust x-axis date breaks and labels
+
+rec
+ggsave(here("saved_figures", "rec_fishery_SRKW_overlap_a7_2014_2023.jpg"), plot = rec, width = 8, height = 9, units = "in")
+
+```
+
+
+Create a table that shows the number of days of fishing, and the number of those days when SRKW were in the area by year and what percentage of the days open to fishing that SRKW were also present. Another column also has catch information (number of Chinook caught in MA 7).
+```{r}
+###AVERAGE PERCENT OVERLAP
+# Filter the dataframe for fishery_status = "open" and sighting = "yes"
+percent_overlap <- fishery_status_1 %>%
+  filter(fishery_status == "open")
+
+percent_overlap <- percent_overlap %>%
+  group_by(year) %>%
+  summarize(percentage = mean(sighting == "yes") * 100)
+
+mean(percent_overlap$percentage)
+
+overlap_summary_table <- fishery_status_1 %>%
+  group_by(year) %>%
+  summarize(
+    summer_days_open = sum(fishery_status == 'open'),
+    summer_srkw_days_chinook = sum(fishery_status == 'open' & sighting == 'yes')
+  )
+overlap_summary_table<-overlap_summary_table %>% 
+  left_join(percent_overlap)
+
+catch<-read_csv(here("data","excess_catch.csv")) %>% 
+  filter(group=="total", 
+         area==7, 
+         year>2017) %>% 
+  dplyr::select(year, actual)
+
+overlap_summary_table<-overlap_summary_table %>% 
+  left_join(catch) %>% 
+  rename("catch"="actual")
+```
+
+
+Filter out incidents to be just recreational. Merged_data has the date, number of incidents on that day, and fishery status on that day (open or closed).
+```{r}
+#rename all the columns the same so that I can join them all
+#2015 and 2022 have no observations
+filtered_2011_a <-filtered_2011 %>% filter(vessel_type_code=="PM") %>% dplyr::select(c(monitor_event_date, short_title)) %>% rename("date"="monitor_event_date") %>% rename("incident"="short_title")
+filtered_2011_a$date <- as.character(filtered_2011_a$date)
+
+filtered_2012_a <-filtered_2012 %>% filter(vessel_type=="private motor") %>% dplyr::select(c(monitor_eve, short_titl)) %>%  rename("date"="monitor_eve") %>% rename("incident"="short_titl")
+filtered_2012_a$date <- as.character(filtered_2012_a$date)
+
+filtered_2013_a <-filtered_2013 %>% filter(vessel_type=="private motor") %>% dplyr::select(c(date, short_titl)) %>% rename("incident"="short_titl")
+filtered_2013_a$date <- as.character(filtered_2013_a$date)
+
+filtered_2014_a <-filtered_2014 %>% filter(vessel_type_code=="PM") %>% dplyr::select(c(monitor_event_date, short_title)) %>%  rename("date"="monitor_event_date") %>% rename("incident"="short_title")
+filtered_2014_a$date <- as.character(filtered_2014_a$date)
+
+filtered_2015_a <-filtered_2015 %>% filter(vessel_type_code=="PM") %>% dplyr::select(c(monitor_event_date, short_title)) %>% rename("date"="monitor_event_date") %>% rename("incident"="short_title")
+filtered_2015_a$date <- as.character(filtered_2015_a$date)
+
+filtered_2016_a <-filtered_2016 %>% filter(vessel=="PM")%>% dplyr::select(c(today, incidents)) %>% 
+  rename("date"="today") %>% rename("incident"="incidents")
+filtered_2016_a$date <- as.character(filtered_2016_a$date)
+
+filtered_2017_a <-filtered_2017 %>% filter(vessel=="PM")%>% dplyr::select(c(date_new, incidents)) %>% 
+   rename("date"="date_new") %>% rename("incident"="incidents")
+filtered_2017_a$date <- as.character(filtered_2017_a$date)
+
+filtered_2018_a <-filtered_2018 %>% filter(vessel=="PM") %>% dplyr::select(c(today, incidents)) %>% 
+  rename("date"="today") %>% rename("incident"="incidents")
+filtered_2018_a$date <- as.character(filtered_2018_a$date)
+
+filtered_2019_a <-filtered_2019 %>% filter(vessel=="PM") %>% dplyr::select(c(today, incidents)) %>% 
+  rename("date"="today") %>% rename("incident"="incidents")
+filtered_2019_a$date <- as.character(filtered_2019_a$date)
+
+filtered_2020_a <-filtered_2020 %>% filter(vessel=="PM")%>% dplyr::select(c(date, incidents)) %>% 
+ rename("incident"="incidents")
+filtered_2020_a$date <- as.character(filtered_2020_a$date)
+
+filtered_2021_a <-filtered_2021 %>% filter(vessel=="PM")%>% dplyr::select(c(date, incidents)) %>% 
+ rename("incident"="incidents")
+filtered_2021_a$date <- as.character(filtered_2021_a$date)
+
+#incident_list<-list(filtered_2011, filtered_2012)
+incident_list <- list(filtered_2011_a, filtered_2012_a, filtered_2013_a, filtered_2014_a, filtered_2015_a, filtered_2016_a, filtered_2017_a, filtered_2018_a, filtered_2019_a, filtered_2020_a, filtered_2021_a)
+
+# Combine data frames using rbind
+total_incidents <- do.call(rbind, incident_list)
+
+total_incidents$year<- substr(total_incidents$date, 1, 4)
+
+incident_counts <- total_incidents %>%
+  group_by(date) %>%
+  summarize(total_incidents = n())
+
+fishery_status <- fishery_status %>%
+  mutate(date = as.Date(paste(year, date, sep = "-"), format = "%Y-%m/%d"))
+
+incident_counts$date <- as.Date(incident_counts$date, format = "%Y-%m-%d")
+
+# merged_data <- fishery_status %>%
+#   left_join(incident_counts, by = c("date")) %>%
+#   filter(fishery_status == "open")
+# 
+# merged_data$date_md <- substr(merged_data$date, 6, 10)
+```
+
+
+Determine how many incidents per day and the min/max of incidents per day from 2018 to 2022
+```{r}
+incident_counts_metrics <- incident_counts %>%
+  filter(date > as.Date("2018-01-01"))
+min(incident_counts_metrics$total_incidents)
+max(incident_counts_metrics$total_incidents)
+
+open_18_22<-merged_data %>% 
+  filter(year>2017) %>% 
+  filter(fishery_status=="open")
+
+sum(open_18_22$total_incidents, na.rm = TRUE)/nrow(open_18_22)
+```
+
+## Updated rec figure
+```{r}
+merged_data <- fishery_status %>%
+  left_join(incident_counts, by = c("date"))
+
+merged_data$date_md <- substr(merged_data$date, 6, 10)
+
+# Create the customized stacked line graph
+merged_data <- merged_data[order(merged_data$date), ]
+
+srkw_sightings<-read_csv(here("data","SRKW_sightings_2012-2022.csv")) %>% 
+  clean_names() 
+srkw_sightings$sight_date <- mdy(srkw_sightings$sight_date)
+srkw_sightings<-srkw_sightings %>% 
+  filter(year(sight_date) >= 2011 & year(sight_date) <= 2022) %>% 
+  filter(month(sight_date) >= 7 & month(sight_date) <= 9) %>% 
+  filter(fish_area==7) %>% 
+  filter(pod!=c("NA", "Ts?", "NRs", "NRs?"))
+unique_dates_df <- srkw_sightings %>%
+  distinct(sight_date) %>%
+  mutate(sighting = "yes")
+colnames(unique_dates_df)[1] <- "date"
+
+merged_data<-left_join(merged_data, unique_dates_df, by="date")
+
+merged_data$sighting <- ifelse(is.na(merged_data$sighting), "no", merged_data$sighting)
+#all days that do not have sightings have 0 incidents
+
+merged_data <- merged_data %>%
+  mutate(total_incidents = ifelse(sighting == "yes" & is.na(total_incidents), 0, total_incidents))
+
+write.csv(merged_data, here("data", "incidents.csv"))
+
+###this works for incidents (date ordered wrong)
+p<-ggplot(merged_data, aes(x = format(date, "%m %d"), y = as.factor(year))) +
+  geom_tile(aes(fill = total_incidents), width = 0.9, height = 0.9) +
+  scale_fill_gradient(low = "seashell2", high = "red3", na.value = "#CCCCCC") +
+  labs(x = "Date",
+       y = "Year", fill = "Number of Incidents") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0),
+        legend.position = "right", 
+    panel.grid = element_blank() ) +
+   scale_x_discrete(
+    labels = format(merged_data$date[seq(1, 95, by = 5)], "%m/%d"), breaks=format(merged_data$date[seq(1, 95, by = 5)], "%m %d"))
+
+filtered_data <- merged_data %>%
+  filter(sighting == "yes") %>% 
+  filter(total_incidents!=c(0)) %>% 
+  filter(total_incidents!=c("NA")) %>% 
+  filter(fishery_status=="open")
+filtered_data_1<-merged_data %>% 
+  filter(fishery_status=="closed")
+
+p<-p + geom_text(data = filtered_data,
+              # aes(label = format(date, "%m/%d")),
+              aes(label = "*"),
+              vjust = 0.75, hjust = -2, size = 3, angle = 90, color="black")+
+ geom_tile(data = filtered_data_1, aes(fill = total_incidents), width = 0.9, height = 0.9, fill = "white") 
+  
+p
+ggsave(here("saved_figures","rec_a7_incidents.jpg"), plot = p, width = 8, height = 5, units = "in")
+```
+
+Do the same thing for the commercial data (make a figure that shows incidents)
+
+```{r}
+#rename all the columns the same so that I can join them all
+#2015 and 2022 have no observations
+filtered_2011_b <-filtered_2011 %>% filter(vessel_type_code=="MF") %>% dplyr::select(c(monitor_event_date, short_title)) %>% rename("date"="monitor_event_date") %>% rename("incident"="short_title")
+filtered_2011_b$date <- as.character(filtered_2011_b$date)
+
+filtered_2012_b <-filtered_2012 %>% filter(vessel_type=="marine fishing (commercial)") %>% dplyr::select(c(monitor_eve, short_titl)) %>%  rename("date"="monitor_eve") %>% rename("incident"="short_titl")
+filtered_2012_b$date <- as.character(filtered_2012_b$date)
+
+filtered_2013_b <-filtered_2013 %>% filter(vessel_type=="marine fishing (commercial)") %>% dplyr::select(c(date, short_titl)) %>% rename("incident"="short_titl")
+filtered_2013_b$date <- as.character(filtered_2013_b$date)
+
+filtered_2014_b <-filtered_2014 %>% filter(vessel_type_code=="MF") %>% dplyr::select(c(monitor_event_date, short_title)) %>%  rename("date"="monitor_event_date") %>% rename("incident"="short_title")
+filtered_2014_b$date <- as.character(filtered_2014_b$date)
+
+filtered_2015_b <-filtered_2015 %>% filter(vessel_type_code=="MF") %>% dplyr::select(c(monitor_event_date, short_title)) %>% rename("date"="monitor_event_date") %>% rename("incident"="short_title")
+filtered_2015_b$date <- as.character(filtered_2015_b$date)
+
+filtered_2016_b <-filtered_2016 %>% filter(vessel=="MF")%>% dplyr::select(c(today, incidents)) %>% 
+  rename("date"="today") %>% rename("incident"="incidents")
+filtered_2016_b$date <- as.character(filtered_2016_b$date)
+
+filtered_2017_b <-filtered_2017 %>% filter(vessel=="MF")%>% dplyr::select(c(date_new, incidents)) %>% 
+   rename("date"="date_new") %>% rename("incident"="incidents")
+filtered_2017_b$date <- as.character(filtered_2017_b$date)
+
+filtered_2018_b <-filtered_2018 %>% filter(vessel=="MF") %>% dplyr::select(c(today, incidents)) %>% 
+  rename("date"="today") %>% rename("incident"="incidents")
+filtered_2018_b$date <- as.character(filtered_2018_b$date)
+
+filtered_2019_b <-filtered_2019 %>% filter(vessel=="MF") %>% dplyr::select(c(today, incidents)) %>% 
+  rename("date"="today") %>% rename("incident"="incidents")
+filtered_2019_b$date <- as.character(filtered_2019_b$date)
+
+filtered_2020_b <-filtered_2020 %>% filter(vessel=="MF")%>% dplyr::select(c(date, incidents)) %>% 
+ rename("incident"="incidents")
+filtered_2020_b$date <- as.character(filtered_2020_b$date)
+
+filtered_2021_b <-filtered_2021 %>% filter(vessel=="MF")%>% dplyr::select(c(date, incidents)) %>% 
+ rename("incident"="incidents")
+filtered_2021_b$date <- as.character(filtered_2021_b$date)
+
+#incident_list<-list(filtered_2011, filtered_2012)
+incident_listb <- list(filtered_2011_b, filtered_2012_b, filtered_2013_b, filtered_2014_b, filtered_2015_b, filtered_2016_b, filtered_2017_b, filtered_2018_b, filtered_2019_b, filtered_2020_b, filtered_2021_b)
+
+# Combine data frames using rbind
+total_incidentsb <- do.call(rbind, incident_listb)
+
+total_incidentsb$year<- substr(total_incidentsb$date, 1, 4)
+
+incident_countsb <- total_incidentsb %>%
+  group_by(date) %>%
+  summarize(total_incidents = n())
+incident_countsb$date<-as.Date(incident_countsb$date)
+
+# comm_fish<-read_csv(here("data","a7_commercial_fishery_dates.csv")) %>% 
+#   clean_names() %>% 
+#   filter(fishery_type!="reef net") #remove reef net fishing rows (does not get to vessel overlap question)
+# comm_fish$date<-as.Date(comm_fish$date)
+# comm_fish$fishery_status <- "open"
+
+#this data incorporates Fraser panel fisheries and WDFW openers after Fraser panel relinquishes control and already has reef net fishing removed
+comm_fish<-read_csv(here("data","comm_dates_Fraser_WDFW.csv")) %>% rename("year"="observed_year")
+comm_fish$date <- as.Date(paste(comm_fish$year, comm_fish$md_date, sep = "-"), format = "%Y-%m/%d")
+comm_fish$fishery_status <- ifelse(comm_fish$fishery_status, "open", "closed")
+
+# merged_data_com <- comm_fish %>%
+#   full_join(incident_countsb, by = c("date")) %>%
+#   filter(fishery_status == "open")
+# 
+# merged_data_com$date_md <- substr(merged_data_com$date, 6, 10)
+```
+
+Creating the figure itself for commercial 
+```{r}
+merged_data_com <- comm_fish %>%
+  full_join(incident_countsb, by = c("date")) 
+
+merged_data_com$date_md <- substr(merged_data_com$date, 6, 10)
+
+# Create the customized stacked line graph
+merged_data_com <- merged_data_com[order(merged_data_com$date), ]
+merged_data_com <- merged_data_com %>% 
+  dplyr::select(c(date, fishery_status, total_incidents, date_md)) %>% 
+  group_by(date) %>%
+  slice(1) %>%
+  ungroup()
+
+srkw_sightings1<-read_csv(here("data","SRKW_sightings_2012-2022.csv")) %>%
+  clean_names()
+srkw_sightings1$sight_date <- mdy(srkw_sightings1$sight_date)
+srkw_sightings1<-srkw_sightings1 %>%
+  filter(year(sight_date) >= 2012 & year(sight_date) <= 2022) %>%
+  filter(month(sight_date) >= 7 & month(sight_date) <= 9) %>%
+  filter(fish_area==7) %>%
+  filter(pod!=c("NA", "Ts?", "NRs", "NRs?"))
+#creating a df that tells whether SRKW were in MA 7 on each date
+unique_dates_df1 <- srkw_sightings1 %>%
+  distinct(sight_date) %>%
+  mutate(sighting = "yes")
+colnames(unique_dates_df1)[1] <- "date"
+
+merged_data_com<-left_join(merged_data_com, unique_dates_df1, by="date") 
+merged_data_com$year <- substr(merged_data_com$date, 1, 4)
+merged_data_com<-merged_data_com %>% filter(year!="2011")%>%
+  filter(month(date) > 7)
+
+merged_data_com$sighting <- ifelse(is.na(merged_data_com$sighting), "no", merged_data_com$sighting)
+#all days that do not have sightings have 0 incidents
+
+merged_data_com <- merged_data_com %>%
+  mutate(total_incidents = ifelse(sighting == "yes" & is.na(total_incidents), 0, total_incidents))
+
+#for the labels
+custom_dates <- c("08-01", "", "", "08-04", "", "",  "08-07", "", "", "08-10", "", "", "08-13", "", "",  "08-16", "", "", "08-19", "", "",  "08-22", "", "", "08-25", "", "", "08-28", "", "", "08-31","", "", "09-03", "", "", "09-06","", "","09-09", "", "", "09-12","", "", "09-15","", "", "09-18", "", "", "09-21", "", "", "09-24", "", "", "09-27", "", "", "09-30")
+date_labels <- factor(custom_dates)
+
+###this works for incidents (date ordered wrong)
+com<-ggplot(merged_data_com, aes(x = format(date, "%m %d"), y = as.factor(year))) +
+  # geom_tile(data = merged_data_com[merged_data_com$fishery_status != "closed", ], 
+  #           aes(fill = total_incidents), width = 0.9, height = 0.9) +
+ geom_tile(aes(fill = total_incidents), width = 0.9, height = 0.9) +
+  scale_fill_gradient(low = "seashell2", high = "red3", na.value = "#CCCCCC",
+    breaks = seq(0, 13, by = 3)) +
+  labs(x = "Date",
+       y = "Year", fill = "Number of Incidents") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+        legend.position = "right",
+    panel.grid = element_blank() )+
+  scale_x_discrete(labels = custom_dates)
+  
+filtered_data_com <- merged_data_com %>%
+  filter(sighting == "yes") %>%
+  filter(fishery_status == "open")%>% 
+  filter(total_incidents!=c(0)) %>%
+  filter(total_incidents!=c("NA"))
+
+filtered_data_com_1 <- merged_data_com %>%
+  filter(fishery_status == "closed") 
+
+com<-com + 
+  geom_text(data = filtered_data_com,
+              aes(label = "*"),
+              vjust = 0.75, hjust = -3.5, size = 3, angle = 90, color="black")+
+ geom_tile(data = filtered_data_com_1, aes(fill = total_incidents), width = 0.9, height = 0.9, fill = "white") 
+
+
+com
+ggsave(here("saved_figures", "comm_a7_incidents.jpg"), plot = com, width = 8, height = 5, units = "in")
+```
+
+
+
+## metrics for commercial
+```{r}
+incident_counts_metricsb <- incident_countsb %>%
+  filter(date > as.Date("2018-01-01"))
+min(incident_counts_metricsb$total_incidents)
+max(incident_counts_metricsb$total_incidents)
+
+open_18_22_com<-merged_data_com %>% 
+  filter(year>2017) %>% 
+  filter(fishery_status=="open")
+
+sum(open_18_22_com$total_incidents, na.rm = TRUE)/nrow(open_18_22_com)
+```
+## combined rec and commercial metrics
+```{r}
+total_incident_metrics<-full_join(incident_counts_metrics, incident_counts_metricsb)
+
+open_18_22_com<-open_18_22_com %>% dplyr::select(date, fishery_status, total_incidents)
+total_open_18_22<-full_join(open_18_22, open_18_22_com, by="date")
+total_open_18_22$total_incidents <- rowSums(total_open_18_22[c("total_incidents.x", "total_incidents.y")], na.rm = TRUE)
+
+
+sum(total_open_18_22$total_incidents, na.rm = TRUE)/nrow(total_open_18_22)
+```
+
+Determine which incidents are most common and list in a table, its important to note that the codes that soundwatch uses makes it difficult to see which more broad incident type is the most common, but generally fishing within a close proximity to the SRKW is common.
+```{r}
+
+# Create a frequency table of incidents
+incident_freq <- table(total_incidents$incident)
+
+# Convert to a data frame
+incident_df <- data.frame(incident = names(incident_freq), count = incident_freq)
+
+# Sort in descending order by count
+incident_df <- incident_df[order(-incident_df$count.Freq), ]
+incident_df<-incident_df %>% 
+  rename("count"="count.Freq") %>% 
+  dplyr::select(count, incident)
+
+print(incident_df)
+sum(incident_df$count)
+```
+
