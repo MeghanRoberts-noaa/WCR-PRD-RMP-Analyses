@@ -5,7 +5,7 @@ date: "2024-06-10"
 output: html_document
 ---
 
-This markdown contains analyses produced for the tech memo that Meg Wallen is working on looking at cumulative prey reduction for SRKW across all fisheries by timestep. The figures are saved to saved_figures>tech_memo.
+This markdown contains analyses produced for the tech memo looking at cumulative prey reduction for SRKW across all fisheries by timestep. The figures are saved to saved_figures>tech_memo.
 
 
 ```{r setup, include=FALSE}
@@ -68,8 +68,13 @@ map<-ggplot() +
   theme_minimal()+
   coord_sf(xlim = c(-129, -119), ylim = c(34, 51), expand = FALSE)+
   theme(legend.position = "none") + # Remove legend
-  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)
+#two lines added to make blank map
+        # ,legend.title=element_blank(),
+        # legend.text = element_text(size = 14)
+        )
 
+#ggsave(here("saved_figures", "tech_memo", "region_map.jpg"), plot = map, height=10, width = 6)
 
 map_legend<-ggplot() +
   geom_sf(data=US, aes())+
