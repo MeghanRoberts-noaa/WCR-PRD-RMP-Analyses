@@ -60,7 +60,41 @@ CAN<-read_sf(here("data","shapefiles", "Canada","Canada", "gpr_000b11a_e.shp"))
 region_colors <- c("SWWCVI" = "#26456E", "Salish" = "#7AC7E2", "NOF" = "#64AAD2", 
                    "OR" = "#1C5A99", "CA" = "#B4D4DA")
 
-map<-ggplot() +
+#create nudge columns in data_spatial to move labels on map to appropriate locations
+# data_spatial$nudge_x<-0
+data_spatial <- data_spatial %>%
+  mutate(
+    nudge_x = case_when(
+      region == "CA" ~ 1.9, 
+      region == "OR" ~ -0.3,     
+      region == "Salish" ~ -0.6,
+      region == "SWWCVI" ~ 0.1,
+      TRUE ~ 0                            # Default nudge value (if none match)
+    )
+  )
+# data_spatial$nudge_y<-0
+data_spatial <- data_spatial %>%
+  mutate(
+    nudge_y = case_when(
+      region == "CA" ~ -4.5,  
+      region == "OR" ~ -1.5,    
+      region == "Salish" ~ -0.4,
+      region == "SWWCVI" ~ -0.1,
+      TRUE ~ 0                            # Default nudge value (if none match)
+    )
+  )
+data_spatial <- data_spatial %>%
+  mutate(
+    color = case_when(
+      region == "OR" ~ "white",   
+      region == "SWWCVI" ~ "white",
+      TRUE ~ "black"                            # Default nudge value (if none match)
+    )
+  )
+
+
+#create a map with just regions labelled and no data
+map_blank<-ggplot() +
   geom_sf(data=US, aes())+
   geom_sf(data=CAN, aes())+
   geom_sf(data = data_spatial, aes(fill=region)) +
@@ -70,11 +104,25 @@ map<-ggplot() +
   theme(legend.position = "none") + # Remove legend
   theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)
 #two lines added to make blank map
-        # ,legend.title=element_blank(),
-        # legend.text = element_text(size = 14)
-        )
+        ,legend.title=element_blank(),
+        legend.text = element_text(size = 14)
+        ) +
+  geom_sf_text(data = data_spatial, aes(label = region), size = 5, color = data_spatial$color, 
+               nudge_x = data_spatial$nudge_x, 
+               nudge_y = data_spatial$nudge_y)+
+  labs(x = NULL, y = NULL)
+ggsave(here("saved_figures", "tech_memo", "region_map.jpg"), plot = map_blank, height=10, width = 6)
 
-#ggsave(here("saved_figures", "tech_memo", "region_map.jpg"), plot = map, height=10, width = 6)
+map<-ggplot() +
+  geom_sf(data=US, aes())+
+  geom_sf(data=CAN, aes())+
+  geom_sf(data = data_spatial, aes(fill=region)) +
+  scale_fill_manual(values = region_colors) +  # Manual color assignment
+  theme_minimal()+
+  coord_sf(xlim = c(-129, -119), ylim = c(34, 51), expand = FALSE)+
+  theme(legend.position = "none") + # Remove legend
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)        )
+
 
 map_legend<-ggplot() +
   geom_sf(data=US, aes())+
