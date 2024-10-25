@@ -25,6 +25,8 @@ library(scatterpie)
 library(grid)
 library(treemapify)
 library(cowplot)
+library(rlang)
+library(ggpattern)
 ```
 
 
@@ -36,14 +38,72 @@ regions_sp$layer[2]<-"CA"
 regions_sp$layer[3]<-"OR"
 regions_sp$layer[5]<-"SWWCVI"
 regions_sp<-regions_sp %>% rename("region"="layer")
-data<-read_csv(here("data","USALLValid_TechMemo.csv"))
+data<-read_csv(here("data","USALLValid_TechMemo.csv")) #old data
 # write_csv(data, "tech_memo_data_nonshp.csv")
+percent_reduction_current<-read_csv(here("data", "tech_memo", "SRKW_reduction_percent_RMP.csv")) #2019 PST+RMP scenario
+```
+
+#cleaning up the input data to make a nice map
+```{r}
+### getting the df in a workable format
+#convert years to numeric
+percent_reduction_current$Year<-as.numeric(percent_reduction_current$Year)
+#remove percent sign
+substitute_values <- function(column) {
+  as.numeric(gsub("%", "", column))
+}
+
+#rename Cali
+percent_reduction_current<-percent_reduction_current %>% rename("CA"="Cali")
+
+# Apply the function to multiple columns
+percent_reduction_current <- percent_reduction_current  %>%
+  mutate_at(vars(Salish, OR, NOF, CA, SWWCVI), list(~substitute_values(.)))
+
+#filter for only Zero_all scenario
+percent_reduction_current<-percent_reduction_current %>% filter(Scenario %in% "ZeroALL")
+
+###group by and summarize
+percent_reduction_avg<- percent_reduction_current %>%
+  group_by(TimeStep) %>%
+  summarise(
+    avg_percent_reduction_Salish = round(mean(Salish, na.rm = TRUE),2),
+    avg_percent_reduction_OR = round(mean(OR, na.rm = TRUE),2),
+    avg_percent_reduction_NOF = round(mean(NOF, na.rm = TRUE),2),
+    avg_percent_reduction_CA = round(mean(CA, na.rm = TRUE),2),
+    avg_percent_reduction_SWWCVI = round(mean(SWWCVI, na.rm = TRUE),2),
+    .groups = 'drop'
+  )
+
+percent_reduction_10yr<-percent_reduction_current %>% filter(Year>2009)
+
+percent_reduction_avg_10yr <- percent_reduction_10yr %>%
+  group_by(TimeStep) %>%
+  summarise(
+    avg_percent_reduction_Salish = round(mean(Salish, na.rm = TRUE),2),
+    avg_percent_reduction_OR = round(mean(OR, na.rm = TRUE),2),
+    avg_percent_reduction_NOF = round(mean(NOF, na.rm = TRUE),2),
+    avg_percent_reduction_CA = round(mean(CA, na.rm = TRUE),2),
+    avg_percent_reduction_SWWCVI = round(mean(SWWCVI, na.rm = TRUE),2),
+    .groups = 'drop'
+  )
+
+#now we need to put the data in tidyformat
+percent_reduction_avg_longer<-pivot_longer(data= percent_reduction_avg, cols = !c(TimeStep), names_to = "region", values_to = "avg_per_reduction" ) %>% rename("timestep"="TimeStep")
+percent_reduction_avg_longer$region<-str_replace_all(percent_reduction_avg_longer$region, "avg_percent_reduction_", "")
+percent_reduction_avg_longer$timestep<-str_replace_all(percent_reduction_avg_longer$timestep, "_", "-")
+
+percent_reduction_avg_longer_10<-pivot_longer(data= percent_reduction_avg_10yr, cols = !c(TimeStep), names_to = "region", values_to = "10yr_per_reduction" ) %>% rename("timestep"="TimeStep")
+percent_reduction_avg_longer_10$region<-str_replace_all(percent_reduction_avg_longer_10$region, "avg_percent_reduction_", "")
+percent_reduction_avg_longer_10$timestep<-str_replace_all(percent_reduction_avg_longer_10$timestep, "_", "-")
+
+data_2019<-full_join(percent_reduction_avg_longer_10, percent_reduction_avg_longer)
 
 #join the data
-data_spatial<-left_join(regions_sp, data)
-# st_write(data_spatial, "tech_memo_data.shp")
-
+data_spatial<-left_join(regions_sp, data_2019) #changed this out for the 2019 data for the tech memo
+ # st_write(data_spatial, "tech_memo_data.shp")
 ```
+
 
 #making a map
 ```{r}
@@ -190,6 +250,17 @@ oct_apr<-data_spatial %>% filter(timestep=="Oct-Apr")
 may_jun<-data_spatial %>% filter(timestep=="May-Jun")
 jul_sep<-data_spatial %>% filter(timestep=="Jul-Sep")
 
+#adding code to show high SRKW presence
+oct_apr$SRKW_risk<-"Low"
+oct_apr$SRKW_risk[oct_apr$region %in% c("NOF", "CA", "OR")] <- 'High'
+oct_apr$SRKW_risk <- factor(oct_apr$SRKW_risk, levels = rev(unique(oct_apr$SRKW_risk))) #sets the order of the characters
+may_jun$SRKW_risk<-"Low"
+may_jun$SRKW_risk[may_jun$region %in% c("SWWCVI")] <- 'High'
+may_jun$SRKW_risk <- factor(may_jun$SRKW_risk, levels = rev(unique(may_jun$SRKW_risk))) #sets the order of the characters
+jul_sep$SRKW_risk<-"Low"
+jul_sep$SRKW_risk[jul_sep$region %in% c("SWWCVI", "Salish")] <- 'High'
+jul_sep$SRKW_risk <- factor(jul_sep$SRKW_risk, levels = rev(unique(jul_sep$SRKW_risk))) #sets the order of the characters
+
 #getting the scale the same
 # Generate gradient colors
 gradient_colors <- scales::gradient_n_pal("Blues")(20)
@@ -219,66 +290,105 @@ oct_apr_map
 oct_apr_map <- ggplot() +
   geom_sf(data = US, aes()) +
   geom_sf(data = CAN, aes()) +
-  geom_sf(data = oct_apr, aes(fill = avg_per_reduction)) +
-  # scale_fill_gradient(low = "lightblue", high = "darkblue") +
+  geom_sf_pattern(data = oct_apr, aes(fill = avg_per_reduction, pattern=SRKW_risk), 
+                  pattern_fill='#e5975a', 
+                  pattern_density=0.07, 
+                  pattern_color="#e5975a"
+                  ) +
+  scale_pattern_manual(values = c("Low"="none", "High"="crosshatch"))+
   scale_fill_gradient(low = "lightblue", high = "darkblue", limits = common_scale_limits) +
   theme_minimal() +
   coord_sf(xlim = c(-133, -117), ylim = c(34, 51), expand = FALSE) +
   theme(legend.position = "none") +
-  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 1)) +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        plot.title = element_text(size=22),
+        axis.ticks.y=element_blank()) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   geom_sf_text(data = oct_apr, aes(label = paste(region, " = \n", avg_per_reduction, "%")),
-               color = "black", size=2.5, fun.geometry = sf::st_centroid, 
+               color = "black", size=5, fun.geometry = sf::st_centroid, 
                nudge_x=oct_apr$x_nudge, nudge_y = oct_apr$y_nudge)+
   labs(x="", y="",fill="Average Percent Reduction", title="October - April")
 
-# Print the map
-# print(oct_apr_map)
+oct_apr_map
 ```
 
 ```{r}
 may_jun_map <- ggplot() +
   geom_sf(data = US, aes()) +
   geom_sf(data = CAN, aes()) +
-  geom_sf(data = may_jun, aes(fill = avg_per_reduction)) +
+  geom_sf_pattern(data = may_jun, aes(fill = avg_per_reduction, pattern=SRKW_risk), 
+                  pattern_fill='#e5975a', 
+                  pattern_density=0.07, 
+                  pattern_color="#e5975a") +
+  scale_pattern_manual(values = c("Low"="none", "High"="crosshatch"))+
   scale_fill_gradient(low = "lightblue", high = "darkblue", limits = common_scale_limits) +
   theme_minimal() +
   coord_sf(xlim = c(-133, -117), ylim = c(34, 51), expand = FALSE) +
   theme(legend.position = "none") +
-  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 1)) +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        plot.title = element_text(size=22),
+        axis.ticks.y=element_blank()) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   geom_sf_text(data = may_jun, aes(label = paste(region, " = \n", avg_per_reduction, "%")),
-               color = "black", size=2.5, fun.geometry = sf::st_centroid, 
+               color = "black", size=5, fun.geometry = sf::st_centroid, 
                nudge_x=oct_apr$x_nudge, nudge_y = oct_apr$y_nudge)+
   labs(x="", y="",fill="Average Percent Reduction", title="May - June")
 
-# Print the map
-# print(may_jun_map)
+# may_jun_map
 ```
 
 ```{r}
 jul_sep_map <- ggplot() +
   geom_sf(data = US, aes()) +
   geom_sf(data = CAN, aes()) +
-  geom_sf(data = jul_sep, aes(fill = avg_per_reduction)) +
+  geom_sf_pattern(data = jul_sep, aes(fill = avg_per_reduction, pattern=SRKW_risk), 
+                  pattern_fill='#e5975a', 
+                  pattern_density=0.07, 
+                  pattern_color="#e5975a") +
+  scale_pattern_manual(values = c("Low"="none", "High"="crosshatch"))+
   scale_fill_gradient(low = "lightblue", high = "darkblue", limits = common_scale_limits) +
   theme_minimal() +
   coord_sf(xlim = c(-133, -117), ylim = c(34, 51), expand = FALSE) +
   theme(legend.position = "right") +
-  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 1)) +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        plot.title = element_text(size=22),
+        legend.text=element_text(size=16), 
+        legend.title=element_text(size=18)
+    # axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 1)
+    ) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   geom_sf_text(data = jul_sep, aes(label = paste(region, " = \n", avg_per_reduction, "%")),
-               color = "black", size=2.5, fun.geometry = sf::st_centroid, 
+               color = "black", size=5, fun.geometry = sf::st_centroid, 
                nudge_x=oct_apr$x_nudge, nudge_y = oct_apr$y_nudge)+
-  labs(x="", y="",fill="Average Percent\nReduction", title="July - Sep")
+  labs(x="", y="", fill="Average Percent\nReduction", pattern="SRKW Presence",
+       title="July - September")
 
-# Print the map
-# print(jul_sep_map)
+jul_sep_map
 ```
 
 
 #combine the maps
 ```{r}
-perc_reduction_map<-oct_apr_map +may_jun_map +jul_sep_map
+# perc_reduction_map<-oct_apr_map +may_jun_map +jul_sep_map
+legend<-get_legend(jul_sep_map)
+jul_sep_map<-jul_sep_map + theme(legend.position = "none")
+perc_reduction_map<-plot_grid(oct_apr_map, may_jun_map, jul_sep_map, legend, ncol = 4)
+
 perc_reduction_map
-# ggsave("regional_per_reduction_tech_memo.jpg", plot = perc_reduction_map, width = 10, height = 5, dpi = 300)
+ggsave(here("saved_figures","tech_memo", "regional_per_reduction_tech_memo_flat.jpeg"), plot = perc_reduction_map, width = 14, height = 6, dpi = 300)
 ```
 
 ##Making a treemap instead of a pie chart

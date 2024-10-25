@@ -25,6 +25,8 @@ percent_reduction<-read_csv(here("data", "SRKW_output_Validation_1992-2020", "SR
 starting_abundances<-read_csv(here("data", "SRKW_output_Validation_1992-2020", "SRKW_output_Validation_1992-2020", "SRKW_preFish_zero_all_Valid2022.csv"))
 
 nominal_reduction<-read_csv(here("data", "SRKW_output_Validation_1992-2020", "SRKW_output_Validation_1992-2020", "SRKW_reduction_nominal_all_Valid2022.csv"))
+
+percent_reduction_current<-read_csv(here("data", "tech_memo", "SRKW_reduction_percent_RMP.csv")) #2019 PST+RMP scenario
 ```
 
 ###Tech Memo (all regions)
@@ -97,6 +99,7 @@ percent_reduction_all_allyr <- percent_reduction %>%
     .groups = 'drop'
   )
 ```
+
 
 ###1 yr Biop
 ####Finding the average percent reduction in Salish over all time and past 10 yrs by timestep
