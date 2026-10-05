@@ -236,6 +236,10 @@ rec<-ggplot(fishery_status_1, aes(x = as.Date(md_date_for, format="%m/%d"), fill
 
 rec
 ggsave(here("saved_figures", "rec_fishery_SRKW_overlap_a7_2014_2023.jpg"), plot = rec, width = 8, height = 9, units = "in")
+
+write.csv(fishery_status_1, here("data", "rec_fishery_dates_overlap_2014_2025.csv")) #file for Meg
+
+
 ```
 
 
